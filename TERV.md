@@ -30,7 +30,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] E-mail app
 - [x] Hangok: rádiózaj a háttérben, üzenet- és sikerhang, hangerő-kapcsoló
 - [x] A fejezet vége: átvezetés a 2. fejezetre
-- [ ] Teszt: a fejezet automatikusan végigjátszható a megoldásokkal
+- [x] Teszt: a fejezet automatikusan végigjátszható a megoldásokkal
 
 ## 3. A 2-3. fejezet
 
