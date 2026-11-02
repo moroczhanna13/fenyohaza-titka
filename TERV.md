@@ -12,7 +12,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 
 ## 1. Prototípus (cél: kiderüljön, működik-e a forma)
 
-- [ ] Telefon-keret komponens (mobilon teljes képernyő, nagy kijelzőn középen)
+- [x] Telefon-keret komponens (mobilon teljes képernyő, nagy kijelzőn középen)
 - [ ] Kezdőképernyő appikonokkal (Üzenetek, Galéria aktív, a többi még szürke)
 - [ ] Játékállás: reducer + automatikus mentés localStorage-ba + "Új játék" gomb
 - [ ] Adatformátum a fejezetekhez (típusok TypeScriptben): üzenet, bizonyíték, fejtörő, tipp

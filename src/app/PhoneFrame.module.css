@@ -1,0 +1,92 @@
+/*
+ * Mobile first: on small screens the "phone" is the device itself, so the
+ * frame fills the viewport with no bezel. On larger screens it becomes a
+ * centered phone mock-up that scales down to fit short windows.
+ */
+.stage {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.device {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.statusBar {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44px;
+  padding: env(safe-area-inset-top) var(--space-6) 0;
+  box-sizing: content-box;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.indicators {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.screen {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.homeIndicator {
+  display: none;
+}
+
+@media (min-width: 600px) and (min-height: 560px) {
+  .stage {
+    align-items: center;
+    padding: var(--space-6);
+    background:
+      radial-gradient(ellipse at 50% 30%, var(--color-surface) 0%, transparent 70%),
+      var(--color-bg);
+  }
+
+  .device {
+    width: auto;
+    min-height: 0;
+    height: min(844px, calc(100dvh - 2 * var(--space-6)));
+    aspect-ratio: 390 / 844;
+    border: 12px solid #05090f;
+    border-radius: 48px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 2px var(--color-border),
+      0 30px 80px rgb(0 0 0 / 0.6);
+  }
+
+  .statusBar {
+    padding-top: 0;
+  }
+
+  .screen {
+    padding-bottom: 0;
+  }
+
+  .homeIndicator {
+    display: block;
+    flex: none;
+    width: 35%;
+    height: 5px;
+    margin: var(--space-2) auto;
+    border-radius: 3px;
+    background: var(--color-text-muted);
+  }
+}
