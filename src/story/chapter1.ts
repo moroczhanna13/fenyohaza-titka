@@ -51,6 +51,7 @@ export const chapter1: Chapter = {
   apps: [
     { app: 'messages', availableAfter: unlocked },
     { app: 'gallery', availableAfter: unlocked },
+    { app: 'notebook', availableAfter: unlocked },
   ],
 
   conversations: [

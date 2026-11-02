@@ -1,6 +1,6 @@
 import type { AppId } from '../apps/registry'
 import { CHAPTERS, chapterIndex, chaptersUpTo, findConversation } from '../story/chapters'
-import type { Chapter, Condition, Conversation, Id, Photo } from '../story/types'
+import type { Chapter, Condition, Conversation, Evidence, Id, Photo } from '../story/types'
 import { buildTimeline, isFinished } from './conversation'
 import { getProgress, type GameState } from './gameState'
 
@@ -58,4 +58,11 @@ export function availableConversations(state: GameState): Conversation[] {
   return chaptersUpTo(state.chapter)
     .flatMap((chapter) => chapter.conversations)
     .filter((conversation) => isMet(state, conversation.availableAfter))
+}
+
+/** Evidence found so far, in story order; it goes to the notebook automatically. */
+export function foundEvidence(state: GameState): Evidence[] {
+  return chaptersUpTo(state.chapter)
+    .flatMap((chapter) => chapter.evidence)
+    .filter((evidence) => isMet(state, evidence.foundWhen))
 }

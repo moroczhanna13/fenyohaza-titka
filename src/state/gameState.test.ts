@@ -32,6 +32,15 @@ describe('gameReducer', () => {
     expect(state.openedHints).toEqual({ p: 3 })
   })
 
+  it('stores notes and marks evidence as seen once', () => {
+    let state = gameReducer(createInitialState(), { type: 'setNotes', text: 'Kerekes Pál?' })
+    state = gameReducer(state, { type: 'markEvidenceSeen', evidence: ['a', 'b'] })
+    const again = gameReducer(state, { type: 'markEvidenceSeen', evidence: ['a'] })
+    expect(state.notes).toBe('Kerekes Pál?')
+    expect(state.seenEvidence).toEqual(['a', 'b'])
+    expect(again).toBe(state)
+  })
+
   it('resets everything on new game', () => {
     const played = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'p' })
     expect(gameReducer(played, { type: 'newGame' })).toEqual(createInitialState())

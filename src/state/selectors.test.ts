@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createInitialState, gameReducer } from './gameState'
-import { availablePhotos, isMet, isPhoneLocked, unlockedApps } from './selectors'
+import { availablePhotos, foundEvidence, isMet, isPhoneLocked, unlockedApps } from './selectors'
 
 describe('selectors', () => {
   it('evaluates nested conditions', () => {
@@ -26,7 +26,7 @@ describe('selectors', () => {
   it('unlocks the chapter 1 apps with the phone', () => {
     expect(unlockedApps(createInitialState())).toEqual([])
     const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
-    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery'])
+    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery', 'notebook'])
   })
 
   it('lists gallery photos newest first', () => {
@@ -34,5 +34,14 @@ describe('selectors', () => {
     const dates = photos.map((p) => p.info.takenAt)
     expect(dates).toEqual([...dates].sort().reverse())
     expect(photos[0].id).toBe('ch1-photo-lake-evening')
+  })
+})
+
+describe('foundEvidence', () => {
+  it('adds evidence as its condition is met', () => {
+    const start = createInitialState()
+    expect(foundEvidence(start)).toEqual([])
+    const unlocked = gameReducer(start, { type: 'solvePuzzle', puzzle: 'ch1-lock' })
+    expect(foundEvidence(unlocked).map((e) => e.id)).toEqual(['ch1-last-message'])
   })
 })

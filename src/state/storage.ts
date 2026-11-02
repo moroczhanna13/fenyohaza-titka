@@ -28,6 +28,8 @@ function isGameState(value: unknown): value is GameState {
     isStringArray(v.solvedPuzzles) &&
     isStringArray(v.viewedPhotos) &&
     isStringArray(v.introSeen) &&
+    isStringArray(v.seenEvidence) &&
+    typeof v.notes === 'string' &&
     typeof v.openedHints === 'object' &&
     v.openedHints !== null &&
     Object.values(v.openedHints).every((n) => typeof n === 'number')

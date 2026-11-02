@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import PhoneFrame from './PhoneFrame'
 import HomeScreen from './HomeScreen'
 import AppPlaceholder from './AppPlaceholder'
@@ -10,11 +10,18 @@ import { playMessageSound } from './sound'
 import { APPS, type AppId } from '../apps/registry'
 import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
+import NotebookApp from '../apps/notebook/NotebookApp'
 import PuzzlePanel from '../puzzles/PuzzlePanel'
 import type { Conversation, Id, MessageStep } from '../story/types'
 import { unreadCount } from '../state/conversation'
 import { getProgress } from '../state/gameState'
-import { availableConversations, currentChapter, isPhoneLocked, unlockedApps } from '../state/selectors'
+import {
+  availableConversations,
+  currentChapter,
+  foundEvidence,
+  isPhoneLocked,
+  unlockedApps,
+} from '../state/selectors'
 import { useConversationEngine } from '../state/useConversationEngine'
 import { useGameState } from '../state/useGameState'
 
@@ -46,7 +53,31 @@ export default function App() {
 
   useConversationEngine(game, dispatch, openApp === 'messages' ? openConversation : null, onIncoming)
 
+  // Announce evidence found during play (not what was already found when the game loaded).
+  const evidence = foundEvidence(game)
+  const evidenceKey = evidence.map((e) => e.id).join()
+  const knownEvidence = useRef<string | null>(null)
+  useEffect(() => {
+    const known = knownEvidence.current
+    knownEvidence.current = evidenceKey
+    if (known === null) return
+    const fresh = evidence.filter((e) => !known.split(',').includes(e.id))
+    const latest = fresh.at(-1)
+    if (!latest) return
+    setNotification({
+      key: Date.now(),
+      title: 'Jegyzetfüzet',
+      text: `Új bizonyíték: ${latest.title}`,
+      onOpen: () => {
+        setOpenConversation(null)
+        setOpenApp('notebook')
+      },
+    })
+    // Only the set of found ids matters; `evidence` is rebuilt every render.
+  }, [evidenceKey])
+
   const chapter = currentChapter(game)
+  const unseenEvidence = evidence.filter((e) => !game.seenEvidence.includes(e.id)).length
   const unreadMessages = availableConversations(game).reduce(
     (sum, c) => sum + unreadCount(c, getProgress(game, c.id)),
     0,
@@ -95,6 +126,8 @@ export default function App() {
     )
   } else if (openApp === 'gallery') {
     screen = <GalleryApp game={game} dispatch={dispatch} onClose={goHome} />
+  } else if (openApp === 'notebook') {
+    screen = <NotebookApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp) {
     const app = APPS.find((a) => a.id === openApp)
     screen = <AppPlaceholder title={app?.label ?? ''} onBack={goHome} />
@@ -102,7 +135,7 @@ export default function App() {
     screen = (
       <HomeScreen
         unlockedApps={unlockedApps(game)}
-        badges={{ messages: unreadMessages }}
+        badges={{ messages: unreadMessages, notebook: unseenEvidence }}
         onOpenApp={setOpenApp}
         onNewGame={() => {
           setNotification(null)

@@ -3,7 +3,7 @@ import { CHAPTERS, findConversation } from '../story/chapters'
 import { buildTimeline, initialProgress, type ConversationProgress } from './conversation'
 
 /** Bump when the shape of GameState changes; older saves are then discarded. */
-export const SAVE_VERSION = 4
+export const SAVE_VERSION = 5
 
 export interface GameState {
   version: typeof SAVE_VERSION
@@ -17,6 +17,10 @@ export interface GameState {
   openedHints: Record<Id, number>
   /** Chapters whose intro the player has dismissed. */
   introSeen: Id[]
+  /** Evidence the player has already seen in the notebook. */
+  seenEvidence: Id[]
+  /** The player's own notes in the notebook. */
+  notes: string
 }
 
 export const HINTS_PER_PUZZLE = 3
@@ -32,6 +36,8 @@ export type GameAction =
   /** Reveals the next hint of a puzzle. */
   | { type: 'openHint'; puzzle: Id }
   | { type: 'dismissIntro'; chapter: Id }
+  | { type: 'markEvidenceSeen'; evidence: Id[] }
+  | { type: 'setNotes'; text: string }
 
 export function createInitialState(): GameState {
   return {
@@ -42,6 +48,8 @@ export function createInitialState(): GameState {
     viewedPhotos: [],
     openedHints: {},
     introSeen: [],
+    seenEvidence: [],
+    notes: '',
   }
 }
 
@@ -111,5 +119,14 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'dismissIntro':
       if (state.introSeen.includes(action.chapter)) return state
       return { ...state, introSeen: [...state.introSeen, action.chapter] }
+
+    case 'markEvidenceSeen': {
+      const unseen = action.evidence.filter((id) => !state.seenEvidence.includes(id))
+      if (unseen.length === 0) return state
+      return { ...state, seenEvidence: [...state.seenEvidence, ...unseen] }
+    }
+
+    case 'setNotes':
+      return { ...state, notes: action.text }
   }
 }
