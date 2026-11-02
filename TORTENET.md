@@ -62,3 +62,14 @@ Minden fejtörőhöz 3 tipp tartozik.
 ## Hangulat
 
 Sötétkék és borostyánsárga színek, enyhe rádiózaj a háttérben, értesítéshang az új üzeneteknél. A szöveg köznapi magyar, kicsit szarkasztikus, de nem humoros, hiszen az ügy súlyos.
+
+## Kidolgozott részletek (1–3. fejezet)
+
+A játékban már szereplő, a fenti vázlatot kiegészítő tények. A későbbi fejezetek ezekre épülnek; a teljes szöveg a `src/story/chapter*.ts` fájlokban van.
+
+- **Idővonal:** a játék jelene 2026 ősze. A Tavi Fesztivál 2001. július 20–21-én volt, a tűz szombat éjjel, július 21-én. Tűzijáték 22:30-kor.
+- **Helyszín:** a klubház címe Kikötő sétány 4. Gedeon szeptember 14-én 21:12-kor fotózta a romokat, 21:30-kor írta az utolsó üzenetét.
+- **1. fejezet:** a telefon jelszava KEREKES (rovásírással a cédula hátoldalán). Gedeon még tavasszal egy ismeretlen számtól (Réka) kapott üzenetet; Réka névtelenül, magázva ír.
+- **Előre jelzett szálak:** Vidor Ilona a patikából üzent Gedeonnak „az új vérnyomás-gyógyszeréről” (szept. 12.). Ilona a cikkben azt állítja, fél tizenegykor bezárta az irodát. A Régi Rendszám oldalon az ő autója is szerepel (HKZ-907).
+- **2. fejezet:** a tűzoltónapló szerint a bejelentés 23:10-kor jött, és a tűz két ponton (iroda, csónakraktár) égett. A Fenyőházi Hírek 2001. július 23-i cikkében Tóth Ervin klubelnök 23:40-et mond. Ő hazudott az időről.
+- **3. fejezet:** Tóth 23:00 és 23:30 között a fesztiválsátorban feketén intézte a pénzt az üzemeltetőkkel. Pásztor László 22:45-kor összeveszett Kerekes Pállal a ki nem fizetett bére miatt, aztán hazament; Pál szerint „valami nem stimmel a könyvekkel”. Mészáros Béla azt állította, végig a színpadnál volt, de a 23:05-ös fesztiválfotón a piros Opelje (GBM-418) a klubnál áll. Szembesítve bevallja: titkos kulcsa volt, és látta, hogy valaki az irodában a könyvelési dossziékat pakolja; húsz perccel később égett a klub. Az arcot nem látta.
