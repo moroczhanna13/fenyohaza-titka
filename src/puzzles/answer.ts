@@ -20,3 +20,13 @@ export async function hashAnswer(input: string): Promise<string> {
 export async function isCorrectAnswer(input: string, answerHash: string): Promise<boolean> {
   return (await hashAnswer(input)) === answerHash
 }
+
+/** Answer string of a connect puzzle: the two statement ids, order-independent. */
+export function connectAnswer(a: string, b: string): string {
+  return [a, b].sort().join('+')
+}
+
+/** Answer string of a timeline puzzle: the fitting statements in order, then the one that does not fit. */
+export function timelineAnswer(order: string[], misfit: string): string {
+  return `${order.filter((id) => id !== misfit).join('>')}|${misfit}`
+}

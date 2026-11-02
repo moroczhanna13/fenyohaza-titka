@@ -14,7 +14,7 @@ export const chapter2: Chapter = {
     'A Fenyőházi Hírek archívuma ma már online is elérhető. Gedeon postafiókjában ott a levél róla.',
   ],
 
-  apps: [],
+  apps: [{ app: 'browser' }, { app: 'deductions' }],
   conversations: [],
   photos: [],
   puzzles: [],

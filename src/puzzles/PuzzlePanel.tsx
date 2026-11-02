@@ -17,6 +17,8 @@ interface PuzzlePanelProps {
 export default function PuzzlePanel({ puzzleId, game, dispatch, submitLabel }: Readonly<PuzzlePanelProps>) {
   const puzzle = findPuzzle(puzzleId)
   if (!puzzle || game.solvedPuzzles.includes(puzzle.id)) return null
+  // Connect and timeline puzzles need more room; they live in the Deductions app.
+  if (puzzle.kind !== 'text') return null
 
   return (
     <section className={styles.panel} aria-label={puzzle.title}>

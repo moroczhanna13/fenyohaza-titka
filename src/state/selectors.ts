@@ -1,6 +1,6 @@
 import type { AppId } from '../apps/registry'
 import { CHAPTERS, chapterIndex, chaptersUpTo, findConversation } from '../story/chapters'
-import type { Chapter, Condition, Conversation, Email, Evidence, Id, Photo } from '../story/types'
+import type { Chapter, Condition, Conversation, Email, Evidence, Id, Photo, Puzzle, WebPage } from '../story/types'
 import { buildTimeline, isFinished } from './conversation'
 import { getProgress, type GameState } from './gameState'
 
@@ -21,6 +21,8 @@ export function isMet(state: GameState, condition: Condition | undefined): boole
       return state.solvedPuzzles.includes(condition.puzzle)
     case 'photoViewed':
       return state.viewedPhotos.includes(condition.photo)
+    case 'pageVisited':
+      return state.visitedPages.includes(condition.page)
     case 'conversationFinished': {
       const conversation = findConversation(condition.conversation)
       return !!conversation && isFinished(conversation, getProgress(state, conversation.id))
@@ -82,4 +84,17 @@ export function isChapterComplete(state: GameState): boolean {
 
 export function nextChapter(state: GameState): Chapter | undefined {
   return CHAPTERS[chapterIndex(state.chapter) + 1]
+}
+
+export function availablePages(state: GameState): WebPage[] {
+  return chaptersUpTo(state.chapter)
+    .flatMap((chapter) => chapter.pages ?? [])
+    .filter((page) => isMet(state, page.availableAfter))
+}
+
+/** Puzzles solved in the Deductions app (connect and timeline), available so far. */
+export function availableDeductions(state: GameState): Puzzle[] {
+  return chaptersUpTo(state.chapter)
+    .flatMap((chapter) => chapter.puzzles)
+    .filter((puzzle) => puzzle.kind !== 'text' && isMet(state, puzzle.availableAfter))
 }

@@ -15,6 +15,8 @@ export type Condition =
   | { type: 'puzzleSolved'; puzzle: Id }
   | { type: 'conversationFinished'; conversation: Id }
   | { type: 'photoViewed'; photo: Id }
+  /** A web page or a news article was opened in the browser. */
+  | { type: 'pageVisited'; page: Id }
   | { type: 'all'; conditions: Condition[] }
 
 // ---------- Messages ----------
@@ -95,19 +97,41 @@ interface PuzzleBase {
   prompt: string
   hints: Hints
   availableAfter?: Condition
+  /** Lowercase hex SHA-256 of the normalized answer (see src/puzzles/answer.ts for each kind's answer string). */
+  answerHash: string
+  /** What the player concludes once it is solved, shown in the Deductions app. */
+  conclusion?: string
 }
 
 /**
  * The player types an answer. It is normalized (lowercase, no accents, no
- * whitespace) and compared by SHA-256 hash, so the solution is not in plain text.
+ * whitespace, no punctuation) and compared by hash, so the solution is not in plain text.
  */
 export interface TextPuzzle extends PuzzleBase {
   kind: 'text'
-  /** Lowercase hex SHA-256 of the normalized answer. */
-  answerHash: string
 }
 
-export type Puzzle = TextPuzzle
+export interface Statement {
+  id: Id
+  text: string
+}
+
+/** Pick the two statements that contradict each other. Solved in the Deductions app. */
+export interface ConnectPuzzle extends PuzzleBase {
+  kind: 'connect'
+  statements: Statement[]
+}
+
+/**
+ * Put statements in chronological order and mark the one that does not fit.
+ * Solved in the Deductions app.
+ */
+export interface TimelinePuzzle extends PuzzleBase {
+  kind: 'timeline'
+  statements: Statement[]
+}
+
+export type Puzzle = TextPuzzle | ConnectPuzzle | TimelinePuzzle
 
 // ---------- Evidence ----------
 
@@ -138,6 +162,55 @@ export interface Email {
   body: string[]
   availableAfter?: Condition
 }
+
+// ---------- Web pages (Browser app) ----------
+
+export interface NewsArticle {
+  id: Id
+  /** Publication date, "YYYY-MM-DD". */
+  date: string
+  title: string
+  author?: string
+  body: string[]
+}
+
+interface WebPageBase {
+  id: Id
+  /** Address without protocol, e.g. "fenyohazihirek.hu/archivum". */
+  url: string
+  title: string
+  /** Short text under the page heading. */
+  intro?: string
+  /** Listed on the browser's start page. */
+  bookmarked?: boolean
+  availableAfter?: Condition
+}
+
+/** Newspaper archive, searchable by date. */
+export interface NewsArchivePage extends WebPageBase {
+  kind: 'newsArchive'
+  /** A search for a day lists articles from that day and this many days after. */
+  searchDays: number
+  articles: NewsArticle[]
+}
+
+export interface VehicleRecord {
+  /** As printed on the plate, e.g. "GBM-418". */
+  plate: string
+  vehicle: string
+  color: string
+  holder: string
+  /** When the holder had the vehicle, e.g. "1997–2005". */
+  period: string
+}
+
+/** Vehicle history lookup by (old) number plate. */
+export interface VehicleRegistryPage extends WebPageBase {
+  kind: 'vehicleRegistry'
+  records: VehicleRecord[]
+}
+
+export type WebPage = NewsArchivePage | VehicleRegistryPage
 
 // ---------- Physical items (the box) ----------
 
@@ -182,6 +255,8 @@ export interface Chapter {
   conversations: Conversation[]
   /** Inbox, newest first. */
   emails?: Email[]
+  /** Pages reachable in the Browser app. */
+  pages?: WebPage[]
   photos: Photo[]
   puzzles: Puzzle[]
   evidence: Evidence[]

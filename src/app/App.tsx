@@ -10,6 +10,7 @@ import NotificationBanner, { type PhoneNotification } from './NotificationBanner
 import SoundToggle from './SoundToggle'
 import { isMuted, playMessageSound, playSuccessSound, setMuted, startAmbience } from './sound'
 import { APPS, type AppId } from '../apps/registry'
+import BrowserApp from '../apps/browser/BrowserApp'
 import EmailApp from '../apps/email/EmailApp'
 import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
@@ -191,6 +192,8 @@ export default function App() {
     )
   } else if (openApp === 'gallery') {
     screen = <GalleryApp game={game} dispatch={dispatch} onClose={goHome} />
+  } else if (openApp === 'browser') {
+    screen = <BrowserApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp === 'email') {
     screen = <EmailApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp === 'notebook') {

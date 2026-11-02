@@ -10,6 +10,9 @@ export function validateChapter(chapter: Chapter): string[] {
   const conversations = new Set(chapter.conversations.map((c) => c.id))
   const photos = new Set(chapter.photos.map((p) => p.id))
   const puzzles = new Set(chapter.puzzles.map((p) => p.id))
+  const pages = new Set(
+    (chapter.pages ?? []).flatMap((p) => [p.id, ...(p.kind === 'newsArchive' ? p.articles.map((a) => a.id) : [])]),
+  )
 
   const seen = new Set<string>()
   const allIds = [
@@ -19,6 +22,7 @@ export function validateChapter(chapter: Chapter): string[] {
     ...chapter.photos,
     ...chapter.puzzles,
     ...chapter.evidence,
+    ...[...pages].map((id) => ({ id })),
   ].map((item) => item.id)
   for (const id of allIds) {
     if (seen.has(id)) errors.push(`Duplicate id "${id}"`)
@@ -37,6 +41,9 @@ export function validateChapter(chapter: Chapter): string[] {
         break
       case 'photoViewed':
         if (!photos.has(condition.photo)) errors.push(`${where}: unknown photo "${condition.photo}"`)
+        break
+      case 'pageVisited':
+        if (!pages.has(condition.page)) errors.push(`${where}: unknown page "${condition.page}"`)
         break
       case 'all':
         condition.conditions.forEach((c) => checkCondition(c, where))
@@ -73,10 +80,13 @@ export function validateChapter(chapter: Chapter): string[] {
     checkSteps([...(c.history ?? []), ...c.steps], `conversation ${c.id}`)
   }
   chapter.emails?.forEach((e) => checkCondition(e.availableAfter, `email ${e.id}`))
+  chapter.pages?.forEach((p) => checkCondition(p.availableAfter, `page ${p.id}`))
   chapter.photos.forEach((p) => checkCondition(p.availableAfter, `photo ${p.id}`))
   for (const p of chapter.puzzles) {
     checkCondition(p.availableAfter, `puzzle ${p.id}`)
     if (!/^[0-9a-f]{64}$/.test(p.answerHash)) errors.push(`puzzle ${p.id}: answerHash is not a SHA-256 hex string`)
+    if (p.kind !== 'text' && new Set(p.statements.map((s) => s.id)).size !== p.statements.length)
+      errors.push(`puzzle ${p.id}: duplicate statement ids`)
   }
   for (const e of chapter.evidence) {
     checkCondition(e.foundWhen, `evidence ${e.id}`)

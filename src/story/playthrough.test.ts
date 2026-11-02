@@ -39,6 +39,8 @@ async function satisfy(state: GameState, condition: Condition): Promise<GameStat
       return solve(state, condition.puzzle)
     case 'photoViewed':
       return gameReducer(state, { type: 'viewPhoto', photo: condition.photo })
+    case 'pageVisited':
+      return gameReducer(state, { type: 'visitPage', page: condition.page })
     case 'all':
       for (const c of condition.conditions) if (!isMet(state, c)) state = await satisfy(state, c)
       return state

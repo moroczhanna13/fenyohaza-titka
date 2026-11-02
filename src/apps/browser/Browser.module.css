@@ -1,0 +1,103 @@
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.address {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--font-size-sm);
+}
+
+.navButton {
+  flex: none;
+  width: 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.navButton:disabled {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  cursor: default;
+}
+
+.page {
+  min-height: 100%;
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.start {
+  padding: var(--space-6) var(--space-4);
+}
+
+.startTitle {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.bookmarks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.bookmark {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  text-align: left;
+  cursor: pointer;
+}
+
+.bookmark:hover {
+  border-color: var(--color-accent-muted);
+}
+
+.bookmarkTitle {
+  font-weight: 600;
+}
+
+.bookmarkUrl {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.notFound {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+}
+
+.notFound h2 {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-lg);
+}

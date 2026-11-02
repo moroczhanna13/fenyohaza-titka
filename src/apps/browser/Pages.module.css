@@ -1,0 +1,185 @@
+/* In-game web pages. Each site has its own look, unlike the phone UI. */
+
+.intro {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+.label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.searchForm {
+  margin-bottom: var(--space-4);
+}
+
+.searchRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid #b9ae95;
+  border-radius: 3px;
+  background: #fff;
+  color: #222;
+  font: inherit;
+  color-scheme: light;
+}
+
+.button {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: 3px;
+  background: #3b3326;
+  color: #f5efe0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.noResults,
+.resultCount {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+/* ---------- Newspaper archive ---------- */
+
+.paper {
+  min-height: 100%;
+  padding: var(--space-4);
+  background: #f5efe0;
+  color: #2b2418;
+}
+
+.masthead {
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 3px double #2b2418;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.result {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) 0;
+  border: none;
+  border-bottom: 1px solid #d8ccae;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.resultDate {
+  font-size: 0.75rem;
+  color: #7a6a4a;
+}
+
+.resultTitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.result:hover .resultTitle {
+  text-decoration: underline;
+}
+
+.backLink {
+  margin-bottom: var(--space-3);
+  padding: 0;
+  border: none;
+  background: none;
+  color: #6b4d1f;
+  cursor: pointer;
+}
+
+.headline {
+  margin: var(--space-2) 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.dateline {
+  margin: 0 0 var(--space-4);
+  font-size: 0.8rem;
+  color: #7a6a4a;
+}
+
+.bodyText {
+  margin: 0 0 var(--space-3);
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+}
+
+/* ---------- Vehicle registry ---------- */
+
+.registry {
+  min-height: 100%;
+  padding: var(--space-4);
+  background: #eef1f4;
+  color: #1d2733;
+}
+
+.registry .button {
+  background: #2c4a6b;
+  color: #fff;
+}
+
+.registry .input {
+  border-color: #a9b4c0;
+}
+
+.registryTitle {
+  margin: 0 0 var(--space-3);
+  font-size: 1.2rem;
+  color: #2c4a6b;
+}
+
+.plateInput {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.record {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-4);
+  margin: 0 0 var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid #c9d2db;
+  border-radius: 4px;
+  background: #fff;
+  font-size: var(--font-size-sm);
+}
+
+.record dt {
+  color: #5b6875;
+}
+
+.record dd {
+  margin: 0;
+}
+
+.plate {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}

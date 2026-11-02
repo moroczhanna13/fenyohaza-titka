@@ -30,6 +30,7 @@ function isGameState(value: unknown): value is GameState {
     isStringArray(v.introSeen) &&
     isStringArray(v.seenEvidence) &&
     isStringArray(v.readEmails) &&
+    isStringArray(v.visitedPages) &&
     typeof v.notes === 'string' &&
     typeof v.openedHints === 'object' &&
     v.openedHints !== null &&
