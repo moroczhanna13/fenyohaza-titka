@@ -3,7 +3,7 @@ import { CHAPTERS, findConversation } from '../story/chapters'
 import { buildTimeline, initialProgress, type ConversationProgress } from './conversation'
 
 /** Bump when the shape of GameState changes; older saves are then discarded. */
-export const SAVE_VERSION = 3
+export const SAVE_VERSION = 4
 
 export interface GameState {
   version: typeof SAVE_VERSION
@@ -15,6 +15,8 @@ export interface GameState {
   viewedPhotos: Id[]
   /** Number of hints revealed per puzzle (0–3). */
   openedHints: Record<Id, number>
+  /** Chapters whose intro the player has dismissed. */
+  introSeen: Id[]
 }
 
 export const HINTS_PER_PUZZLE = 3
@@ -29,6 +31,7 @@ export type GameAction =
   | { type: 'viewPhoto'; photo: Id }
   /** Reveals the next hint of a puzzle. */
   | { type: 'openHint'; puzzle: Id }
+  | { type: 'dismissIntro'; chapter: Id }
 
 export function createInitialState(): GameState {
   return {
@@ -38,6 +41,7 @@ export function createInitialState(): GameState {
     solvedPuzzles: [],
     viewedPhotos: [],
     openedHints: {},
+    introSeen: [],
   }
 }
 
@@ -103,5 +107,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (opened >= HINTS_PER_PUZZLE) return state
       return { ...state, openedHints: { ...state.openedHints, [action.puzzle]: opened + 1 } }
     }
+
+    case 'dismissIntro':
+      if (state.introSeen.includes(action.chapter)) return state
+      return { ...state, introSeen: [...state.introSeen, action.chapter] }
   }
 }

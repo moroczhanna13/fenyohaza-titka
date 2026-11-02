@@ -1,4 +1,12 @@
 /* Design tokens and base styles. Component styles live in *.module.css files. */
+
+/* Old Hungarian (rovás) script. Noto Sans Old Hungarian, SIL Open Font License (public/fonts/OFL.txt). */
+@font-face {
+  font-family: 'Rovas';
+  src: url('/fonts/NotoSansOldHungarian-Regular.ttf') format('truetype');
+  unicode-range: U+10C80-10CFF;
+  font-display: swap;
+}
 :root {
   /* Night blue */
   --color-bg: #0b1424;
@@ -19,6 +27,8 @@
 
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Mono', 'Consolas', 'Menlo', monospace;
+  --font-rovas: 'Rovas', 'Segoe UI Historic', sans-serif;
+  --font-hand: 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
 
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;

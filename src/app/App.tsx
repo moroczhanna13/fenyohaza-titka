@@ -2,6 +2,9 @@ import { useCallback, useState } from 'react'
 import PhoneFrame from './PhoneFrame'
 import HomeScreen from './HomeScreen'
 import AppPlaceholder from './AppPlaceholder'
+import BoxView from './BoxView'
+import IntroScreen from './IntroScreen'
+import LockScreen from './LockScreen'
 import NotificationBanner, { type PhoneNotification } from './NotificationBanner'
 import { playMessageSound } from './sound'
 import { APPS, type AppId } from '../apps/registry'
@@ -11,7 +14,7 @@ import PuzzlePanel from '../puzzles/PuzzlePanel'
 import type { Conversation, Id, MessageStep } from '../story/types'
 import { unreadCount } from '../state/conversation'
 import { getProgress } from '../state/gameState'
-import { availableConversations, unlockedApps } from '../state/selectors'
+import { availableConversations, currentChapter, isPhoneLocked, unlockedApps } from '../state/selectors'
 import { useConversationEngine } from '../state/useConversationEngine'
 import { useGameState } from '../state/useGameState'
 
@@ -19,6 +22,7 @@ export default function App() {
   const [game, dispatch] = useGameState()
   const [openApp, setOpenApp] = useState<AppId | null>(null)
   const [openConversation, setOpenConversation] = useState<Id | null>(null)
+  const [boxOpen, setBoxOpen] = useState(false)
   const [notification, setNotification] = useState<PhoneNotification | null>(null)
 
   const showConversation = useCallback((id: Id) => {
@@ -42,6 +46,7 @@ export default function App() {
 
   useConversationEngine(game, dispatch, openApp === 'messages' ? openConversation : null, onIncoming)
 
+  const chapter = currentChapter(game)
   const unreadMessages = availableConversations(game).reduce(
     (sum, c) => sum + unreadCount(c, getProgress(game, c.id)),
     0,
@@ -53,7 +58,27 @@ export default function App() {
   }
 
   let screen
-  if (openApp === 'messages') {
+  if (chapter.intro && !game.introSeen.includes(chapter.id)) {
+    screen = (
+      <IntroScreen
+        title={chapter.title}
+        number={chapter.number}
+        paragraphs={chapter.intro}
+        onStart={() => dispatch({ type: 'dismissIntro', chapter: chapter.id })}
+      />
+    )
+  } else if (boxOpen && chapter.box) {
+    screen = <BoxView items={chapter.box} onBack={() => setBoxOpen(false)} />
+  } else if (chapter.lock && isPhoneLocked(game)) {
+    screen = (
+      <LockScreen
+        lock={chapter.lock}
+        game={game}
+        dispatch={dispatch}
+        onOpenBox={chapter.box ? () => setBoxOpen(true) : undefined}
+      />
+    )
+  } else if (openApp === 'messages') {
     screen = (
       <MessagesApp
         game={game}
@@ -81,6 +106,7 @@ export default function App() {
         onOpenApp={setOpenApp}
         onNewGame={() => {
           setNotification(null)
+          setBoxOpen(false)
           dispatch({ type: 'newGame' })
         }}
       />

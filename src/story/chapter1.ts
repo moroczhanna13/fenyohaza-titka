@@ -1,16 +1,63 @@
-import type { Chapter } from './types'
+import type { Chapter, Condition } from './types'
+
+const unlocked: Condition = { type: 'puzzleSolved', puzzle: 'ch1-lock' }
+
+// Old Hungarian (rovás) capitals, Unicode U+10C80 block.
+const ROVAS: [latin: string, glyph: string][] = [
+  ['A', '\u{10C80}'], ['Á', '\u{10C81}'], ['B', '\u{10C82}'], ['C', '\u{10C84}'], ['Cs', '\u{10C86}'],
+  ['D', '\u{10C87}'], ['E', '\u{10C89}'], ['É', '\u{10C8B}'], ['F', '\u{10C8C}'], ['G', '\u{10C8D}'],
+  ['Gy', '\u{10C8E}'], ['H', '\u{10C8F}'], ['I', '\u{10C90}'], ['Í', '\u{10C91}'], ['J', '\u{10C92}'],
+  ['K', '\u{10C93}'], ['L', '\u{10C96}'], ['Ly', '\u{10C97}'], ['M', '\u{10C98}'], ['N', '\u{10C99}'],
+  ['Ny', '\u{10C9A}'], ['O', '\u{10C9B}'], ['Ó', '\u{10C9C}'], ['Ö', '\u{10C9E}'], ['Ő', '\u{10C9F}'],
+  ['P', '\u{10CA0}'], ['R', '\u{10CA2}'], ['S', '\u{10CA4}'], ['Sz', '\u{10CA5}'], ['T', '\u{10CA6}'],
+  ['Ty', '\u{10CA8}'], ['U', '\u{10CAA}'], ['Ú', '\u{10CAB}'], ['Ü, Ű', '\u{10CAD}'], ['V', '\u{10CAE}'],
+  ['Z', '\u{10CAF}'], ['Zs', '\u{10CB0}'],
+]
 
 /** 1. fejezet – A doboz */
 export const chapter1: Chapter = {
   id: 'ch1',
   number: 1,
   title: 'A doboz',
-  apps: [{ app: 'messages' }, { app: 'gallery' }],
+
+  intro: [
+    'Berényi Gedeon nyugdíjas zárszerelő volt, és megszállott rejtvényfejtő. A nagybátyád. Nemrég meghalt – hivatalosan baleset.',
+    'Az utolsó éveiben egy régi fenyőházi ügy nem hagyta nyugodni. Hogy mi, azt senkinek nem mondta el.',
+    'A hagyatékból két dolgot kaptál: a telefonját és egy kartondobozt. A dobozban egy cédula van, az ő kézírásával.',
+    'A telefon le van zárva.',
+  ],
+
+  lock: { puzzle: 'ch1-lock', title: 'Berényi Gedeon telefonja' },
+
+  box: [
+    {
+      id: 'ch1-box-note',
+      title: 'A cédula',
+      blocks: [{ type: 'text', text: '„Ha ezt olvasod, nem baleset volt.”' }],
+    },
+    {
+      id: 'ch1-box-note-back',
+      title: 'A cédula hátoldala',
+      // KEREKES
+      blocks: [{ type: 'text', script: 'rovas', text: '\u{10C93}\u{10C89}\u{10CA2}\u{10C89}\u{10C93}\u{10C89}\u{10CA4}' }],
+    },
+    {
+      id: 'ch1-box-alphabet',
+      title: 'Megsárgult lap: a rovásírás betűi',
+      blocks: [{ type: 'glyphTable', entries: ROVAS }],
+    },
+  ],
+
+  apps: [
+    { app: 'messages', availableAfter: unlocked },
+    { app: 'gallery', availableAfter: unlocked },
+  ],
 
   conversations: [
     {
       id: 'ch1-unknown',
       contact: 'Ismeretlen szám',
+      availableAfter: unlocked,
       history: [
         {
           type: 'message',
@@ -117,6 +164,7 @@ export const chapter1: Chapter = {
     {
       id: 'ch1-pharmacy',
       contact: 'Fenyő Patika',
+      availableAfter: unlocked,
       history: [
         {
           type: 'message',

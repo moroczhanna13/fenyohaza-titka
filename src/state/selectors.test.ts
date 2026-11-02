@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createInitialState, gameReducer } from './gameState'
-import { availablePhotos, isMet, unlockedApps } from './selectors'
+import { availablePhotos, isMet, isPhoneLocked, unlockedApps } from './selectors'
 
 describe('selectors', () => {
   it('evaluates nested conditions', () => {
@@ -18,8 +18,15 @@ describe('selectors', () => {
     ).toBe(false)
   })
 
-  it('unlocks the chapter 1 apps', () => {
-    expect(unlockedApps(createInitialState())).toEqual(['messages', 'gallery'])
+  it('keeps the phone locked until the password is solved', () => {
+    expect(isPhoneLocked(createInitialState())).toBe(true)
+    expect(isPhoneLocked(gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' }))).toBe(false)
+  })
+
+  it('unlocks the chapter 1 apps with the phone', () => {
+    expect(unlockedApps(createInitialState())).toEqual([])
+    const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
+    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery'])
   })
 
   it('lists gallery photos newest first', () => {

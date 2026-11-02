@@ -125,7 +125,29 @@ export interface Evidence {
   foundWhen: Condition
 }
 
+// ---------- Physical items (the box) ----------
+
+export type DocumentBlock =
+  /** `script: 'rovas'` renders the text in the Old Hungarian font (Unicode U+10C80 block). */
+  | { type: 'text'; text: string; script?: 'rovas' }
+  /** A key table, e.g. an alphabet: each entry pairs a Latin letter with its glyph. */
+  | { type: 'glyphTable'; entries: [latin: string, glyph: string][] }
+
+/** Something the player holds in hand, outside the phone. */
+export interface BoxItem {
+  id: Id
+  title: string
+  blocks: DocumentBlock[]
+}
+
 // ---------- Chapter ----------
+
+export interface PhoneLock {
+  /** The phone stays locked until this puzzle is solved. */
+  puzzle: Id
+  /** Shown on the lock screen, e.g. whose phone it is. */
+  title: string
+}
 
 export interface AppUnlock {
   app: AppId
@@ -137,6 +159,11 @@ export interface Chapter {
   /** 1-based position in the main story; side cases leave it out. */
   number?: number
   title: string
+  /** Paragraphs shown once when the chapter starts. */
+  intro?: string[]
+  lock?: PhoneLock
+  /** Items available outside the phone (shown from the lock screen). */
+  box?: BoxItem[]
   apps: AppUnlock[]
   conversations: Conversation[]
   photos: Photo[]

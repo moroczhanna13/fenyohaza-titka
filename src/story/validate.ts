@@ -13,6 +13,7 @@ export function validateChapter(chapter: Chapter): string[] {
 
   const seen = new Set<string>()
   const allIds = [
+    ...(chapter.box ?? []),
     ...chapter.conversations,
     ...chapter.photos,
     ...chapter.puzzles,
@@ -80,6 +81,7 @@ export function validateChapter(chapter: Chapter): string[] {
     checkSource(e.source, `evidence ${e.id}`)
   }
   checkCondition(chapter.completedWhen, 'completedWhen')
+  if (chapter.lock) checkCondition({ type: 'puzzleSolved', puzzle: chapter.lock.puzzle }, 'lock')
 
   return errors
 }

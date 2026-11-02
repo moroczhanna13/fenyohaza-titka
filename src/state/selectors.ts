@@ -1,8 +1,18 @@
 import type { AppId } from '../apps/registry'
-import { chaptersUpTo, findConversation } from '../story/chapters'
-import type { Condition, Conversation, Id, Photo } from '../story/types'
+import { CHAPTERS, chapterIndex, chaptersUpTo, findConversation } from '../story/chapters'
+import type { Chapter, Condition, Conversation, Id, Photo } from '../story/types'
 import { buildTimeline, isFinished } from './conversation'
 import { getProgress, type GameState } from './gameState'
+
+export function currentChapter(state: GameState): Chapter {
+  return CHAPTERS[chapterIndex(state.chapter)]
+}
+
+/** True while the current chapter's phone lock is still unsolved. */
+export function isPhoneLocked(state: GameState): boolean {
+  const { lock } = currentChapter(state)
+  return !!lock && !state.solvedPuzzles.includes(lock.puzzle)
+}
 
 export function isMet(state: GameState, condition: Condition | undefined): boolean {
   if (!condition) return true
