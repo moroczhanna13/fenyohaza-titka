@@ -1,6 +1,15 @@
 import { describe, expect, it } from 'vitest'
 import { createInitialState, gameReducer } from './gameState'
-import { availableEmails, availablePhotos, foundEvidence, isMet, isPhoneLocked, unlockedApps } from './selectors'
+import {
+  availableEmails,
+  availablePhotos,
+  foundEvidence,
+  isChapterComplete,
+  isMet,
+  isPhoneLocked,
+  nextChapter,
+  unlockedApps,
+} from './selectors'
 
 describe('selectors', () => {
   it('evaluates nested conditions', () => {
@@ -51,5 +60,18 @@ describe('availableEmails', () => {
     expect(availableEmails(createInitialState())).toEqual([])
     const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
     expect(availableEmails(unlocked).length).toBeGreaterThan(0)
+  })
+})
+
+describe('chapter progress', () => {
+  it('completes chapter 1 and moves on to chapter 2', () => {
+    let state = createInitialState()
+    expect(isChapterComplete(state)).toBe(false)
+    expect(nextChapter(state)?.id).toBe('ch2')
+    state = gameReducer(state, { type: 'advanceChapter' })
+    expect(state.chapter).toBe('ch2')
+    // Chapter 2 has no completion condition yet, and there is no chapter after it.
+    expect(isChapterComplete(state)).toBe(false)
+    expect(gameReducer(state, { type: 'advanceChapter' })).toBe(state)
   })
 })

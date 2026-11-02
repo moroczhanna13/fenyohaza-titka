@@ -40,6 +40,8 @@ export type GameAction =
   | { type: 'markEvidenceSeen'; evidence: Id[] }
   | { type: 'setNotes'; text: string }
   | { type: 'readEmail'; email: Id }
+  /** Moves on to the next main-story chapter. */
+  | { type: 'advanceChapter' }
 
 export function createInitialState(): GameState {
   return {
@@ -131,6 +133,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'setNotes':
       return { ...state, notes: action.text }
+
+    case 'advanceChapter': {
+      const next = CHAPTERS[CHAPTERS.findIndex((c) => c.id === state.chapter) + 1]
+      return next ? { ...state, chapter: next.id } : state
+    }
 
     case 'readEmail':
       if (state.readEmails.includes(action.email)) return state

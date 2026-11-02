@@ -74,3 +74,12 @@ export function availableEmails(state: GameState): Email[] {
     .flatMap((chapter) => chapter.emails ?? [])
     .filter((email) => isMet(state, email.availableAfter))
 }
+
+export function isChapterComplete(state: GameState): boolean {
+  const { completedWhen } = currentChapter(state)
+  return !!completedWhen && isMet(state, completedWhen)
+}
+
+export function nextChapter(state: GameState): Chapter | undefined {
+  return CHAPTERS[chapterIndex(state.chapter) + 1]
+}

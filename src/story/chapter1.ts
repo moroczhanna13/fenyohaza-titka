@@ -298,6 +298,12 @@ export const chapter1: Chapter = {
     },
   ],
 
+  outro: [
+    'Másnap kimész a Kikötő sétányra. A telek gazos, a kerítés mögött kormos alapfalak, a vízből elszenesedett cölöpök állnak ki.',
+    'Huszonöt éve itt állt a vitorlásklub. A Tavi Fesztivál éjszakáján porig égett, a gondnok, Kerekes Pál bent halt meg. A rendőrség balesetnek minősítette.',
+    'Gedeon nem hitte el. Most már te sem.',
+  ],
+
   completedWhen: {
     type: 'all',
     conditions: [

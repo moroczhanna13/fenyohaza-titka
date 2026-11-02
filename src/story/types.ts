@@ -185,6 +185,8 @@ export interface Chapter {
   photos: Photo[]
   puzzles: Puzzle[]
   evidence: Evidence[]
-  /** The chapter is complete when this is met. */
-  completedWhen: Condition
+  /** The chapter is complete when this is met. Omitted while the chapter's content is unfinished. */
+  completedWhen?: Condition
+  /** Paragraphs shown on the chapter's closing screen. */
+  outro?: string[]
 }

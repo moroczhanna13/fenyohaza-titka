@@ -29,7 +29,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Jegyzetfüzet app: a megtalált bizonyítékok automatikusan bekerülnek, a játékos is írhat
 - [x] E-mail app
 - [x] Hangok: rádiózaj a háttérben, üzenet- és sikerhang, hangerő-kapcsoló
-- [ ] A fejezet vége: átvezetés a 2. fejezetre
+- [x] A fejezet vége: átvezetés a 2. fejezetre
 - [ ] Teszt: a fejezet automatikusan végigjátszható a megoldásokkal
 
 ## 3. A 2-3. fejezet

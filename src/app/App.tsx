@@ -3,6 +3,7 @@ import PhoneFrame from './PhoneFrame'
 import HomeScreen from './HomeScreen'
 import AppPlaceholder from './AppPlaceholder'
 import BoxView from './BoxView'
+import ChapterEnd from './ChapterEnd'
 import IntroScreen from './IntroScreen'
 import LockScreen from './LockScreen'
 import NotificationBanner, { type PhoneNotification } from './NotificationBanner'
@@ -23,11 +24,15 @@ import {
   availableEmails,
   currentChapter,
   foundEvidence,
+  isChapterComplete,
   isPhoneLocked,
+  nextChapter,
   unlockedApps,
 } from '../state/selectors'
 import { useConversationEngine } from '../state/useConversationEngine'
 import { useGameState } from '../state/useGameState'
+
+const END_DELAY_MS = 4000
 
 export default function App() {
   const [game, dispatch] = useGameState()
@@ -113,6 +118,18 @@ export default function App() {
   }
 
   const chapter = currentChapter(game)
+
+  // The closing screen waits a moment, so the last message can still be read.
+  const complete = isChapterComplete(game)
+  const [endShown, setEndShown] = useState(complete)
+  useEffect(() => {
+    if (!complete) {
+      setEndShown(false)
+      return
+    }
+    const timer = window.setTimeout(() => setEndShown(true), END_DELAY_MS)
+    return () => window.clearTimeout(timer)
+  }, [complete])
   const unseenEvidence = evidence.filter((e) => !game.seenEvidence.includes(e.id)).length
   const unreadEmails = availableEmails(game).filter((e) => !game.readEmails.includes(e.id)).length
   const unreadMessages = availableConversations(game).reduce(
@@ -126,7 +143,18 @@ export default function App() {
   }
 
   let screen
-  if (chapter.intro && !game.introSeen.includes(chapter.id)) {
+  if (complete && endShown) {
+    screen = (
+      <ChapterEnd
+        chapter={chapter}
+        next={nextChapter(game)}
+        onContinue={() => {
+          goHome()
+          dispatch({ type: 'advanceChapter' })
+        }}
+      />
+    )
+  } else if (chapter.intro && !game.introSeen.includes(chapter.id)) {
     screen = (
       <IntroScreen
         title={chapter.title}
