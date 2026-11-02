@@ -7,6 +7,7 @@ import { playMessageSound } from './sound'
 import { APPS, type AppId } from '../apps/registry'
 import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
+import PuzzlePanel from '../puzzles/PuzzlePanel'
 import type { Conversation, Id, MessageStep } from '../story/types'
 import { unreadCount } from '../state/conversation'
 import { getProgress } from '../state/gameState'
@@ -60,6 +61,11 @@ export default function App() {
         openConversation={openConversation}
         onOpenConversation={setOpenConversation}
         onClose={goHome}
+        renderWait={(until) =>
+          until.type === 'puzzleSolved' && (
+            <PuzzlePanel puzzleId={until.puzzle} game={game} dispatch={dispatch} submitLabel="Küldés" />
+          )
+        }
       />
     )
   } else if (openApp === 'gallery') {

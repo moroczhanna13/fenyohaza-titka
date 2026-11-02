@@ -1,5 +1,5 @@
 import { chapter1 } from './chapter1'
-import type { Chapter, Conversation, Id, Photo } from './types'
+import type { Chapter, Conversation, Id, Photo, Puzzle } from './types'
 
 /** Main story chapters in order. */
 export const CHAPTERS: readonly Chapter[] = [chapter1]
@@ -25,4 +25,10 @@ const photosById = new Map<Id, Photo>(CHAPTERS.flatMap((c) => c.photos).map((p) 
 
 export function findPhoto(id: Id): Photo | undefined {
   return photosById.get(id)
+}
+
+const puzzlesById = new Map<Id, Puzzle>(CHAPTERS.flatMap((c) => c.puzzles).map((p) => [p.id, p]))
+
+export function findPuzzle(id: Id): Puzzle | undefined {
+  return puzzlesById.get(id)
 }

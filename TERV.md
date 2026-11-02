@@ -18,7 +18,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Adatformátum a fejezetekhez (típusok TypeScriptben): üzenet, bizonyíték, fejtörő, tipp
 - [x] Üzenetek app: beszélgetéslista, csevegés, válaszlehetőségek, értesítéshang
 - [x] Galéria app: képrács, nagyítás, infó-lap (hely, dátum)
-- [ ] Szöveges fejtörő-komponens (beírt válasz, hash-ellenőrzés, normalizálás)
+- [x] Szöveges fejtörő-komponens (beírt válasz, hash-ellenőrzés, normalizálás)
 - [ ] Tipp-rendszer: 3 szint, a megnyitott tippek mentődnek
 - [ ] 1. fejtörő: rovásírásos szó a telefon jelszavához (rovásírás-ábécé a dobozban)
 - [ ] 2. fejtörő: galériafotó infó-lapjáról a klubház helye
