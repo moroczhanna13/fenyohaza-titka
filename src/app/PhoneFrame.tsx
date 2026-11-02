@@ -41,7 +41,7 @@ function BatteryIcon() {
   )
 }
 
-export default function PhoneFrame({ children }: { children: ReactNode }) {
+export default function PhoneFrame({ children }: Readonly<{ children: ReactNode }>) {
   const now = useClock()
   return (
     <div className={styles.stage}>

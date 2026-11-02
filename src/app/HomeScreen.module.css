@@ -1,0 +1,71 @@
+.home {
+  min-height: 100%;
+  padding: var(--space-8) var(--space-4);
+  /* Starts and ends in the device color so the status bar and home indicator blend in. */
+  background: linear-gradient(
+    180deg,
+    var(--color-bg) 0%,
+    var(--color-surface) 50%,
+    var(--color-bg) 100%
+  );
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-2);
+}
+
+.icon {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: var(--tile-color);
+  color: #fff;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.35);
+  transition: transform 0.12s ease;
+}
+
+.icon:not([aria-disabled='true']):active .tile {
+  transform: scale(0.92);
+}
+
+.label {
+  max-width: 100%;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+.icon[aria-disabled='true'] .tile {
+  background: var(--color-surface-raised);
+  color: var(--color-text-muted);
+  box-shadow: none;
+}
+
+.icon[aria-disabled='true'] .label {
+  color: var(--color-text-muted);
+}
