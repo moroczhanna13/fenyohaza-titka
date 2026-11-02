@@ -3,7 +3,7 @@ import { CHAPTERS, findConversation } from '../story/chapters'
 import { buildTimeline, initialProgress, type ConversationProgress } from './conversation'
 
 /** Bump when the shape of GameState changes; older saves are then discarded. */
-export const SAVE_VERSION = 2
+export const SAVE_VERSION = 3
 
 export interface GameState {
   version: typeof SAVE_VERSION
@@ -13,7 +13,11 @@ export interface GameState {
   conversations: Record<Id, ConversationProgress>
   solvedPuzzles: Id[]
   viewedPhotos: Id[]
+  /** Number of hints revealed per puzzle (0–3). */
+  openedHints: Record<Id, number>
 }
+
+export const HINTS_PER_PUZZLE = 3
 
 export type GameAction =
   | { type: 'newGame' }
@@ -23,6 +27,8 @@ export type GameAction =
   | { type: 'markConversationRead'; conversation: Id }
   | { type: 'solvePuzzle'; puzzle: Id }
   | { type: 'viewPhoto'; photo: Id }
+  /** Reveals the next hint of a puzzle. */
+  | { type: 'openHint'; puzzle: Id }
 
 export function createInitialState(): GameState {
   return {
@@ -31,6 +37,7 @@ export function createInitialState(): GameState {
     conversations: {},
     solvedPuzzles: [],
     viewedPhotos: [],
+    openedHints: {},
   }
 }
 
@@ -90,5 +97,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'viewPhoto':
       if (state.viewedPhotos.includes(action.photo)) return state
       return { ...state, viewedPhotos: [...state.viewedPhotos, action.photo] }
+
+    case 'openHint': {
+      const opened = state.openedHints[action.puzzle] ?? 0
+      if (opened >= HINTS_PER_PUZZLE) return state
+      return { ...state, openedHints: { ...state.openedHints, [action.puzzle]: opened + 1 } }
+    }
   }
 }

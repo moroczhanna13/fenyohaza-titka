@@ -40,6 +40,9 @@
 
 .footer {
   flex: none;
+  /* Long footers (e.g. a puzzle with all hints open) scroll instead of hiding the chat. */
+  max-height: 60%;
+  overflow-y: auto;
   border-top: 1px solid var(--color-border);
   background: var(--color-surface);
 }

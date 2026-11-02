@@ -19,7 +19,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Üzenetek app: beszélgetéslista, csevegés, válaszlehetőségek, értesítéshang
 - [x] Galéria app: képrács, nagyítás, infó-lap (hely, dátum)
 - [x] Szöveges fejtörő-komponens (beírt válasz, hash-ellenőrzés, normalizálás)
-- [ ] Tipp-rendszer: 3 szint, a megnyitott tippek mentődnek
+- [x] Tipp-rendszer: 3 szint, a megnyitott tippek mentődnek
 - [ ] 1. fejtörő: rovásírásos szó a telefon jelszavához (rovásírás-ábécé a dobozban)
 - [ ] 2. fejtörő: galériafotó infó-lapjáról a klubház helye
 - [ ] Prototípus végigjátszása, hibák javítása

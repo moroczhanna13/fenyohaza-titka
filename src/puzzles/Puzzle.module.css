@@ -71,6 +71,53 @@
   color: var(--color-danger);
 }
 
+.hints {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hintList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.hintList:empty {
+  display: none;
+}
+
+.hint {
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--color-accent-muted);
+  background: var(--color-bg);
+  font-size: var(--font-size-sm);
+}
+
+.hintLevel {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.hintButton {
+  align-self: flex-start;
+  padding: var(--space-1) var(--space-3);
+  border: 1px dashed var(--color-accent-muted);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.hintButton:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
 @keyframes shake {
   25% {
     transform: translateX(-4px);

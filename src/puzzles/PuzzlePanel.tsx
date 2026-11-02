@@ -2,6 +2,7 @@ import type { Dispatch } from 'react'
 import { findPuzzle } from '../story/chapters'
 import type { Id } from '../story/types'
 import type { GameAction, GameState } from '../state/gameState'
+import HintPanel from './HintPanel'
 import TextPuzzleForm from './TextPuzzleForm'
 import styles from './Puzzle.module.css'
 
@@ -24,6 +25,11 @@ export default function PuzzlePanel({ puzzleId, game, dispatch, submitLabel }: R
         puzzle={puzzle}
         submitLabel={submitLabel}
         onSolved={() => dispatch({ type: 'solvePuzzle', puzzle: puzzle.id })}
+      />
+      <HintPanel
+        hints={puzzle.hints}
+        opened={game.openedHints[puzzle.id] ?? 0}
+        onOpenNext={() => dispatch({ type: 'openHint', puzzle: puzzle.id })}
       />
     </section>
   )

@@ -26,6 +26,12 @@ describe('gameReducer', () => {
     expect(gameReducer(once, { type: 'advanceConversation', conversation: 'ch1-unknown', from, read: false })).toBe(once)
   })
 
+  it('opens hints one at a time, at most three', () => {
+    let state = createInitialState()
+    for (let i = 0; i < 5; i++) state = gameReducer(state, { type: 'openHint', puzzle: 'p' })
+    expect(state.openedHints).toEqual({ p: 3 })
+  })
+
   it('resets everything on new game', () => {
     const played = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'p' })
     expect(gameReducer(played, { type: 'newGame' })).toEqual(createInitialState())
