@@ -15,7 +15,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Telefon-keret komponens (mobilon teljes képernyő, nagy kijelzőn középen)
 - [x] Kezdőképernyő appikonokkal (Üzenetek, Galéria aktív, a többi még szürke)
 - [x] Játékállás: reducer + automatikus mentés localStorage-ba + "Új játék" gomb
-- [ ] Adatformátum a fejezetekhez (típusok TypeScriptben): üzenet, bizonyíték, fejtörő, tipp
+- [x] Adatformátum a fejezetekhez (típusok TypeScriptben): üzenet, bizonyíték, fejtörő, tipp
 - [ ] Üzenetek app: beszélgetéslista, csevegés, válaszlehetőségek, értesítéshang
 - [ ] Galéria app: képrács, nagyítás, infó-lap (hely, dátum)
 - [ ] Szöveges fejtörő-komponens (beírt válasz, hash-ellenőrzés, normalizálás)

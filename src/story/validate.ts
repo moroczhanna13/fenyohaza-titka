@@ -1,0 +1,85 @@
+import type { Chapter, Condition, ConversationStep, EvidenceSource } from './types'
+
+/**
+ * Checks a chapter for authoring mistakes: duplicate ids, references to
+ * content that does not exist, malformed answer hashes.
+ * Returns a list of problems; an empty list means the chapter is valid.
+ */
+export function validateChapter(chapter: Chapter): string[] {
+  const errors: string[] = []
+  const conversations = new Set(chapter.conversations.map((c) => c.id))
+  const photos = new Set(chapter.photos.map((p) => p.id))
+  const puzzles = new Set(chapter.puzzles.map((p) => p.id))
+
+  const seen = new Set<string>()
+  const allIds = [
+    ...chapter.conversations,
+    ...chapter.photos,
+    ...chapter.puzzles,
+    ...chapter.evidence,
+  ].map((item) => item.id)
+  for (const id of allIds) {
+    if (seen.has(id)) errors.push(`Duplicate id "${id}"`)
+    seen.add(id)
+  }
+
+  const checkCondition = (condition: Condition | undefined, where: string) => {
+    if (!condition) return
+    switch (condition.type) {
+      case 'puzzleSolved':
+        if (!puzzles.has(condition.puzzle)) errors.push(`${where}: unknown puzzle "${condition.puzzle}"`)
+        break
+      case 'conversationFinished':
+        if (!conversations.has(condition.conversation))
+          errors.push(`${where}: unknown conversation "${condition.conversation}"`)
+        break
+      case 'photoViewed':
+        if (!photos.has(condition.photo)) errors.push(`${where}: unknown photo "${condition.photo}"`)
+        break
+      case 'all':
+        condition.conditions.forEach((c) => checkCondition(c, where))
+        break
+    }
+  }
+
+  const checkSource = (source: EvidenceSource | undefined, where: string) => {
+    if (!source) return
+    const [known, ref] =
+      source.type === 'photo'
+        ? [photos, source.photo]
+        : source.type === 'conversation'
+          ? [conversations, source.conversation]
+          : [puzzles, source.puzzle]
+    if (!known.has(ref)) errors.push(`${where}: unknown ${source.type} "${ref}"`)
+  }
+
+  const checkSteps = (steps: ConversationStep[], where: string) => {
+    for (const step of steps) {
+      if (step.type === 'message' && step.photo && !photos.has(step.photo))
+        errors.push(`${where}: unknown photo "${step.photo}"`)
+      if (step.type === 'choice') {
+        if (step.options.length < 2) errors.push(`${where}: a choice needs at least two options`)
+        step.options.forEach((o) => checkSteps(o.replies, where))
+      }
+      if (step.type === 'wait') checkCondition(step.until, where)
+    }
+  }
+
+  chapter.apps.forEach((a) => checkCondition(a.availableAfter, `app ${a.app}`))
+  for (const c of chapter.conversations) {
+    checkCondition(c.availableAfter, `conversation ${c.id}`)
+    checkSteps(c.steps, `conversation ${c.id}`)
+  }
+  chapter.photos.forEach((p) => checkCondition(p.availableAfter, `photo ${p.id}`))
+  for (const p of chapter.puzzles) {
+    checkCondition(p.availableAfter, `puzzle ${p.id}`)
+    if (!/^[0-9a-f]{64}$/.test(p.answerHash)) errors.push(`puzzle ${p.id}: answerHash is not a SHA-256 hex string`)
+  }
+  for (const e of chapter.evidence) {
+    checkCondition(e.foundWhen, `evidence ${e.id}`)
+    checkSource(e.source, `evidence ${e.id}`)
+  }
+  checkCondition(chapter.completedWhen, 'completedWhen')
+
+  return errors
+}
