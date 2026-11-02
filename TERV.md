@@ -35,7 +35,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 ## 3. A 2-3. fejezet
 
 - [x] Böngésző app: címsor, a játékon belüli hamis oldalak betöltése
-- [ ] Oldal: Fenyőházi Hírek archívum (keresés dátumra)
+- [x] Oldal: Fenyőházi Hírek archívum (keresés dátumra)
 - [ ] Következtetések app: két állítás összekötése
 - [ ] Fejtörő: ki hazudott az időről (összekötés)
 - [ ] Idővonal-fejtörő: négy vallomás időrendbe húzása

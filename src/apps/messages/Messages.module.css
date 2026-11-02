@@ -146,6 +146,7 @@
 }
 
 .typing {
+  align-self: flex-start;
   display: inline-flex;
   gap: 4px;
   margin: 0 var(--space-3) var(--space-3);

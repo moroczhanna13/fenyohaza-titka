@@ -36,6 +36,9 @@
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  /* Column flex, so a child can fill the remaining height with flex-grow. */
+  display: flex;
+  flex-direction: column;
 }
 
 .footer {

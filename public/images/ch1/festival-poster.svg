@@ -19,7 +19,8 @@
     <path d="M355 292 L430 292 L420 304 L365 304 Z" fill="#5b3a26"/>
     <text x="400" y="385" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#2b2b2b" opacity="0.85">TAVI FESZTIVÁL</text>
     <text x="400" y="430" text-anchor="middle" font-family="Georgia, serif" font-size="40" fill="#a3402c" opacity="0.85">2001</text>
-    <text x="400" y="470" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#2b2b2b" opacity="0.7">Fenyőházi Vitorlásklub</text>
+    <text x="400" y="458" text-anchor="middle" font-family="Georgia, serif" font-size="17" fill="#2b2b2b" opacity="0.8">július 20–21. · Kikötő sétány</text>
+    <text x="400" y="480" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#2b2b2b" opacity="0.7">Tűzijáték szombaton 22:30 · Fenyőházi Vitorlásklub</text>
     <!-- pins -->
     <circle cx="265" cy="82" r="6" fill="#c0392b"/>
     <circle cx="535" cy="82" r="6" fill="#c0392b"/>

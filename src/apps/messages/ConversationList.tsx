@@ -1,37 +1,40 @@
 import type { Id } from '../../story/types'
 import { buildTimeline, unreadCount } from '../../state/conversation'
 import { getProgress, type GameState } from '../../state/gameState'
-import { availableConversations } from '../../state/selectors'
+import { availableThreads } from '../../state/selectors'
 import styles from './Messages.module.css'
 
-export default function ConversationList({ game, onOpen }: Readonly<{ game: GameState; onOpen: (id: Id) => void }>) {
-  const rows = availableConversations(game).flatMap((conversation) => {
-    const progress = getProgress(game, conversation.id)
-    const delivered = buildTimeline(conversation, progress.choices).slice(0, progress.cursor)
+export default function ConversationList({ game, onOpen }: Readonly<{ game: GameState; onOpen: (thread: Id) => void }>) {
+  const rows = [...availableThreads(game)].flatMap(([thread, parts]) => {
+    const delivered = parts.flatMap((part) => {
+      const progress = getProgress(game, part.id)
+      return buildTimeline(part, progress.choices).slice(0, progress.cursor)
+    })
     const last = delivered.findLast((item) => item.kind === 'message')
-    // A conversation shows up once its first message has arrived.
+    // A chat shows up once its first message has arrived.
     if (last?.kind !== 'message') return []
-    return [{ conversation, last: last.message, unread: unreadCount(conversation, progress) }]
+    const unread = parts.reduce((sum, part) => sum + unreadCount(part, getProgress(game, part.id)), 0)
+    return [{ thread, contact: parts[0].contact, last: last.message, unread }]
   })
 
   if (rows.length === 0) return <p className={styles.empty}>Nincsenek üzenetek.</p>
 
   return (
     <ul className={styles.list}>
-      {rows.map(({ conversation, last, unread }) => (
-        <li key={conversation.id}>
+      {rows.map(({ thread, contact, last, unread }) => (
+        <li key={thread}>
           <button
             type="button"
             className={styles.row}
             data-unread={unread > 0}
-            aria-label={`${conversation.contact}${unread > 0 ? `, ${unread} olvasatlan üzenet` : ''}`}
-            onClick={() => onOpen(conversation.id)}
+            aria-label={`${contact}${unread > 0 ? `, ${unread} olvasatlan üzenet` : ''}`}
+            onClick={() => onOpen(thread)}
           >
             <span className={styles.avatar} aria-hidden="true">
-              {conversation.contact.charAt(0)}
+              {contact.charAt(0)}
             </span>
             <span className={styles.rowText}>
-              <span className={styles.contact}>{conversation.contact}</span>
+              <span className={styles.contact}>{contact}</span>
               <span className={styles.preview}>
                 {last.from === 'player' ? 'Én: ' : ''}
                 {last.text}

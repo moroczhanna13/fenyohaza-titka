@@ -1,3 +1,4 @@
+import { findConversation } from './chapters'
 import type { Chapter, Condition, ConversationStep, EvidenceSource } from './types'
 
 /**
@@ -77,6 +78,7 @@ export function validateChapter(chapter: Chapter): string[] {
   chapter.apps.forEach((a) => checkCondition(a.availableAfter, `app ${a.app}`))
   for (const c of chapter.conversations) {
     checkCondition(c.availableAfter, `conversation ${c.id}`)
+    if (c.thread && !findConversation(c.thread)) errors.push(`conversation ${c.id}: unknown thread "${c.thread}"`)
     checkSteps([...(c.history ?? []), ...c.steps], `conversation ${c.id}`)
   }
   chapter.emails?.forEach((e) => checkCondition(e.availableAfter, `email ${e.id}`))

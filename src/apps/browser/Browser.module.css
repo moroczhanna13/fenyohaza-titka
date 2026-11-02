@@ -38,8 +38,15 @@
   cursor: default;
 }
 
+/* Fills the rest of the screen, so each site's background reaches the bottom. */
 .page {
-  min-height: 100%;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page > * {
+  flex: 1 0 auto;
 }
 
 .muted {

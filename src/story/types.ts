@@ -56,6 +56,11 @@ export interface Conversation {
   id: Id
   /** Contact name as shown in the conversation list. */
   contact: string
+  /**
+   * Id of an earlier conversation this one continues (e.g. the same contact in a
+   * later chapter). Both are shown as one chat thread on the phone.
+   */
+  thread?: Id
   availableAfter?: Condition
   /** Messages already on the phone when the conversation becomes available. */
   history?: MessageStep[]

@@ -1,6 +1,6 @@
 import type { Dispatch, ReactNode } from 'react'
 import AppScreen from '../../app/AppScreen'
-import { findConversation } from '../../story/chapters'
+import { availableThreads } from '../../state/selectors'
 import type { Condition, Id } from '../../story/types'
 import type { GameAction, GameState } from '../../state/gameState'
 import ChatView from './ChatView'
@@ -9,6 +9,7 @@ import ConversationList from './ConversationList'
 interface MessagesAppProps {
   game: GameState
   dispatch: Dispatch<GameAction>
+  /** Thread id of the open chat. */
   openConversation: Id | null
   onOpenConversation: (id: Id | null) => void
   onClose: () => void
@@ -24,14 +25,14 @@ export default function MessagesApp({
   onClose,
   renderWait,
 }: Readonly<MessagesAppProps>) {
-  const conversation = openConversation ? findConversation(openConversation) : undefined
+  const parts = openConversation ? availableThreads(game).get(openConversation) : undefined
 
-  if (conversation) {
+  if (parts) {
     return (
       <ChatView
         game={game}
         dispatch={dispatch}
-        conversation={conversation}
+        parts={parts}
         onBack={() => onOpenConversation(null)}
         renderWait={renderWait}
       />

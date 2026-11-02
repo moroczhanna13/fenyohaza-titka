@@ -28,6 +28,7 @@ import {
   isChapterComplete,
   isPhoneLocked,
   nextChapter,
+  threadOf,
   unlockedApps,
 } from '../state/selectors'
 import { useConversationEngine } from '../state/useConversationEngine'
@@ -54,7 +55,7 @@ export default function App() {
         key: Date.now(),
         title: conversation.contact,
         text: message.text,
-        onOpen: () => showConversation(conversation.id),
+        onOpen: () => showConversation(threadOf(conversation)),
       })
     },
     [showConversation],

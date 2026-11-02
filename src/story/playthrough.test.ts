@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isCorrectAnswer } from '../puzzles/answer'
+import { connectAnswer, isCorrectAnswer } from '../puzzles/answer'
 import { buildTimeline } from '../state/conversation'
 import { createInitialState, gameReducer, getProgress, type GameAction, type GameState } from '../state/gameState'
 import {
@@ -17,6 +17,8 @@ import type { Condition, Id } from './types'
 const SOLUTIONS: Record<Id, string> = {
   'ch1-lock': 'Kerekes',
   'ch1-photo-place': 'Kikötő sétány 4.',
+  'ch2-article-time': '23:40',
+  'ch2-who-lied': connectAnswer('ch2-s-toth', 'ch2-s-log'),
 }
 
 type PickOption = (optionCount: number) => number

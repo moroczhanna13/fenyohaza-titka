@@ -52,7 +52,6 @@
 /* ---------- Newspaper archive ---------- */
 
 .paper {
-  min-height: 100%;
   padding: var(--space-4);
   background: #f5efe0;
   color: #2b2418;
@@ -133,7 +132,6 @@
 /* ---------- Vehicle registry ---------- */
 
 .registry {
-  min-height: 100%;
   padding: var(--space-4);
   background: #eef1f4;
   color: #1d2733;

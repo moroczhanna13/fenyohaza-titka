@@ -56,6 +56,21 @@ export function availablePhotos(state: GameState): Photo[] {
     .sort((a, b) => b.info.takenAt.localeCompare(a.info.takenAt))
 }
 
+/** Conversations shown together as one chat on the phone share a thread id. */
+export function threadOf(conversation: Conversation): Id {
+  return conversation.thread ?? conversation.id
+}
+
+/** Available conversations grouped into chat threads, each in story order. */
+export function availableThreads(state: GameState): Map<Id, Conversation[]> {
+  const threads = new Map<Id, Conversation[]>()
+  for (const conversation of availableConversations(state)) {
+    const id = threadOf(conversation)
+    threads.set(id, [...(threads.get(id) ?? []), conversation])
+  }
+  return threads
+}
+
 export function availableConversations(state: GameState): Conversation[] {
   return chaptersUpTo(state.chapter)
     .flatMap((chapter) => chapter.conversations)

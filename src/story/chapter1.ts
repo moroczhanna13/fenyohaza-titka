@@ -237,7 +237,7 @@ export const chapter1: Chapter = {
     {
       id: 'ch1-photo-poster',
       src: 'images/ch1/festival-poster.svg',
-      alt: 'Kifakult plakát egy hirdetőtáblán: vitorlás a tavon, felirata „Tavi Fesztivál 2001 – Fenyőházi Vitorlásklub”.',
+      alt: 'Kifakult plakát egy hirdetőtáblán: vitorlás a tavon. Felirata: „Tavi Fesztivál 2001, július 20–21., Kikötő sétány. Tűzijáték szombaton 22:30. Fenyőházi Vitorlásklub.”',
       info: { takenAt: '2026-09-10T14:40', place: 'Fenyőháza, Városi Könyvtár', coordinates: { lat: 46.9198, lon: 17.8852 } },
     },
     {
