@@ -40,7 +40,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Fejtörő: ki hazudott az időről (összekötés)
 - [ ] Idővonal-fejtörő: négy vallomás időrendbe húzása
 - [x] Oldal: jármű-nyilvántartó (régi rendszám alapján keresés)
-- [ ] Kikérdezések: a gyanúsítottak beszélgetései (Tóth Ervin, Pásztor László, Mészáros Béla)
+- [x] Kikérdezések: a gyanúsítottak beszélgetései (Tóth Ervin, Pásztor László, Mészáros Béla)
 
 ## 4. A 4-6. fejezet
 
