@@ -19,6 +19,7 @@ const SOLUTIONS: Record<Id, string> = {
   'ch1-photo-place': 'Kikötő sétány 4.',
   'ch2-article-time': '23:40',
   'ch2-who-lied': connectAnswer('ch2-s-toth', 'ch2-s-log'),
+  'ch3-car-owner': 'Mészáros Béla',
 }
 
 type PickOption = (optionCount: number) => number

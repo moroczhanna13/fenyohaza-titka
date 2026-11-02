@@ -64,14 +64,18 @@ describe('availableEmails', () => {
 })
 
 describe('chapter progress', () => {
-  it('completes chapter 1 and moves on to chapter 2', () => {
+  it('moves on from chapter 1 to chapter 2', () => {
     let state = createInitialState()
     expect(isChapterComplete(state)).toBe(false)
     expect(nextChapter(state)?.id).toBe('ch2')
     state = gameReducer(state, { type: 'advanceChapter' })
     expect(state.chapter).toBe('ch2')
-    // Chapter 2 has no completion condition yet, and there is no chapter after it.
     expect(isChapterComplete(state)).toBe(false)
+  })
+
+  it('stays in the last chapter', () => {
+    let state = createInitialState()
+    while (nextChapter(state)) state = gameReducer(state, { type: 'advanceChapter' })
     expect(gameReducer(state, { type: 'advanceChapter' })).toBe(state)
   })
 })

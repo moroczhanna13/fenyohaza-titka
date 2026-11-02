@@ -66,13 +66,13 @@
   height: auto;
 }
 
-/* Zoomed: twice the width, scrollable in both directions. */
+/* Zoomed: three times the width, scrollable in both directions. */
 .stage[data-zoomed='true'] {
   max-height: 70vh;
 }
 
 .stage[data-zoomed='true'] .photo {
-  width: 200%;
+  width: 300%;
   max-width: none;
 }
 
