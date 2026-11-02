@@ -130,7 +130,8 @@ export const chapter1: Chapter = {
         },
         { type: 'message', from: 'contact', text: 'Hol készült a kép? Írja meg a pontos címet.' },
         { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch1-photo-place' } },
-        { type: 'message', from: 'contact', text: 'Kikötő sétány 4. Ott állt a vitorlásklub, mielőtt leégett.' },
+        { type: 'message', from: 'player', text: 'Kikötő sétány 4.' },
+        { type: 'message', from: 'contact', text: 'Igen. Ott állt a vitorlásklub, mielőtt leégett.' },
         { type: 'message', from: 'contact', text: 'A gondnok bent égett. Kerekes Pál.' },
         {
           type: 'choice',
