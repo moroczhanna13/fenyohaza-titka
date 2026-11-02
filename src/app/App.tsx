@@ -11,6 +11,7 @@ import SoundToggle from './SoundToggle'
 import { isMuted, playMessageSound, playSuccessSound, setMuted, startAmbience } from './sound'
 import { APPS, type AppId } from '../apps/registry'
 import BrowserApp from '../apps/browser/BrowserApp'
+import DeductionsApp from '../apps/deductions/DeductionsApp'
 import EmailApp from '../apps/email/EmailApp'
 import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
@@ -41,6 +42,8 @@ export default function App() {
   const [openApp, setOpenApp] = useState<AppId | null>(null)
   const [openConversation, setOpenConversation] = useState<Id | null>(null)
   const [boxOpen, setBoxOpen] = useState(false)
+  // Puzzle to show when the Deductions app is opened from a chat.
+  const [deductionToOpen, setDeductionToOpen] = useState<Id | null>(null)
   const [notification, setNotification] = useState<PhoneNotification | null>(null)
 
   const showConversation = useCallback((id: Id) => {
@@ -142,6 +145,7 @@ export default function App() {
   const goHome = () => {
     setOpenApp(null)
     setOpenConversation(null)
+    setDeductionToOpen(null)
   }
 
   let screen
@@ -186,13 +190,25 @@ export default function App() {
         onClose={goHome}
         renderWait={(until) =>
           until.type === 'puzzleSolved' && (
-            <PuzzlePanel puzzleId={until.puzzle} game={game} dispatch={dispatch} submitLabel="Küldés" />
+            <PuzzlePanel
+              puzzleId={until.puzzle}
+              game={game}
+              dispatch={dispatch}
+              submitLabel="Küldés"
+              onOpenDeduction={(id) => {
+                setDeductionToOpen(id)
+                setOpenConversation(null)
+                setOpenApp('deductions')
+              }}
+            />
           )
         }
       />
     )
   } else if (openApp === 'gallery') {
     screen = <GalleryApp game={game} dispatch={dispatch} onClose={goHome} />
+  } else if (openApp === 'deductions') {
+    screen = <DeductionsApp game={game} dispatch={dispatch} onClose={goHome} initialPuzzle={deductionToOpen} />
   } else if (openApp === 'browser') {
     screen = <BrowserApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp === 'email') {

@@ -11,14 +11,34 @@ interface PuzzlePanelProps {
   game: GameState
   dispatch: Dispatch<GameAction>
   submitLabel?: string
+  /** Connect and timeline puzzles are solved in the Deductions app; this opens it. */
+  onOpenDeduction?: (puzzleId: Id) => void
 }
 
 /** A puzzle by id, with its title; renders nothing once solved. */
-export default function PuzzlePanel({ puzzleId, game, dispatch, submitLabel }: Readonly<PuzzlePanelProps>) {
+export default function PuzzlePanel({
+  puzzleId,
+  game,
+  dispatch,
+  submitLabel,
+  onOpenDeduction,
+}: Readonly<PuzzlePanelProps>) {
   const puzzle = findPuzzle(puzzleId)
   if (!puzzle || game.solvedPuzzles.includes(puzzle.id)) return null
   // Connect and timeline puzzles need more room; they live in the Deductions app.
-  if (puzzle.kind !== 'text') return null
+  if (puzzle.kind !== 'text') {
+    return (
+      <section className={styles.panel} aria-label={puzzle.title}>
+        <h2 className={styles.title}>{puzzle.title}</h2>
+        <p className={styles.prompt}>Ezt a Következtetések appban tudod kibogozni.</p>
+        {onOpenDeduction && (
+          <button type="button" className={styles.submit} onClick={() => onOpenDeduction(puzzle.id)}>
+            Megnyitás a Következtetésekben
+          </button>
+        )}
+      </section>
+    )
+  }
 
   return (
     <section className={styles.panel} aria-label={puzzle.title}>
