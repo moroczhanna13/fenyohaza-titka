@@ -1,0 +1,96 @@
+/* Design tokens and base styles. Component styles live in *.module.css files. */
+:root {
+  /* Night blue */
+  --color-bg: #0b1424;
+  --color-surface: #13213a;
+  --color-surface-raised: #1c2e4d;
+  --color-border: #2a3f63;
+
+  /* Amber */
+  --color-accent: #f2a93b;
+  --color-accent-strong: #ffbf5a;
+  --color-accent-muted: #8a6224;
+
+  --color-text: #e8edf5;
+  --color-text-muted: #9aa8bf;
+  --color-text-on-accent: #1a1204;
+  --color-danger: #e5675a;
+  --color-success: #6cc28a;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'Consolas', 'Menlo', monospace;
+
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --focus-ring: 0 0 0 3px var(--color-accent-strong);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Keyboard focus must always be visible. */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
