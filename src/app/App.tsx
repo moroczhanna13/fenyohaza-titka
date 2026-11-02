@@ -3,11 +3,10 @@ import PhoneFrame from './PhoneFrame'
 import HomeScreen from './HomeScreen'
 import AppPlaceholder from './AppPlaceholder'
 import { APPS, type AppId } from '../apps/registry'
-
-// Until game state exists (next task), chapter 1 unlocks these two apps.
-const UNLOCKED_APPS: AppId[] = ['messages', 'gallery']
+import { useGameState } from '../state/useGameState'
 
 export default function App() {
+  const [game, dispatch] = useGameState()
   const [openApp, setOpenApp] = useState<AppId | null>(null)
   const app = APPS.find((a) => a.id === openApp)
 
@@ -16,7 +15,11 @@ export default function App() {
       {app ? (
         <AppPlaceholder title={app.label} onBack={() => setOpenApp(null)} />
       ) : (
-        <HomeScreen unlockedApps={UNLOCKED_APPS} onOpenApp={setOpenApp} />
+        <HomeScreen
+          unlockedApps={game.unlockedApps}
+          onOpenApp={setOpenApp}
+          onNewGame={() => dispatch({ type: 'newGame' })}
+        />
       )}
     </PhoneFrame>
   )

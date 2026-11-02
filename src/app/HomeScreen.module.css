@@ -1,5 +1,9 @@
 .home {
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-6);
   padding: var(--space-8) var(--space-4);
   /* Starts and ends in the device color so the status bar and home indicator blend in. */
   background: linear-gradient(
