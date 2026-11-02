@@ -5,6 +5,7 @@ import AppPlaceholder from './AppPlaceholder'
 import NotificationBanner, { type PhoneNotification } from './NotificationBanner'
 import { playMessageSound } from './sound'
 import { APPS, type AppId } from '../apps/registry'
+import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
 import type { Conversation, Id, MessageStep } from '../story/types'
 import { unreadCount } from '../state/conversation'
@@ -61,6 +62,8 @@ export default function App() {
         onClose={goHome}
       />
     )
+  } else if (openApp === 'gallery') {
+    screen = <GalleryApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp) {
     const app = APPS.find((a) => a.id === openApp)
     screen = <AppPlaceholder title={app?.label ?? ''} onBack={goHome} />

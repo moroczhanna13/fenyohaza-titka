@@ -45,10 +45,6 @@ function withProgress(state: GameState, conversationId: Id, progress: Conversati
   return { ...state, conversations: { ...state.conversations, [conversationId]: progress } }
 }
 
-function addOnce(list: Id[], id: Id): Id[] {
-  return list.includes(id) ? list : [...list, id]
-}
-
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'newGame':
@@ -86,10 +82,13 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return withProgress(state, action.conversation, { ...progress, readUpTo: progress.cursor })
     }
 
+    // Unchanged state is returned as-is so repeated actions do not re-render.
     case 'solvePuzzle':
-      return { ...state, solvedPuzzles: addOnce(state.solvedPuzzles, action.puzzle) }
+      if (state.solvedPuzzles.includes(action.puzzle)) return state
+      return { ...state, solvedPuzzles: [...state.solvedPuzzles, action.puzzle] }
 
     case 'viewPhoto':
-      return { ...state, viewedPhotos: addOnce(state.viewedPhotos, action.photo) }
+      if (state.viewedPhotos.includes(action.photo)) return state
+      return { ...state, viewedPhotos: [...state.viewedPhotos, action.photo] }
   }
 }

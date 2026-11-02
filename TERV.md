@@ -17,7 +17,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Játékállás: reducer + automatikus mentés localStorage-ba + "Új játék" gomb
 - [x] Adatformátum a fejezetekhez (típusok TypeScriptben): üzenet, bizonyíték, fejtörő, tipp
 - [x] Üzenetek app: beszélgetéslista, csevegés, válaszlehetőségek, értesítéshang
-- [ ] Galéria app: képrács, nagyítás, infó-lap (hely, dátum)
+- [x] Galéria app: képrács, nagyítás, infó-lap (hely, dátum)
 - [ ] Szöveges fejtörő-komponens (beírt válasz, hash-ellenőrzés, normalizálás)
 - [ ] Tipp-rendszer: 3 szint, a megnyitott tippek mentődnek
 - [ ] 1. fejtörő: rovásírásos szó a telefon jelszavához (rovásírás-ábécé a dobozban)

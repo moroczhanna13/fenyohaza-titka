@@ -134,6 +134,17 @@
   color: var(--color-text-on-accent);
 }
 
+.attachment {
+  width: 60%;
+  margin-top: var(--space-1);
+  border-radius: var(--radius-md);
+  align-self: flex-start;
+}
+
+.attachmentMine {
+  align-self: flex-end;
+}
+
 .typing {
   display: inline-flex;
   gap: 4px;

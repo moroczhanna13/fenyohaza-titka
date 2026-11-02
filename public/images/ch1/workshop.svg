@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="lamp" cx="0.5" cy="0.2" r="0.8">
+      <stop offset="0" stop-color="#5a4630"/>
+      <stop offset="1" stop-color="#1a140f"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#lamp)"/>
+  <!-- pegboard with tools -->
+  <rect x="80" y="40" width="640" height="250" fill="#3b2e22"/>
+  <g fill="#2a2119">
+    <circle cx="120" cy="80" r="3"/><circle cx="160" cy="80" r="3"/><circle cx="200" cy="80" r="3"/>
+    <circle cx="600" cy="80" r="3"/><circle cx="640" cy="80" r="3"/><circle cx="680" cy="80" r="3"/>
+  </g>
+  <g stroke="#9aa3ad" stroke-width="8" stroke-linecap="round">
+    <line x1="150" y1="90" x2="150" y2="230"/>
+    <line x1="200" y1="90" x2="200" y2="200"/>
+    <line x1="250" y1="90" x2="250" y2="250"/>
+  </g>
+  <!-- key blanks hanging -->
+  <g fill="#c9a24a">
+    <path d="M420 100 h20 v60 l-6 6 v10 h-8 v-10 l-6 -6 Z"/>
+    <path d="M460 100 h20 v70 l-6 6 v10 h-8 v-10 l-6 -6 Z"/>
+    <path d="M500 100 h20 v55 l-6 6 v10 h-8 v-10 l-6 -6 Z"/>
+    <path d="M540 100 h20 v65 l-6 6 v10 h-8 v-10 l-6 -6 Z"/>
+  </g>
+  <!-- workbench -->
+  <rect y="360" width="800" height="240" fill="#5b3f27"/>
+  <rect y="350" width="800" height="16" fill="#77553a"/>
+  <!-- disassembled padlock -->
+  <rect x="300" y="420" width="120" height="100" rx="10" fill="#b08a3e"/>
+  <path d="M320 420 v-40 a40 40 0 0 1 80 0 v10" fill="none" stroke="#a9b2bb" stroke-width="14"/>
+  <circle cx="360" cy="470" r="12" fill="#3d2f1e"/>
+  <g fill="#c9a24a">
+    <rect x="470" y="450" width="10" height="26" rx="3"/>
+    <rect x="490" y="455" width="10" height="20" rx="3"/>
+    <rect x="510" y="448" width="10" height="30" rx="3"/>
+    <rect x="530" y="458" width="10" height="16" rx="3"/>
+  </g>
+  <!-- magnifier -->
+  <circle cx="620" cy="460" r="40" fill="#9fc4d6" opacity="0.25" stroke="#2a2119" stroke-width="8"/>
+  <line x1="650" y1="490" x2="710" y2="550" stroke="#2a2119" stroke-width="14" stroke-linecap="round"/>
+</svg>

@@ -1,7 +1,7 @@
 import type { AppId } from '../apps/registry'
 import { chaptersUpTo, findConversation } from '../story/chapters'
-import type { Condition, Conversation } from '../story/types'
-import { isFinished } from './conversation'
+import type { Condition, Conversation, Id, Photo } from '../story/types'
+import { buildTimeline, isFinished } from './conversation'
 import { getProgress, type GameState } from './gameState'
 
 export function isMet(state: GameState, condition: Condition | undefined): boolean {
@@ -25,6 +25,23 @@ export function unlockedApps(state: GameState): AppId[] {
     .flatMap((chapter) => chapter.apps)
     .filter((unlock) => isMet(state, unlock.availableAfter))
     .map((unlock) => unlock.app)
+}
+
+/** Photos in the gallery, newest first. Photos sent in a conversation appear once delivered. */
+export function availablePhotos(state: GameState): Photo[] {
+  const sentInChat = new Map<Id, boolean>()
+  for (const conversation of chaptersUpTo(state.chapter).flatMap((c) => c.conversations)) {
+    const progress = getProgress(state, conversation.id)
+    buildTimeline(conversation, progress.choices).forEach((item, index) => {
+      if (item.kind !== 'message' || !item.message.photo) return
+      const delivered = isMet(state, conversation.availableAfter) && index < progress.cursor
+      sentInChat.set(item.message.photo, (sentInChat.get(item.message.photo) ?? false) || delivered)
+    })
+  }
+  return chaptersUpTo(state.chapter)
+    .flatMap((chapter) => chapter.photos)
+    .filter((photo) => isMet(state, photo.availableAfter) && sentInChat.get(photo.id) !== false)
+    .sort((a, b) => b.info.takenAt.localeCompare(a.info.takenAt))
 }
 
 export function availableConversations(state: GameState): Conversation[] {

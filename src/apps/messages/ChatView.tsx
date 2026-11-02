@@ -1,6 +1,8 @@
 import { useEffect, useRef, type Dispatch, type ReactNode } from 'react'
 import AppScreen from '../../app/AppScreen'
+import { findPhoto } from '../../story/chapters'
 import type { Condition, Conversation } from '../../story/types'
+import { photoUrl } from '../gallery/format'
 import { buildTimeline } from '../../state/conversation'
 import { getProgress, type GameAction, type GameState } from '../../state/gameState'
 import styles from './Messages.module.css'
@@ -55,6 +57,7 @@ export default function ChatView({ game, dispatch, conversation, onBack, renderW
           if (item.kind !== 'message') return null
           const { message } = item
           const mine = message.from === 'player'
+          const photo = message.photo ? findPhoto(message.photo) : undefined
           return (
             // Delivered items never reorder, so the index is a stable key.
             <li key={index} className={styles.item}>
@@ -63,6 +66,13 @@ export default function ChatView({ game, dispatch, conversation, onBack, renderW
                 <span className={styles.srOnly}>{mine ? 'Én: ' : `${conversation.contact}: `}</span>
                 {message.text}
               </p>
+              {photo && (
+                <img
+                  className={mine ? `${styles.attachment} ${styles.attachmentMine}` : styles.attachment}
+                  src={photoUrl(photo.src)}
+                  alt={photo.alt}
+                />
+              )}
             </li>
           )
         })}

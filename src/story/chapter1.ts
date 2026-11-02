@@ -130,7 +130,38 @@ export const chapter1: Chapter = {
     },
   ],
 
-  photos: [],
+  photos: [
+    {
+      id: 'ch1-photo-workshop',
+      src: 'images/ch1/workshop.svg',
+      alt: 'Műhely esti lámpafényben: szerszámfal, kulcsnyersek, a munkapadon egy szétszedett lakat és egy nagyító.',
+      info: { takenAt: '2026-07-02T18:20', place: 'Fenyőháza, Bükk utca 12.', coordinates: { lat: 46.9241, lon: 17.8833 } },
+    },
+    {
+      id: 'ch1-photo-square',
+      src: 'images/ch1/main-square.svg',
+      alt: 'A főtér a városházával, zászlók a homlokzaton, piaci standok és néhány járókelő.',
+      info: { takenAt: '2026-08-20T10:05', place: 'Fenyőháza, Fő tér', coordinates: { lat: 46.9205, lon: 17.8867 } },
+    },
+    {
+      id: 'ch1-photo-poster',
+      src: 'images/ch1/festival-poster.svg',
+      alt: 'Kifakult plakát egy hirdetőtáblán: vitorlás a tavon, felirata „Tavi Fesztivál 2001 – Fenyőházi Vitorlásklub”.',
+      info: { takenAt: '2026-09-10T14:40', place: 'Fenyőháza, Városi Könyvtár', coordinates: { lat: 46.9198, lon: 17.8852 } },
+    },
+    {
+      id: 'ch1-photo-lake-morning',
+      src: 'images/ch1/lake-morning.svg',
+      alt: 'Reggeli tópart ködös túlparttal: homokos strand, piros vízimentő-torony, bóják és egy üres pad.',
+      info: { takenAt: '2026-09-14T08:30', place: 'Fenyőháza, Szabadstrand', coordinates: { lat: 46.9150, lon: 17.8790 } },
+    },
+    {
+      id: 'ch1-photo-lake-evening',
+      src: 'images/ch1/lake-evening.svg',
+      alt: 'Alkonyat a tónál. A bal parton egy leégett épület fekete körvonala, előtte elszenesedett stégcölöpök állnak ki a vízből.',
+      info: { takenAt: '2026-09-14T21:12', place: 'Fenyőháza, Kikötő sétány 4.', coordinates: { lat: 46.9132, lon: 17.8915 } },
+    },
+  ],
 
   puzzles: [
     {
