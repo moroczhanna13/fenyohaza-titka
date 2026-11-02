@@ -125,6 +125,20 @@ export interface Evidence {
   foundWhen: Condition
 }
 
+// ---------- E-mail ----------
+
+export interface Email {
+  id: Id
+  /** Sender as shown in the inbox. */
+  from: string
+  subject: string
+  /** Display date, e.g. "szept. 30.". The inbox lists emails in data order. */
+  date: string
+  /** Paragraphs of the message body. */
+  body: string[]
+  availableAfter?: Condition
+}
+
 // ---------- Physical items (the box) ----------
 
 export type DocumentBlock =
@@ -166,6 +180,8 @@ export interface Chapter {
   box?: BoxItem[]
   apps: AppUnlock[]
   conversations: Conversation[]
+  /** Inbox, newest first. */
+  emails?: Email[]
   photos: Photo[]
   puzzles: Puzzle[]
   evidence: Evidence[]

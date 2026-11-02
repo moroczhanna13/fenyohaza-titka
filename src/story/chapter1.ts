@@ -52,6 +52,7 @@ export const chapter1: Chapter = {
     { app: 'messages', availableAfter: unlocked },
     { app: 'gallery', availableAfter: unlocked },
     { app: 'notebook', availableAfter: unlocked },
+    { app: 'email', availableAfter: unlocked },
   ],
 
   conversations: [
@@ -177,6 +178,46 @@ export const chapter1: Chapter = {
         { type: 'message', from: 'player', text: 'Köszönöm, holnap beugrom.' },
       ],
       steps: [],
+    },
+  ],
+
+  emails: [
+    {
+      id: 'ch1-mail-library',
+      from: 'Városi Könyvtár',
+      subject: 'Lejárt kölcsönzési határidő',
+      date: 'okt. 2.',
+      availableAfter: unlocked,
+      body: [
+        'Tisztelt Olvasónk!',
+        'Az alábbi dokumentum kölcsönzési határideje lejárt: Fenyőházi Hírek, 2001. évfolyam (bekötött példány, csak helyben olvasható – kivételes engedéllyel kölcsönözve).',
+        'Kérjük, mielőbb juttassa vissza a könyvtárba.',
+        'Üdvözlettel: Fenyőházi Városi Könyvtár',
+      ],
+    },
+    {
+      id: 'ch1-mail-newspaper',
+      from: 'Fenyőházi Hírek',
+      subject: 'Elkészült az online archívumunk',
+      date: 'szept. 30.',
+      availableAfter: unlocked,
+      body: [
+        'Kedves Olvasónk!',
+        'Örömmel jelentjük, hogy elkészült a Fenyőházi Hírek online archívuma. 1990-től minden lapszámunk elérhető, dátum szerint kereshető.',
+        'Jó böngészést kíván a szerkesztőség',
+      ],
+    },
+    {
+      id: 'ch1-mail-mayor',
+      from: 'Tóth Ervin polgármester',
+      subject: 'Köszönjük, Fenyőháza!',
+      date: 'aug. 25.',
+      availableAfter: unlocked,
+      body: [
+        'Kedves Fenyőháziak!',
+        'Köszönöm mindenkinek, aki idén is velünk ünnepelt a Tavi Fesztiválon. Jövőre ugyanitt, ugyanígy!',
+        'Tóth Ervin polgármester',
+      ],
     },
   ],
 

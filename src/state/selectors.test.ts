@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createInitialState, gameReducer } from './gameState'
-import { availablePhotos, foundEvidence, isMet, isPhoneLocked, unlockedApps } from './selectors'
+import { availableEmails, availablePhotos, foundEvidence, isMet, isPhoneLocked, unlockedApps } from './selectors'
 
 describe('selectors', () => {
   it('evaluates nested conditions', () => {
@@ -26,7 +26,7 @@ describe('selectors', () => {
   it('unlocks the chapter 1 apps with the phone', () => {
     expect(unlockedApps(createInitialState())).toEqual([])
     const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
-    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery', 'notebook'])
+    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery', 'notebook', 'email'])
   })
 
   it('lists gallery photos newest first', () => {
@@ -43,5 +43,13 @@ describe('foundEvidence', () => {
     expect(foundEvidence(start)).toEqual([])
     const unlocked = gameReducer(start, { type: 'solvePuzzle', puzzle: 'ch1-lock' })
     expect(foundEvidence(unlocked).map((e) => e.id)).toEqual(['ch1-last-message'])
+  })
+})
+
+describe('availableEmails', () => {
+  it('fills the inbox once the phone is unlocked', () => {
+    expect(availableEmails(createInitialState())).toEqual([])
+    const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
+    expect(availableEmails(unlocked).length).toBeGreaterThan(0)
   })
 })

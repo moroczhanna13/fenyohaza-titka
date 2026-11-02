@@ -1,6 +1,6 @@
 import type { AppId } from '../apps/registry'
 import { CHAPTERS, chapterIndex, chaptersUpTo, findConversation } from '../story/chapters'
-import type { Chapter, Condition, Conversation, Evidence, Id, Photo } from '../story/types'
+import type { Chapter, Condition, Conversation, Email, Evidence, Id, Photo } from '../story/types'
 import { buildTimeline, isFinished } from './conversation'
 import { getProgress, type GameState } from './gameState'
 
@@ -65,4 +65,12 @@ export function foundEvidence(state: GameState): Evidence[] {
   return chaptersUpTo(state.chapter)
     .flatMap((chapter) => chapter.evidence)
     .filter((evidence) => isMet(state, evidence.foundWhen))
+}
+
+/** Inbox: the current chapter's emails first, each chapter newest first. */
+export function availableEmails(state: GameState): Email[] {
+  return [...chaptersUpTo(state.chapter)]
+    .reverse()
+    .flatMap((chapter) => chapter.emails ?? [])
+    .filter((email) => isMet(state, email.availableAfter))
 }

@@ -3,7 +3,7 @@ import { CHAPTERS, findConversation } from '../story/chapters'
 import { buildTimeline, initialProgress, type ConversationProgress } from './conversation'
 
 /** Bump when the shape of GameState changes; older saves are then discarded. */
-export const SAVE_VERSION = 5
+export const SAVE_VERSION = 6
 
 export interface GameState {
   version: typeof SAVE_VERSION
@@ -21,6 +21,7 @@ export interface GameState {
   seenEvidence: Id[]
   /** The player's own notes in the notebook. */
   notes: string
+  readEmails: Id[]
 }
 
 export const HINTS_PER_PUZZLE = 3
@@ -38,6 +39,7 @@ export type GameAction =
   | { type: 'dismissIntro'; chapter: Id }
   | { type: 'markEvidenceSeen'; evidence: Id[] }
   | { type: 'setNotes'; text: string }
+  | { type: 'readEmail'; email: Id }
 
 export function createInitialState(): GameState {
   return {
@@ -50,6 +52,7 @@ export function createInitialState(): GameState {
     introSeen: [],
     seenEvidence: [],
     notes: '',
+    readEmails: [],
   }
 }
 
@@ -128,5 +131,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'setNotes':
       return { ...state, notes: action.text }
+
+    case 'readEmail':
+      if (state.readEmails.includes(action.email)) return state
+      return { ...state, readEmails: [...state.readEmails, action.email] }
   }
 }

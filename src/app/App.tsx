@@ -8,6 +8,7 @@ import LockScreen from './LockScreen'
 import NotificationBanner, { type PhoneNotification } from './NotificationBanner'
 import { playMessageSound } from './sound'
 import { APPS, type AppId } from '../apps/registry'
+import EmailApp from '../apps/email/EmailApp'
 import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
 import NotebookApp from '../apps/notebook/NotebookApp'
@@ -17,6 +18,7 @@ import { unreadCount } from '../state/conversation'
 import { getProgress } from '../state/gameState'
 import {
   availableConversations,
+  availableEmails,
   currentChapter,
   foundEvidence,
   isPhoneLocked,
@@ -50,6 +52,8 @@ export default function App() {
     [showConversation],
   )
   const dismissNotification = useCallback(() => setNotification(null), [])
+  // A banner from the previous screen would cover the header of the new one.
+  useEffect(dismissNotification, [openApp, openConversation, dismissNotification])
 
   useConversationEngine(game, dispatch, openApp === 'messages' ? openConversation : null, onIncoming)
 
@@ -78,6 +82,7 @@ export default function App() {
 
   const chapter = currentChapter(game)
   const unseenEvidence = evidence.filter((e) => !game.seenEvidence.includes(e.id)).length
+  const unreadEmails = availableEmails(game).filter((e) => !game.readEmails.includes(e.id)).length
   const unreadMessages = availableConversations(game).reduce(
     (sum, c) => sum + unreadCount(c, getProgress(game, c.id)),
     0,
@@ -126,6 +131,8 @@ export default function App() {
     )
   } else if (openApp === 'gallery') {
     screen = <GalleryApp game={game} dispatch={dispatch} onClose={goHome} />
+  } else if (openApp === 'email') {
+    screen = <EmailApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp === 'notebook') {
     screen = <NotebookApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp) {
@@ -135,7 +142,7 @@ export default function App() {
     screen = (
       <HomeScreen
         unlockedApps={unlockedApps(game)}
-        badges={{ messages: unreadMessages, notebook: unseenEvidence }}
+        badges={{ messages: unreadMessages, notebook: unseenEvidence, email: unreadEmails }}
         onOpenApp={setOpenApp}
         onNewGame={() => {
           setNotification(null)

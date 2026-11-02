@@ -29,6 +29,7 @@ function isGameState(value: unknown): value is GameState {
     isStringArray(v.viewedPhotos) &&
     isStringArray(v.introSeen) &&
     isStringArray(v.seenEvidence) &&
+    isStringArray(v.readEmails) &&
     typeof v.notes === 'string' &&
     typeof v.openedHints === 'object' &&
     v.openedHints !== null &&

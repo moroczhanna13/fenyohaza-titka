@@ -15,6 +15,7 @@ export function validateChapter(chapter: Chapter): string[] {
   const allIds = [
     ...(chapter.box ?? []),
     ...chapter.conversations,
+    ...(chapter.emails ?? []),
     ...chapter.photos,
     ...chapter.puzzles,
     ...chapter.evidence,
@@ -71,6 +72,7 @@ export function validateChapter(chapter: Chapter): string[] {
     checkCondition(c.availableAfter, `conversation ${c.id}`)
     checkSteps([...(c.history ?? []), ...c.steps], `conversation ${c.id}`)
   }
+  chapter.emails?.forEach((e) => checkCondition(e.availableAfter, `email ${e.id}`))
   chapter.photos.forEach((p) => checkCondition(p.availableAfter, `photo ${p.id}`))
   for (const p of chapter.puzzles) {
     checkCondition(p.availableAfter, `puzzle ${p.id}`)
