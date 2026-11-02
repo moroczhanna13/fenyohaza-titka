@@ -4,7 +4,7 @@
   justify-content: center;
   gap: var(--space-4);
   padding: var(--space-8) var(--space-6);
-  background: radial-gradient(ellipse at 50% 20%, rgb(242 169 59 / 0.08), transparent 60%), var(--color-bg);
+  background: var(--color-bg);
 }
 
 .kicker {

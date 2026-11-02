@@ -22,7 +22,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Tipp-rendszer: 3 szint, a megnyitott tippek mentődnek
 - [x] 1. fejtörő: rovásírásos szó a telefon jelszavához (rovásírás-ábécé a dobozban)
 - [x] 2. fejtörő: galériafotó infó-lapjáról a klubház helye
-- [ ] Prototípus végigjátszása, hibák javítása
+- [x] Prototípus végigjátszása, hibák javítása
 
 ## 2. Az 1. fejezet befejezése
 

@@ -4,9 +4,7 @@
   justify-content: center;
   gap: var(--space-6);
   padding: var(--space-6) var(--space-4);
-  background:
-    radial-gradient(ellipse at 50% 0%, rgb(242 169 59 / 0.1), transparent 55%),
-    linear-gradient(180deg, var(--color-bg), var(--color-surface) 60%, var(--color-bg));
+  background: linear-gradient(180deg, var(--color-bg), var(--color-surface) 60%, var(--color-bg));
 }
 
 .top {
