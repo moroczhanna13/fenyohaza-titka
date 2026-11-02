@@ -13,7 +13,8 @@
 .device {
   position: relative;
   width: 100%;
-  min-height: 100dvh;
+  /* Fixed height so apps can manage their own scrolling areas. */
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--color-bg);
@@ -42,8 +43,15 @@
   position: relative;
   flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* The current screen fills the phone; taller content scrolls unless it sets min-height: 0. */
+.screen > * {
+  flex: 1 0 0;
 }
 
 .homeIndicator {
@@ -61,7 +69,6 @@
 
   .device {
     width: auto;
-    min-height: 0;
     height: min(844px, calc(100dvh - 2 * var(--space-6)));
     aspect-ratio: 390 / 844;
     border: 12px solid #05090f;

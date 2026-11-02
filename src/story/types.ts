@@ -21,8 +21,11 @@ export type Condition =
 
 export interface MessageStep {
   type: 'message'
+  /** 'player' is the phone's side of the conversation (Gedeon in old messages). */
   from: 'contact' | 'player'
   text: string
+  /** Optional date/time label shown above the message, e.g. "szept. 14. 21:30". */
+  time?: string
   /** Optional photo sent along with the message; it then also appears in the gallery. */
   photo?: Id
 }
@@ -52,6 +55,9 @@ export interface Conversation {
   /** Contact name as shown in the conversation list. */
   contact: string
   availableAfter?: Condition
+  /** Messages already on the phone when the conversation becomes available. */
+  history?: MessageStep[]
+  /** Played live, one by one, after the history. */
   steps: ConversationStep[]
 }
 

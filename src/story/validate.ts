@@ -68,7 +68,7 @@ export function validateChapter(chapter: Chapter): string[] {
   chapter.apps.forEach((a) => checkCondition(a.availableAfter, `app ${a.app}`))
   for (const c of chapter.conversations) {
     checkCondition(c.availableAfter, `conversation ${c.id}`)
-    checkSteps(c.steps, `conversation ${c.id}`)
+    checkSteps([...(c.history ?? []), ...c.steps], `conversation ${c.id}`)
   }
   chapter.photos.forEach((p) => checkCondition(p.availableAfter, `photo ${p.id}`))
   for (const p of chapter.puzzles) {

@@ -41,7 +41,13 @@ function BatteryIcon() {
   )
 }
 
-export default function PhoneFrame({ children }: Readonly<{ children: ReactNode }>) {
+interface PhoneFrameProps {
+  children: ReactNode
+  /** Floating content above the screen, e.g. notification banners. */
+  overlay?: ReactNode
+}
+
+export default function PhoneFrame({ children, overlay }: Readonly<PhoneFrameProps>) {
   const now = useClock()
   return (
     <div className={styles.stage}>
@@ -54,6 +60,7 @@ export default function PhoneFrame({ children }: Readonly<{ children: ReactNode 
           </span>
         </div>
         <div className={styles.screen}>{children}</div>
+        {overlay}
         <div className={styles.homeIndicator} aria-hidden="true" />
       </div>
     </div>

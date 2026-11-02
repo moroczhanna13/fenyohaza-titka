@@ -39,6 +39,8 @@
   --focus-ring: 0 0 0 3px var(--color-accent-strong);
 
   color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 *,

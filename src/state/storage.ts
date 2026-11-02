@@ -1,4 +1,4 @@
-import { APPS } from '../apps/registry'
+import { CHAPTERS } from '../story/chapters'
 import { SAVE_VERSION, type GameState } from './gameState'
 
 export const SAVE_KEY = 'fenyohaza-titka:save'
@@ -14,14 +14,19 @@ export function browserStorage(): KeyValueStorage | null {
   }
 }
 
+const isStringArray = (value: unknown) => Array.isArray(value) && value.every((v) => typeof v === 'string')
+
 function isGameState(value: unknown): value is GameState {
   if (typeof value !== 'object' || value === null) return false
   const v = value as Partial<GameState>
-  const knownApps = APPS.map((a) => a.id) as string[]
   return (
     v.version === SAVE_VERSION &&
-    Array.isArray(v.unlockedApps) &&
-    v.unlockedApps.every((id) => knownApps.includes(id))
+    typeof v.chapter === 'string' &&
+    CHAPTERS.some((c) => c.id === v.chapter) &&
+    typeof v.conversations === 'object' &&
+    v.conversations !== null &&
+    isStringArray(v.solvedPuzzles) &&
+    isStringArray(v.viewedPhotos)
   )
 }
 

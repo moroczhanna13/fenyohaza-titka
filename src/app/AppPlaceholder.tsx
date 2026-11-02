@@ -1,25 +1,11 @@
-import { useEffect, useRef } from 'react'
+import AppScreen from './AppScreen'
 import styles from './AppPlaceholder.module.css'
 
-interface AppPlaceholderProps {
-  title: string
-  onBack: () => void
-}
-
 /** Temporary screen for apps that are not built yet. */
-export default function AppPlaceholder({ title, onBack }: Readonly<AppPlaceholderProps>) {
-  const backRef = useRef<HTMLButtonElement>(null)
-  useEffect(() => backRef.current?.focus(), [])
-
+export default function AppPlaceholder({ title, onBack }: Readonly<{ title: string; onBack: () => void }>) {
   return (
-    <section className={styles.screen} aria-label={title}>
-      <header className={styles.header}>
-        <button ref={backRef} type="button" className={styles.back} onClick={onBack}>
-          ‹ Vissza
-        </button>
-        <h1 className={styles.title}>{title}</h1>
-      </header>
+    <AppScreen title={title} onBack={onBack}>
       <p className={styles.body}>Hamarosan…</p>
-    </section>
+    </AppScreen>
   )
 }

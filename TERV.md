@@ -16,7 +16,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Kezdőképernyő appikonokkal (Üzenetek, Galéria aktív, a többi még szürke)
 - [x] Játékállás: reducer + automatikus mentés localStorage-ba + "Új játék" gomb
 - [x] Adatformátum a fejezetekhez (típusok TypeScriptben): üzenet, bizonyíték, fejtörő, tipp
-- [ ] Üzenetek app: beszélgetéslista, csevegés, válaszlehetőségek, értesítéshang
+- [x] Üzenetek app: beszélgetéslista, csevegés, válaszlehetőségek, értesítéshang
 - [ ] Galéria app: képrács, nagyítás, infó-lap (hely, dátum)
 - [ ] Szöveges fejtörő-komponens (beírt válasz, hash-ellenőrzés, normalizálás)
 - [ ] Tipp-rendszer: 3 szint, a megnyitott tippek mentődnek

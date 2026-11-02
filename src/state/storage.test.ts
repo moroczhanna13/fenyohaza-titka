@@ -13,7 +13,7 @@ function memoryStorage(initial: Record<string, string> = {}) {
 describe('storage', () => {
   it('round-trips a saved game', () => {
     const storage = memoryStorage()
-    const state = gameReducer(createInitialState(), { type: 'unlockApp', app: 'email' })
+    const state = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
     saveGame(storage, state)
     expect(loadGame(storage)).toEqual(state)
   })
@@ -24,11 +24,11 @@ describe('storage', () => {
   })
 
   it('ignores corrupt, outdated or unknown data', () => {
+    const valid = createInitialState()
     expect(loadGame(memoryStorage({ [SAVE_KEY]: '{nem json' }))).toBeNull()
-    expect(loadGame(memoryStorage({ [SAVE_KEY]: '{"version":0,"unlockedApps":[]}' }))).toBeNull()
-    expect(
-      loadGame(memoryStorage({ [SAVE_KEY]: '{"version":1,"unlockedApps":["radio"]}' })),
-    ).toBeNull()
+    expect(loadGame(memoryStorage({ [SAVE_KEY]: JSON.stringify({ ...valid, version: 1 }) }))).toBeNull()
+    expect(loadGame(memoryStorage({ [SAVE_KEY]: JSON.stringify({ ...valid, chapter: 'ch99' }) }))).toBeNull()
+    expect(loadGame(memoryStorage({ [SAVE_KEY]: JSON.stringify({ ...valid, solvedPuzzles: 'x' }) }))).toBeNull()
   })
 
   it('does not throw when saving fails', () => {
