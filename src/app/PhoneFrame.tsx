@@ -45,9 +45,11 @@ interface PhoneFrameProps {
   children: ReactNode
   /** Floating content above the screen, e.g. notification banners. */
   overlay?: ReactNode
+  /** Extra controls in the status bar, next to the indicators. */
+  statusExtra?: ReactNode
 }
 
-export default function PhoneFrame({ children, overlay }: Readonly<PhoneFrameProps>) {
+export default function PhoneFrame({ children, overlay, statusExtra }: Readonly<PhoneFrameProps>) {
   const now = useClock()
   return (
     <div className={styles.stage}>
@@ -55,6 +57,7 @@ export default function PhoneFrame({ children, overlay }: Readonly<PhoneFramePro
         <div className={styles.statusBar}>
           <time dateTime={now.toISOString()}>{timeFormat.format(now)}</time>
           <span className={styles.indicators}>
+            {statusExtra}
             <SignalIcon />
             <BatteryIcon />
           </span>

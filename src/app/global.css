@@ -91,6 +91,16 @@ button {
   color: inherit;
 }
 
+/* Hidden visually but read by screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Keyboard focus must always be visible. */
 :focus-visible {
   outline: none;

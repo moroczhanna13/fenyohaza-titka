@@ -6,13 +6,15 @@ import BoxView from './BoxView'
 import IntroScreen from './IntroScreen'
 import LockScreen from './LockScreen'
 import NotificationBanner, { type PhoneNotification } from './NotificationBanner'
-import { playMessageSound } from './sound'
+import SoundToggle from './SoundToggle'
+import { isMuted, playMessageSound, playSuccessSound, setMuted, startAmbience } from './sound'
 import { APPS, type AppId } from '../apps/registry'
 import EmailApp from '../apps/email/EmailApp'
 import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
 import NotebookApp from '../apps/notebook/NotebookApp'
 import PuzzlePanel from '../puzzles/PuzzlePanel'
+import { findPuzzle } from '../story/chapters'
 import type { Conversation, Id, MessageStep } from '../story/types'
 import { unreadCount } from '../state/conversation'
 import { getProgress } from '../state/gameState'
@@ -79,6 +81,36 @@ export default function App() {
     })
     // Only the set of found ids matters; `evidence` is rebuilt every render.
   }, [evidenceKey])
+
+  // Success sound, with a screen-reader announcement as its text equivalent.
+  const [announcement, setAnnouncement] = useState('')
+  const solvedCount = game.solvedPuzzles.length
+  const knownSolved = useRef(solvedCount)
+  useEffect(() => {
+    if (solvedCount > knownSolved.current) {
+      playSuccessSound()
+      const puzzle = findPuzzle(game.solvedPuzzles[solvedCount - 1])
+      setAnnouncement(`Helyes válasz: ${puzzle?.title ?? ''}`)
+    }
+    knownSolved.current = solvedCount
+    // Only a change in the number of solved puzzles matters.
+  }, [solvedCount])
+
+  // Background radio static starts with the first interaction (browsers block autoplay).
+  useEffect(() => {
+    const start = () => startAmbience()
+    document.addEventListener('pointerdown', start, { once: true })
+    document.addEventListener('keydown', start, { once: true })
+    return () => {
+      document.removeEventListener('pointerdown', start)
+      document.removeEventListener('keydown', start)
+    }
+  }, [])
+  const [muted, setMutedState] = useState(isMuted)
+  const toggleMuted = () => {
+    setMuted(!muted)
+    setMutedState(!muted)
+  }
 
   const chapter = currentChapter(game)
   const unseenEvidence = evidence.filter((e) => !game.seenEvidence.includes(e.id)).length
@@ -154,7 +186,17 @@ export default function App() {
   }
 
   return (
-    <PhoneFrame overlay={<NotificationBanner notification={notification} onDismiss={dismissNotification} />}>
+    <PhoneFrame
+      statusExtra={<SoundToggle muted={muted} onToggle={toggleMuted} />}
+      overlay={
+        <>
+          <NotificationBanner notification={notification} onDismiss={dismissNotification} />
+          <p className="visually-hidden" role="status">
+            {announcement}
+          </p>
+        </>
+      }
+    >
       {screen}
     </PhoneFrame>
   )
