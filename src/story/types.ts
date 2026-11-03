@@ -282,8 +282,6 @@ export type WebPage = NewsArchivePage | VehicleRegistryPage | StaticPage | Login
 /** A recorded voice message, generated in the browser (Web Audio API). */
 export interface VoiceMessage {
   id: Id
-  /** Shown next to the play button, e.g. "0:18". */
-  duration: string
   /**
    * Knocking in the background, in Morse code: "." short, "-" long,
    * " " between letters, " / " between words.

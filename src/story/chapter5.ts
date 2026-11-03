@@ -140,7 +140,6 @@ export const chapter5: Chapter = {
   voiceMessages: [
     {
       id: 'ch5-voice-gedeon',
-      duration: '0:24',
       knocks: '.--. .- - .. -.- .-',
       transcript: [
         '[recsegés, egy hűtő zúgása]',

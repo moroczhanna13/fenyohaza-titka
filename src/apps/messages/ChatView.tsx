@@ -1,11 +1,12 @@
 import { useEffect, useRef, type Dispatch, type ReactNode } from 'react'
 import AppScreen from '../../app/AppScreen'
-import { findPhoto } from '../../story/chapters'
+import { findPhoto, findVoiceMessage } from '../../story/chapters'
 import type { Condition, Conversation } from '../../story/types'
 import { photoUrl } from '../gallery/format'
 import { buildTimeline } from '../../state/conversation'
 import { getProgress, type GameAction, type GameState } from '../../state/gameState'
 import styles from './Messages.module.css'
+import VoicePlayer from './VoicePlayer'
 
 interface ChatViewProps {
   game: GameState
@@ -68,6 +69,7 @@ export default function ChatView({ game, dispatch, parts, onBack, renderWait }: 
           const { message } = item
           const mine = message.from === 'player'
           const photo = message.photo ? findPhoto(message.photo) : undefined
+          const voice = message.audio ? findVoiceMessage(message.audio) : undefined
           return (
             // Delivered items never reorder, so part id + index is a stable key.
             <li key={key} className={styles.item}>
@@ -83,6 +85,7 @@ export default function ChatView({ game, dispatch, parts, onBack, renderWait }: 
                   alt={photo.alt}
                 />
               )}
+              {voice && <VoicePlayer voice={voice} />}
             </li>
           )
         })}

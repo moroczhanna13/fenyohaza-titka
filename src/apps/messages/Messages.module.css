@@ -206,3 +206,95 @@
 .choice:hover {
   border-color: var(--color-accent);
 }
+
+/* ---------- Voice message ---------- */
+
+.voice {
+  align-self: flex-start;
+  width: 80%;
+  margin-top: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  background: var(--color-surface-raised);
+}
+
+.voiceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.voicePlay {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  cursor: pointer;
+}
+
+.wave {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 24px;
+}
+
+.wave span {
+  flex: 1;
+  height: 30%;
+  border-radius: 1px;
+  background: var(--color-text-muted);
+}
+
+.wave span:nth-child(3n) {
+  height: 70%;
+}
+
+.wave span:nth-child(4n + 1) {
+  height: 50%;
+}
+
+.wave[data-playing='true'] span {
+  background: var(--color-accent);
+  animation: wave 0.6s infinite alternate ease-in-out;
+}
+
+@keyframes wave {
+  to {
+    transform: scaleY(1.8);
+  }
+}
+
+.voiceLength {
+  flex: none;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.transcriptToggle {
+  margin-top: var(--space-1);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.transcript {
+  margin-top: var(--space-2);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.transcript p {
+  margin: 0 0 var(--space-1);
+}
