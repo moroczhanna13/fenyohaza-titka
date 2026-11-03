@@ -29,3 +29,18 @@ describe('hashAnswer', () => {
     expect(await isCorrectAnswer('Kikötő sétány', place.answerHash)).toBe(false)
   })
 })
+
+describe('ledger puzzles', () => {
+  it('has exactly one row whose balance does not add up, and it is the answer', async () => {
+    for (const puzzle of CHAPTERS.flatMap((c) => c.puzzles)) {
+      if (puzzle.kind !== 'ledger') continue
+      const broken = puzzle.rows.filter((row, i) => {
+        if (i === 0) return false
+        const previous = puzzle.rows[i - 1].balance
+        return previous + (row.income ?? 0) - (row.expense ?? 0) !== row.balance
+      })
+      expect(broken.map((r) => r.id), puzzle.id).toHaveLength(1)
+      expect(await isCorrectAnswer(broken[0].id, puzzle.answerHash), puzzle.id).toBe(true)
+    }
+  })
+})

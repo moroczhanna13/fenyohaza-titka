@@ -1,7 +1,9 @@
 import { useState, type Dispatch } from 'react'
 import AppScreen from '../../app/AppScreen'
+import AccusationForm from '../../puzzles/AccusationForm'
 import ConnectPuzzleForm from '../../puzzles/ConnectPuzzleForm'
 import HintPanel from '../../puzzles/HintPanel'
+import LedgerPuzzleForm from '../../puzzles/LedgerPuzzleForm'
 import TimelinePuzzleForm from '../../puzzles/TimelinePuzzleForm'
 import type { Id } from '../../story/types'
 import type { GameAction, GameState } from '../../state/gameState'
@@ -36,6 +38,8 @@ export default function DeductionsApp({ game, dispatch, onClose, initialPuzzle =
             <>
               {puzzle.kind === 'connect' && <ConnectPuzzleForm puzzle={puzzle} onSolved={onSolved} />}
               {puzzle.kind === 'timeline' && <TimelinePuzzleForm puzzle={puzzle} onSolved={onSolved} />}
+              {puzzle.kind === 'ledger' && <LedgerPuzzleForm puzzle={puzzle} onSolved={onSolved} />}
+              {puzzle.kind === 'accusation' && <AccusationForm puzzle={puzzle} game={game} onSolved={onSolved} />}
               <HintPanel
                 hints={puzzle.hints}
                 opened={game.openedHints[puzzle.id] ?? 0}

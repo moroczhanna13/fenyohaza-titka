@@ -2,7 +2,9 @@ import { useId, useState, type Dispatch, type SubmitEvent } from 'react'
 import AppScreen from '../../app/AppScreen'
 import type { GameAction, GameState } from '../../state/gameState'
 import { availablePages } from '../../state/selectors'
+import LoginPageView from './LoginPageView'
 import NewsArchiveView from './NewsArchiveView'
+import StaticPageView from './StaticPageView'
 import { findPageByUrl, normalizeUrl } from './url'
 import VehicleRegistryView from './VehicleRegistryView'
 import styles from './Browser.module.css'
@@ -61,12 +63,20 @@ export default function BrowserApp({ game, dispatch, onClose }: Readonly<Browser
       </div>
     )
   } else if (page) {
-    content =
-      page.kind === 'newsArchive' ? (
-        <NewsArchiveView page={page} dispatch={dispatch} />
-      ) : (
-        <VehicleRegistryView page={page} dispatch={dispatch} />
-      )
+    switch (page.kind) {
+      case 'newsArchive':
+        content = <NewsArchiveView page={page} dispatch={dispatch} />
+        break
+      case 'vehicleRegistry':
+        content = <VehicleRegistryView page={page} dispatch={dispatch} />
+        break
+      case 'static':
+        content = <StaticPageView page={page} dispatch={dispatch} />
+        break
+      case 'login':
+        content = <LoginPageView page={page} game={game} dispatch={dispatch} />
+        break
+    }
   } else {
     content = (
       <div className={styles.notFound}>

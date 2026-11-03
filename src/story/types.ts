@@ -30,6 +30,8 @@ export interface MessageStep {
   time?: string
   /** Optional photo sent along with the message; it then also appears in the gallery. */
   photo?: Id
+  /** Optional voice message (see Chapter.voiceMessages) sent along with the message. */
+  audio?: Id
 }
 
 export interface ChoiceOption {
@@ -106,6 +108,11 @@ interface PuzzleBase {
   answerHash: string
   /** What the player concludes once it is solved, shown in the Deductions app. */
   conclusion?: string
+  /**
+   * Set when the puzzle is solved somewhere else than where it is asked, e.g. on a web page.
+   * The chat then shows this text and the hints instead of an answer field.
+   */
+  whereToSolve?: string
 }
 
 /**
@@ -136,7 +143,46 @@ export interface TimelinePuzzle extends PuzzleBase {
   statements: Statement[]
 }
 
-export type Puzzle = TextPuzzle | ConnectPuzzle | TimelinePuzzle
+export interface LedgerRow {
+  id: Id
+  date: string
+  text: string
+  income?: number
+  expense?: number
+  /** Balance as written in the book; in the falsified row it does not add up. */
+  balance: number
+  /** Initials of whoever entered the row. */
+  signed: string
+}
+
+/** Mark the row of a cash book whose balance does not add up. Answer: the row id. */
+export interface LedgerPuzzle extends PuzzleBase {
+  kind: 'ledger'
+  /** Heading above the table, e.g. what the document is. */
+  caption: string
+  rows: LedgerRow[]
+}
+
+export interface AccusationQuestion {
+  id: Id
+  text: string
+  options: string[]
+  /** Hash of accusationAnswer(question id, chosen option index). */
+  answerHash: string
+  /** Chapter whose evidence the player is sent back to after a wrong answer. */
+  chapter: Id
+}
+
+/**
+ * The final accusation: every question must be answered right in one go.
+ * Its own answerHash covers all answers (see accusationAnswer).
+ */
+export interface AccusationPuzzle extends PuzzleBase {
+  kind: 'accusation'
+  questions: AccusationQuestion[]
+}
+
+export type Puzzle = TextPuzzle | ConnectPuzzle | TimelinePuzzle | LedgerPuzzle | AccusationPuzzle
 
 // ---------- Evidence ----------
 
@@ -215,7 +261,37 @@ export interface VehicleRegistryPage extends WebPageBase {
   records: VehicleRecord[]
 }
 
-export type WebPage = NewsArchivePage | VehicleRegistryPage
+/** A plain page made of document blocks, e.g. a social profile or a reference sheet. */
+export interface StaticPage extends WebPageBase {
+  kind: 'static'
+  blocks: DocumentBlock[]
+}
+
+/** A page behind a login. The password is a text puzzle; the blocks show once it is solved. */
+export interface LoginPage extends WebPageBase {
+  kind: 'login'
+  username: string
+  puzzle: Id
+  blocks: DocumentBlock[]
+}
+
+export type WebPage = NewsArchivePage | VehicleRegistryPage | StaticPage | LoginPage
+
+// ---------- Voice messages ----------
+
+/** A recorded voice message, generated in the browser (Web Audio API). */
+export interface VoiceMessage {
+  id: Id
+  /** Shown next to the play button, e.g. "0:18". */
+  duration: string
+  /**
+   * Knocking in the background, in Morse code: "." short, "-" long,
+   * " " between letters, " / " between words.
+   */
+  knocks: string
+  /** Text equivalent of the recording, shown on request. */
+  transcript: string[]
+}
 
 // ---------- Physical items (the box) ----------
 
@@ -224,6 +300,8 @@ export type DocumentBlock =
   | { type: 'text'; text: string; script?: 'rovas' }
   /** A key table, e.g. an alphabet: each entry pairs a Latin letter with its glyph. */
   | { type: 'glyphTable'; entries: [latin: string, glyph: string][] }
+  | { type: 'heading'; text: string }
+  | { type: 'table'; headers: string[]; rows: string[][] }
 
 /** Something the player holds in hand, outside the phone. */
 export interface BoxItem {
@@ -262,6 +340,7 @@ export interface Chapter {
   emails?: Email[]
   /** Pages reachable in the Browser app. */
   pages?: WebPage[]
+  voiceMessages?: VoiceMessage[]
   photos: Photo[]
   puzzles: Puzzle[]
   evidence: Evidence[]

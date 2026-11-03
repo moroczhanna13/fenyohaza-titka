@@ -21,6 +21,8 @@ const SOLUTIONS: Record<Id, string> = {
   'ch2-who-lied': connectAnswer('ch2-s-toth', 'ch2-s-log'),
   'ch3-car-owner': 'Mészáros Béla',
   'ch3-timeline': timelineAnswer(['ch3-t-ilona', 'ch3-t-pasztor', 'ch3-t-toth'], 'ch3-t-meszaros'),
+  'ch4-ledger': 'ch4-r-advance',
+  'ch4-pharmacy-password': 'Bodri2004',
 }
 
 type PickOption = (optionCount: number) => number

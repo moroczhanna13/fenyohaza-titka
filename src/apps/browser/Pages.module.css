@@ -181,3 +181,53 @@
   font-family: var(--font-mono);
   font-weight: 700;
 }
+
+/* ---------- Plain site (e.g. a social profile) ---------- */
+
+.site {
+  padding: var(--space-4);
+  background: #f4f6f8;
+  color: #1f2933;
+}
+
+.siteTitle {
+  margin: 0 0 var(--space-3);
+  font-size: 1.2rem;
+  color: #3b5b8a;
+}
+
+/* ---------- Login portal ---------- */
+
+.portal {
+  padding: var(--space-4);
+  background: #eef5ef;
+  color: #1f3324;
+}
+
+.portalTitle {
+  margin: 0 0 var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 3px solid #2e7d4f;
+  font-size: 1.2rem;
+  color: #2e7d4f;
+}
+
+.loginBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid #c3d8c8;
+  border-radius: 4px;
+  background: #fff;
+  /* The shared puzzle form uses the dark phone palette; override it for this light page. */
+  --color-bg: #fff;
+  --color-text: #1f3324;
+  --color-border: #a9c2af;
+}
+
+.loggedIn {
+  margin: 0 0 var(--space-3);
+  font-size: 0.8rem;
+  color: #4d6b55;
+}

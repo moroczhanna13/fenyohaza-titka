@@ -160,3 +160,107 @@
   border-color: var(--color-danger);
   color: var(--color-danger);
 }
+
+/* ---------- Ledger ---------- */
+
+.ledger {
+  margin: 0;
+  padding: 0;
+  border: none;
+  /* Fieldsets default to min-width: min-content, which would widen the whole screen. */
+  min-width: 0;
+}
+
+.ledgerCaption {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.ledgerScroll {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  /* Photocopy look. */
+  background: #e9e6df;
+  color: #222;
+}
+
+.ledgerTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.ledgerTable th,
+.ledgerTable td {
+  padding: var(--space-2) var(--space-1);
+  border-bottom: 1px solid #c8c3b6;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ledgerTable th {
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+.ledgerTable tr[data-marked='true'] td {
+  background: rgb(229 103 90 / 0.18);
+}
+
+.ledgerTable .num {
+  text-align: right;
+}
+
+.ledgerTable .wrap {
+  min-width: 6em;
+  white-space: normal;
+}
+
+/* ---------- Accusation ---------- */
+
+.question {
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.questionText {
+  padding: 0 var(--space-1);
+  font-weight: 600;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.option[data-checked='true'] {
+  background: rgb(242 169 59 / 0.12);
+}
+
+.failTitle {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.recap {
+  margin: 0;
+  padding-left: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+}

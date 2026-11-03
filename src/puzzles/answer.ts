@@ -26,6 +26,16 @@ export function connectAnswer(a: string, b: string): string {
   return [a, b].sort().join('+')
 }
 
+/** Answer string of one accusation question. */
+export function accusationAnswer(questionId: string, optionIndex: number): string {
+  return `${questionId}=${optionIndex}`
+}
+
+/** Answer string of the whole accusation: every question's answer in order. */
+export function accusationAllAnswers(answers: [questionId: string, optionIndex: number][]): string {
+  return answers.map(([q, i]) => accusationAnswer(q, i)).join('&')
+}
+
 /** Answer string of a timeline puzzle: the fitting statements in order, then the one that does not fit. */
 export function timelineAnswer(order: string[], misfit: string): string {
   return `${order.filter((id) => id !== misfit).join('>')}|${misfit}`

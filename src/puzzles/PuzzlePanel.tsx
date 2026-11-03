@@ -25,6 +25,25 @@ export default function PuzzlePanel({
 }: Readonly<PuzzlePanelProps>) {
   const puzzle = findPuzzle(puzzleId)
   if (!puzzle || game.solvedPuzzles.includes(puzzle.id)) return null
+  const hints = (
+    <HintPanel
+      hints={puzzle.hints}
+      opened={game.openedHints[puzzle.id] ?? 0}
+      onOpenNext={() => dispatch({ type: 'openHint', puzzle: puzzle.id })}
+    />
+  )
+
+  // Solved somewhere else (e.g. on a web page): say where, and offer the hints here.
+  if (puzzle.whereToSolve) {
+    return (
+      <section className={styles.panel} aria-label={puzzle.title}>
+        <h2 className={styles.title}>{puzzle.title}</h2>
+        <p className={styles.prompt}>{puzzle.whereToSolve}</p>
+        {hints}
+      </section>
+    )
+  }
+
   // Connect and timeline puzzles need more room; they live in the Deductions app.
   if (puzzle.kind !== 'text') {
     return (

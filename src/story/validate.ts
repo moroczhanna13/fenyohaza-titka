@@ -82,13 +82,21 @@ export function validateChapter(chapter: Chapter): string[] {
     checkSteps([...(c.history ?? []), ...c.steps], `conversation ${c.id}`)
   }
   chapter.emails?.forEach((e) => checkCondition(e.availableAfter, `email ${e.id}`))
-  chapter.pages?.forEach((p) => checkCondition(p.availableAfter, `page ${p.id}`))
+  for (const p of chapter.pages ?? []) {
+    checkCondition(p.availableAfter, `page ${p.id}`)
+    if (p.kind === 'login') checkCondition({ type: 'puzzleSolved', puzzle: p.puzzle }, `page ${p.id}`)
+  }
   chapter.photos.forEach((p) => checkCondition(p.availableAfter, `photo ${p.id}`))
   for (const p of chapter.puzzles) {
     checkCondition(p.availableAfter, `puzzle ${p.id}`)
     if (!/^[0-9a-f]{64}$/.test(p.answerHash)) errors.push(`puzzle ${p.id}: answerHash is not a SHA-256 hex string`)
-    if (p.kind !== 'text' && new Set(p.statements.map((s) => s.id)).size !== p.statements.length)
+    if ((p.kind === 'connect' || p.kind === 'timeline') && new Set(p.statements.map((s) => s.id)).size !== p.statements.length)
       errors.push(`puzzle ${p.id}: duplicate statement ids`)
+    if (p.kind === 'accusation') {
+      for (const q of p.questions) {
+        if (!/^[0-9a-f]{64}$/.test(q.answerHash)) errors.push(`puzzle ${p.id}: question ${q.id} has no valid hash`)
+      }
+    }
   }
   for (const e of chapter.evidence) {
     checkCondition(e.foundWhen, `evidence ${e.id}`)
