@@ -9,9 +9,11 @@ interface HomeScreenProps {
   badges?: Partial<Record<AppId, number>>
   onOpenApp: (id: AppId) => void
   onNewGame: () => void
+  /** Opens the list of cases (main story and side cases). */
+  onOpenCases: () => void
 }
 
-export default function HomeScreen({ unlockedApps, badges = {}, onOpenApp, onNewGame }: Readonly<HomeScreenProps>) {
+export default function HomeScreen({ unlockedApps, badges = {}, onOpenApp, onNewGame, onOpenCases }: Readonly<HomeScreenProps>) {
   return (
     <div className={styles.home}>
       <nav aria-label="Kezdőképernyő">
@@ -47,7 +49,12 @@ export default function HomeScreen({ unlockedApps, badges = {}, onOpenApp, onNew
           })}
         </ul>
       </nav>
-      <NewGameButton onConfirm={onNewGame} />
+      <div className={styles.footer}>
+        <button type="button" className={styles.cases} onClick={onOpenCases}>
+          Ügyek
+        </button>
+        <NewGameButton onConfirm={onNewGame} />
+      </div>
     </div>
   )
 }

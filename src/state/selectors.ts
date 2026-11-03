@@ -1,11 +1,11 @@
 import type { AppId } from '../apps/registry'
-import { CHAPTERS, chapterIndex, chaptersUpTo, findConversation } from '../story/chapters'
+import { caseOfChapter, chapterAfter, chapterIndex, chaptersUpTo, findConversation } from '../story/chapters'
 import type { Chapter, Condition, Conversation, Email, Evidence, Id, Photo, Puzzle, WebPage } from '../story/types'
 import { buildTimeline, isFinished } from './conversation'
 import { getProgress, type GameState } from './gameState'
 
 export function currentChapter(state: GameState): Chapter {
-  return CHAPTERS[chapterIndex(state.chapter)]
+  return caseOfChapter(state.chapter).chapters[chapterIndex(state.chapter)]
 }
 
 /** True while the current chapter's phone lock is still unsolved. */
@@ -98,7 +98,12 @@ export function isChapterComplete(state: GameState): boolean {
 }
 
 export function nextChapter(state: GameState): Chapter | undefined {
-  return CHAPTERS[chapterIndex(state.chapter) + 1]
+  return chapterAfter(state.chapter)
+}
+
+/** The whole case is solved: its last chapter is complete. */
+export function isCaseSolved(state: GameState): boolean {
+  return isChapterComplete(state) && !nextChapter(state)
 }
 
 export function availablePages(state: GameState): WebPage[] {

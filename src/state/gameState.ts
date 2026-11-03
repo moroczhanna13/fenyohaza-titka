@@ -1,5 +1,5 @@
 import type { Id } from '../story/types'
-import { CHAPTERS, findConversation } from '../story/chapters'
+import { CASES, caseOfChapter, chapterAfter, findCase, findConversation, MAIN_CASE_ID } from '../story/chapters'
 import { buildTimeline, initialProgress, type ConversationProgress } from './conversation'
 
 /** Bump when the shape of GameState changes; older saves are then discarded. */
@@ -7,7 +7,7 @@ export const SAVE_VERSION = 7
 
 export interface GameState {
   version: typeof SAVE_VERSION
-  /** Current main-story chapter. */
+  /** Current chapter; it also tells which case (main story or side case) this game belongs to. */
   chapter: Id
   /** Only conversations the player has progressed in; the rest use initialProgress(). */
   conversations: Record<Id, ConversationProgress>
@@ -43,13 +43,14 @@ export type GameAction =
   | { type: 'setNotes'; text: string }
   | { type: 'readEmail'; email: Id }
   | { type: 'visitPage'; page: Id }
-  /** Moves on to the next main-story chapter. */
+  /** Moves on to the next chapter of the same case. */
   | { type: 'advanceChapter' }
 
-export function createInitialState(): GameState {
+export function createInitialState(caseId: Id = MAIN_CASE_ID): GameState {
+  const storyCase = findCase(caseId) ?? CASES[0]
   return {
     version: SAVE_VERSION,
-    chapter: CHAPTERS[0].id,
+    chapter: storyCase.chapters[0].id,
     conversations: {},
     solvedPuzzles: [],
     viewedPhotos: [],
@@ -76,7 +77,7 @@ function withProgress(state: GameState, conversationId: Id, progress: Conversati
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'newGame':
-      return createInitialState()
+      return createInitialState(caseOfChapter(state.chapter).id)
 
     case 'advanceConversation': {
       const progress = getProgress(state, action.conversation)
@@ -139,7 +140,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...state, notes: action.text }
 
     case 'advanceChapter': {
-      const next = CHAPTERS[CHAPTERS.findIndex((c) => c.id === state.chapter) + 1]
+      const next = chapterAfter(state.chapter)
       return next ? { ...state, chapter: next.id } : state
     }
 

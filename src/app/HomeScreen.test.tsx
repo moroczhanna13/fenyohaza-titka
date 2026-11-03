@@ -5,7 +5,13 @@ import { APPS } from '../apps/registry'
 
 describe('HomeScreen', () => {
   const html = renderToStaticMarkup(
-    <HomeScreen unlockedApps={['messages', 'gallery']} badges={{ messages: 2 }} onOpenApp={() => {}} onNewGame={() => {}} />,
+    <HomeScreen
+      unlockedApps={['messages', 'gallery']}
+      badges={{ messages: 2 }}
+      onOpenApp={() => {}}
+      onNewGame={() => {}}
+      onOpenCases={() => {}}
+    />,
   )
 
   it('shows an icon for every app', () => {

@@ -1,7 +1,15 @@
-import { CHAPTERS } from '../story/chapters'
+import { caseOfChapter, findCase, MAIN_CASE_ID } from '../story/chapters'
+import type { Id } from '../story/types'
 import { SAVE_VERSION, type GameState } from './gameState'
 
 export const SAVE_KEY = 'fenyohaza-titka:save'
+/** The case the player had open last. */
+export const ACTIVE_CASE_KEY = 'fenyohaza-titka:case'
+
+/** The main story keeps the original key, so older saves still load; side cases get their own. */
+export function saveKey(caseId: Id): string {
+  return caseId === MAIN_CASE_ID ? SAVE_KEY : `${SAVE_KEY}:${caseId}`
+}
 
 type KeyValueStorage = Pick<Storage, 'getItem' | 'setItem'>
 
@@ -16,13 +24,13 @@ export function browserStorage(): KeyValueStorage | null {
 
 const isStringArray = (value: unknown) => Array.isArray(value) && value.every((v) => typeof v === 'string')
 
-function isGameState(value: unknown): value is GameState {
+function isGameState(value: unknown, caseId: Id): value is GameState {
   if (typeof value !== 'object' || value === null) return false
   const v = value as Partial<GameState>
   return (
     v.version === SAVE_VERSION &&
     typeof v.chapter === 'string' &&
-    CHAPTERS.some((c) => c.id === v.chapter) &&
+    !!findCase(caseId)?.chapters.some((c) => c.id === v.chapter) &&
     typeof v.conversations === 'object' &&
     v.conversations !== null &&
     isStringArray(v.solvedPuzzles) &&
@@ -38,13 +46,13 @@ function isGameState(value: unknown): value is GameState {
   )
 }
 
-/** Returns the saved game, or null if there is none or it is unreadable/outdated. */
-export function loadGame(storage: KeyValueStorage | null): GameState | null {
+/** Returns the case's saved game, or null if there is none or it is unreadable/outdated. */
+export function loadGame(storage: KeyValueStorage | null, caseId: Id = MAIN_CASE_ID): GameState | null {
   try {
-    const raw = storage?.getItem(SAVE_KEY)
+    const raw = storage?.getItem(saveKey(caseId))
     if (!raw) return null
     const parsed: unknown = JSON.parse(raw)
-    return isGameState(parsed) ? parsed : null
+    return isGameState(parsed, caseId) ? parsed : null
   } catch {
     return null
   }
@@ -52,8 +60,25 @@ export function loadGame(storage: KeyValueStorage | null): GameState | null {
 
 export function saveGame(storage: KeyValueStorage | null, state: GameState): void {
   try {
-    storage?.setItem(SAVE_KEY, JSON.stringify(state))
+    storage?.setItem(saveKey(caseOfChapter(state.chapter).id), JSON.stringify(state))
   } catch {
     // Quota exceeded or storage blocked: the game keeps running, just unsaved.
+  }
+}
+
+export function loadActiveCase(storage: KeyValueStorage | null): Id {
+  try {
+    const id = storage?.getItem(ACTIVE_CASE_KEY)
+    return id && findCase(id) ? id : MAIN_CASE_ID
+  } catch {
+    return MAIN_CASE_ID
+  }
+}
+
+export function saveActiveCase(storage: KeyValueStorage | null, caseId: Id): void {
+  try {
+    storage?.setItem(ACTIVE_CASE_KEY, caseId)
+  } catch {
+    // Not saved: the main story opens next time.
   }
 }

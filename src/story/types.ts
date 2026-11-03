@@ -347,3 +347,13 @@ export interface Chapter {
   /** Paragraphs shown on the chapter's closing screen. */
   outro?: string[]
 }
+
+/** A playable story: the main story or a short side case. Each has its own save. */
+export interface StoryCase {
+  id: Id
+  kind: 'main' | 'side'
+  title: string
+  /** One or two sentences shown in the case picker. */
+  summary: string
+  chapters: readonly Chapter[]
+}

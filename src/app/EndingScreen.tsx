@@ -10,10 +10,11 @@ interface EndingScreenProps {
   /** What really happened, e.g. the accusation's conclusion. */
   solution?: string
   onNewGame: () => void
+  onOpenCases: () => void
 }
 
 /** Shown once the last chapter is complete. */
-export default function EndingScreen({ gameTitle, chapter, solution, onNewGame }: Readonly<EndingScreenProps>) {
+export default function EndingScreen({ gameTitle, chapter, solution, onNewGame, onOpenCases }: Readonly<EndingScreenProps>) {
   const headingRef = useRef<HTMLHeadingElement>(null)
   useEffect(() => headingRef.current?.focus(), [])
 
@@ -35,6 +36,9 @@ export default function EndingScreen({ gameTitle, chapter, solution, onNewGame }
           {p}
         </p>
       ))}
+      <button type="button" className={styles.start} onClick={onOpenCases}>
+        Vissza az ügyekhez
+      </button>
       <NewGameButton onConfirm={onNewGame} />
     </section>
   )

@@ -3,6 +3,7 @@ import PhoneFrame from './PhoneFrame'
 import HomeScreen from './HomeScreen'
 import AppPlaceholder from './AppPlaceholder'
 import BoxView from './BoxView'
+import CasePicker from './CasePicker'
 import ChapterEnd from './ChapterEnd'
 import EndingScreen from './EndingScreen'
 import IntroScreen from './IntroScreen'
@@ -18,10 +19,11 @@ import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
 import NotebookApp from '../apps/notebook/NotebookApp'
 import PuzzlePanel from '../puzzles/PuzzlePanel'
-import { findPuzzle, GAME_TITLE } from '../story/chapters'
+import { CASES, caseOfChapter, findPuzzle } from '../story/chapters'
 import type { Conversation, Id, MessageStep } from '../story/types'
 import { unreadCount } from '../state/conversation'
 import { getProgress } from '../state/gameState'
+import { browserStorage, loadActiveCase, loadGame, saveActiveCase } from '../state/storage'
 import {
   availableConversations,
   availableEmails,
@@ -38,8 +40,29 @@ import { useGameState } from '../state/useGameState'
 
 const END_DELAY_MS = 4000
 
+/** Remembers the open case; switching cases remounts the game with that case's own save. */
 export default function App() {
-  const [game, dispatch] = useGameState()
+  const [caseId, setCaseId] = useState(() => loadActiveCase(browserStorage()))
+  return (
+    <CaseGame
+      key={caseId}
+      caseId={caseId}
+      onSwitchCase={(id) => {
+        saveActiveCase(browserStorage(), id)
+        setCaseId(id)
+      }}
+    />
+  )
+}
+
+interface CaseGameProps {
+  caseId: Id
+  onSwitchCase: (id: Id) => void
+}
+
+function CaseGame({ caseId, onSwitchCase }: Readonly<CaseGameProps>) {
+  const [game, dispatch] = useGameState(caseId)
+  const [casesOpen, setCasesOpen] = useState(false)
   const [openApp, setOpenApp] = useState<AppId | null>(null)
   const [openConversation, setOpenConversation] = useState<Id | null>(null)
   const [boxOpen, setBoxOpen] = useState(false)
@@ -151,13 +174,28 @@ export default function App() {
 
   let screen
   const next = nextChapter(game)
-  if (complete && endShown && !next) {
+  if (casesOpen) {
+    // Other cases' saves are only read here; the open case's state is the live one.
+    const saves = Object.fromEntries(
+      CASES.map((c) => [c.id, c.id === caseId ? game : loadGame(browserStorage(), c.id)]),
+    )
+    screen = (
+      <CasePicker
+        cases={CASES}
+        saves={saves}
+        activeCase={caseId}
+        onPick={onSwitchCase}
+        onClose={() => setCasesOpen(false)}
+      />
+    )
+  } else if (complete && endShown && !next) {
     const solution = chapter.puzzles.find((p) => p.kind === 'accusation')?.conclusion
     screen = (
       <EndingScreen
-        gameTitle={GAME_TITLE}
+        gameTitle={caseOfChapter(game.chapter).title}
         chapter={chapter}
         solution={solution}
+        onOpenCases={() => setCasesOpen(true)}
         onNewGame={() => {
           goHome()
           setNotification(null)
@@ -184,6 +222,7 @@ export default function App() {
         number={chapter.number}
         paragraphs={chapter.intro}
         onStart={() => dispatch({ type: 'dismissIntro', chapter: chapter.id })}
+        onOpenCases={() => setCasesOpen(true)}
       />
     )
   } else if (boxOpen && chapter.box) {
@@ -195,6 +234,7 @@ export default function App() {
         game={game}
         dispatch={dispatch}
         onOpenBox={chapter.box ? () => setBoxOpen(true) : undefined}
+        onOpenCases={() => setCasesOpen(true)}
       />
     )
   } else if (openApp === 'messages') {
@@ -241,6 +281,7 @@ export default function App() {
         unlockedApps={unlockedApps(game)}
         badges={{ messages: unreadMessages, notebook: unseenEvidence, email: unreadEmails }}
         onOpenApp={setOpenApp}
+        onOpenCases={() => setCasesOpen(true)}
         onNewGame={() => {
           setNotification(null)
           setBoxOpen(false)

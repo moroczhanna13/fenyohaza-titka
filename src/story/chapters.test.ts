@@ -1,14 +1,16 @@
 import { describe, expect, it } from 'vitest'
-import { CHAPTERS } from './chapters'
+import { CASES } from './chapters'
 import { validateChapter } from './validate'
 
 describe('story data', () => {
-  it.each(CHAPTERS.map((c) => [c.id, c] as const))('%s is consistent', (_id, chapter) => {
+  it.each(CASES.flatMap((sc) => sc.chapters).map((c) => [c.id, c] as const))('%s is consistent', (_id, chapter) => {
     expect(validateChapter(chapter)).toEqual([])
   })
 
-  it('uses unique ids across all chapters', () => {
-    const ids = CHAPTERS.flatMap((c) => [...c.conversations, ...c.photos, ...c.puzzles, ...c.evidence]).map((x) => x.id)
+  it('uses unique ids across all cases and chapters', () => {
+    const ids = CASES.flatMap((sc) => sc.chapters).flatMap((c) => [...c.conversations, ...c.photos, ...c.puzzles, ...c.evidence]).map((x) => x.id)
     expect(new Set(ids).size).toBe(ids.length)
+    const chapterIds = CASES.flatMap((sc) => sc.chapters).map((c) => c.id)
+    expect(new Set([...chapterIds, ...CASES.map((c) => c.id)]).size).toBe(chapterIds.length + CASES.length)
   })
 })

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CHAPTERS } from '../story/chapters'
+import { findChapter } from '../story/chapters'
 import type { AccusationPuzzle, Id } from '../story/types'
 import type { GameState } from '../state/gameState'
 import { foundEvidence } from '../state/selectors'
@@ -39,7 +39,7 @@ export default function AccusationForm({ puzzle, game, onSolved }: Readonly<Accu
   }
 
   if (failedChapter) {
-    const chapter = CHAPTERS.find((c) => c.id === failedChapter)
+    const chapter = findChapter(failedChapter)
     const evidence = foundEvidence(game).filter((e) => chapter?.evidence.some((ce) => ce.id === e.id))
     return (
       <div className={styles.form} role="alert">

@@ -6,10 +6,11 @@ interface IntroScreenProps {
   number?: number
   paragraphs: string[]
   onStart: () => void
+  onOpenCases?: () => void
 }
 
 /** Chapter opening text, shown once. */
-export default function IntroScreen({ title, number, paragraphs, onStart }: Readonly<IntroScreenProps>) {
+export default function IntroScreen({ title, number, paragraphs, onStart, onOpenCases }: Readonly<IntroScreenProps>) {
   const headingRef = useRef<HTMLHeadingElement>(null)
   useEffect(() => headingRef.current?.focus(), [])
 
@@ -27,6 +28,11 @@ export default function IntroScreen({ title, number, paragraphs, onStart }: Read
       <button type="button" className={styles.start} onClick={onStart}>
         Kezdés
       </button>
+      {onOpenCases && (
+        <button type="button" className={styles.secondary} onClick={onOpenCases}>
+          Másik ügy választása
+        </button>
+      )}
     </section>
   )
 }

@@ -10,9 +10,10 @@ interface LockScreenProps {
   dispatch: Dispatch<GameAction>
   /** Present when the chapter has items outside the phone. */
   onOpenBox?: () => void
+  onOpenCases?: () => void
 }
 
-export default function LockScreen({ lock, game, dispatch, onOpenBox }: Readonly<LockScreenProps>) {
+export default function LockScreen({ lock, game, dispatch, onOpenBox, onOpenCases }: Readonly<LockScreenProps>) {
   return (
     <section className={styles.lock} aria-labelledby="lock-title">
       <div className={styles.top}>
@@ -34,6 +35,11 @@ export default function LockScreen({ lock, game, dispatch, onOpenBox }: Readonly
             <path d="M3 8l9 4 9-4M12 12v10" />
           </svg>
           A doboz tartalma
+        </button>
+      )}
+      {onOpenCases && (
+        <button type="button" className={styles.cases} onClick={onOpenCases}>
+          Ügyek
         </button>
       )}
     </section>
