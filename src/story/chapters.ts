@@ -4,6 +4,7 @@ import { chapter3 } from './chapter3'
 import { chapter4 } from './chapter4'
 import { chapter5 } from './chapter5'
 import { chapter6 } from './chapter6'
+import { auctionCase } from './auction'
 import { minibusCase } from './minibus'
 import type { Chapter, Conversation, Id, Photo, Puzzle, StoryCase, VoiceMessage } from './types'
 
@@ -20,10 +21,11 @@ export const CASES: readonly StoryCase[] = [
     id: MAIN_CASE_ID,
     kind: 'main',
     title: GAME_TITLE,
-    summary: 'Egy tó menti kisváros, egy 25 éve leégett vitorlásklub és egy halott nyomozó, aki nem hitt a balesetben.',
+    summary: 'Gedeon nagybácsi hivatalosan balesetben halt meg. A hagyatékában talált cédula szerint nem, és a szál egy 25 éve leégett vitorlásklubhoz vezet.',
     chapters: CHAPTERS,
   },
   minibusCase,
+  auctionCase,
 ]
 
 const ALL_CHAPTERS = CASES.flatMap((c) => c.chapters)

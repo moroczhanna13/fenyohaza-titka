@@ -303,7 +303,29 @@ export interface LoginPage extends WebPageBase {
   blocks: DocumentBlock[]
 }
 
-export type WebPage = NewsArchivePage | VehicleRegistryPage | StaticPage | LoginPage
+export interface ImageSearchMatch {
+  title: string
+  url: string
+  /** Display date of the page, e.g. "2019. március 14.". */
+  date?: string
+  snippet: string
+}
+
+export interface ImageSearchEntry {
+  /** Marked as a visited page once the player searches with the photo. */
+  id: Id
+  photo: Id
+  matches: ImageSearchMatch[]
+}
+
+/** Reverse image search: the player picks a gallery photo and sees where else it appears. */
+export interface ImageSearchPage extends WebPageBase {
+  kind: 'imageSearch'
+  /** Photos without an entry find nothing. */
+  searches: ImageSearchEntry[]
+}
+
+export type WebPage = NewsArchivePage | VehicleRegistryPage | StaticPage | LoginPage | ImageSearchPage
 
 // ---------- Voice messages ----------
 

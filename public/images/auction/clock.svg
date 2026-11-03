@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f1ea"/>
+      <stop offset="1" stop-color="#dcd6c8"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a2a15"/>
+      <stop offset="0.5" stop-color="#7a4a26"/>
+      <stop offset="1" stop-color="#4a2a15"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0d27a"/>
+      <stop offset="1" stop-color="#a87b2a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <ellipse cx="300" cy="770" rx="170" ry="16" fill="#000" opacity="0.15"/>
+  <!-- crown -->
+  <path d="M190 120 Q300 40 410 120 L420 150 L180 150 Z" fill="url(#wood)"/>
+  <circle cx="300" cy="78" r="12" fill="url(#brass)"/>
+  <!-- case -->
+  <rect x="170" y="150" width="260" height="610" rx="6" fill="url(#wood)"/>
+  <rect x="190" y="170" width="220" height="220" rx="4" fill="#3a1f0e"/>
+  <!-- dial -->
+  <circle cx="300" cy="280" r="92" fill="url(#brass)"/>
+  <circle cx="300" cy="280" r="78" fill="#f7f2e2"/>
+  <g font-family="Georgia, serif" font-size="16" fill="#2b2418" text-anchor="middle">
+    <text x="300" y="220">XII</text><text x="360" y="286">III</text><text x="300" y="350">VI</text><text x="240" y="286">IX</text>
+    <text x="333" y="232">I</text><text x="352" y="256">II</text><text x="352" y="318">IV</text><text x="333" y="340">V</text>
+    <text x="267" y="340">VII</text><text x="246" y="318">VIII</text><text x="246" y="256">X</text><text x="267" y="232">XI</text>
+  </g>
+  <line x1="300" y1="280" x2="300" y2="225" stroke="#1d1a14" stroke-width="4" stroke-linecap="round"/>
+  <line x1="300" y1="280" x2="338" y2="300" stroke="#1d1a14" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="300" cy="280" r="6" fill="#1d1a14"/>
+  <!-- pendulum window -->
+  <rect x="205" y="420" width="190" height="310" rx="90" fill="#2a170a"/>
+  <rect x="215" y="430" width="170" height="290" rx="80" fill="#d9e3e6" opacity="0.25"/>
+  <line x1="300" y1="430" x2="300" y2="640" stroke="url(#brass)" stroke-width="6"/>
+  <circle cx="300" cy="650" r="38" fill="url(#brass)"/>
+  <circle cx="290" cy="640" r="10" fill="#fff6d0" opacity="0.6"/>
+  <!-- catalogue lot number, small in the corner -->
+  <text x="570" y="785" font-family="Arial, sans-serif" font-size="14" fill="#8a8274" text-anchor="end">112.</text>
+</svg>

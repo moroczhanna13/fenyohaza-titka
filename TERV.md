@@ -55,7 +55,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 
 - [x] Mellékügy-választó képernyő
 - [x] Az eltűnt kisbusz (menetrend, térkép, útvonal)
-- [ ] A hamis aukció (képek visszakeresése, ellentmondások)
+- [x] A hamis aukció (képek visszakeresése, ellentmondások)
 
 ## 6. Kiadás
 

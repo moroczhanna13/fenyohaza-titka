@@ -46,6 +46,8 @@ const SOLUTIONS: Record<Id, string> = {
   'ch6-accusation': accusationAllAnswers(ACCUSATION),
   'mb-route': routeAnswer(['mb-school', 'mb-nadas', 'mb-inn', 'mb-nadas', 'mb-kovago']),
   'mb-location': 'Ködös-major',
+  'au-source': 'Vértes Aukciósház',
+  'au-lie': connectAnswer('au-s-local', 'au-s-abroad'),
 }
 
 type PickOption = (optionCount: number) => number
@@ -108,9 +110,15 @@ async function playChapter(start: GameState, pick: PickOption): Promise<GameStat
         state = await satisfy(state, item.until)
       }
     }
-    // A curious player also looks at every photo and web page on the phone.
+    // A curious player also looks at every photo and web page on the phone,
     for (const photo of availablePhotos(state)) act({ type: 'viewPhoto', photo: photo.id })
-    for (const page of availablePages(state)) act({ type: 'visitPage', page: page.id })
+    for (const page of availablePages(state)) {
+      act({ type: 'visitPage', page: page.id })
+      // ...and runs a reverse image search with every photo it has.
+      if (page.kind !== 'imageSearch') continue
+      const photos = availablePhotos(state).map((p) => p.id)
+      for (const search of page.searches) if (photos.includes(search.photo)) act({ type: 'visitPage', page: search.id })
+    }
     if (!progressed) break
   }
   return state

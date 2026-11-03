@@ -13,7 +13,11 @@ export function validateChapter(chapter: Chapter): string[] {
   const puzzles = new Set(chapter.puzzles.map((p) => p.id))
   const voices = new Set((chapter.voiceMessages ?? []).map((v) => v.id))
   const pages = new Set(
-    (chapter.pages ?? []).flatMap((p) => [p.id, ...(p.kind === 'newsArchive' ? p.articles.map((a) => a.id) : [])]),
+    (chapter.pages ?? []).flatMap((p) => [
+      p.id,
+      ...(p.kind === 'newsArchive' ? p.articles.map((a) => a.id) : []),
+      ...(p.kind === 'imageSearch' ? p.searches.map((e) => e.id) : []),
+    ]),
   )
 
   const seen = new Set<string>()
@@ -88,6 +92,7 @@ export function validateChapter(chapter: Chapter): string[] {
   for (const p of chapter.pages ?? []) {
     checkCondition(p.availableAfter, `page ${p.id}`)
     if (p.kind === 'login') checkCondition({ type: 'puzzleSolved', puzzle: p.puzzle }, `page ${p.id}`)
+    if (p.kind === 'imageSearch') p.searches.forEach((e) => checkCondition({ type: 'photoViewed', photo: e.photo }, `page ${p.id}`))
   }
   chapter.photos.forEach((p) => checkCondition(p.availableAfter, `photo ${p.id}`))
   for (const p of chapter.puzzles) {

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#fdfbf7"/>
+      <stop offset="1" stop-color="#d9e4ec"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <!-- hair back -->
+  <path d="M170 300 Q160 120 300 110 Q440 120 430 300 L440 420 L160 420 Z" fill="#6b4226"/>
+  <!-- shoulders / sweater -->
+  <path d="M90 600 Q110 440 300 430 Q490 440 510 600 Z" fill="#e7c9a9"/>
+  <!-- neck and face -->
+  <rect x="265" y="340" width="70" height="100" rx="30" fill="#f0c9a5"/>
+  <ellipse cx="300" cy="260" rx="105" ry="125" fill="#f5d2b0"/>
+  <!-- fringe -->
+  <path d="M195 230 Q220 140 300 135 Q390 140 405 240 Q350 180 300 190 Q240 195 195 230 Z" fill="#6b4226"/>
+  <!-- eyes, brows, smile -->
+  <path d="M240 235 Q258 225 276 235" stroke="#4a2c18" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M324 235 Q342 225 360 235" stroke="#4a2c18" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="258" cy="258" rx="9" ry="7" fill="#3a2a1e"/>
+  <ellipse cx="342" cy="258" rx="9" ry="7" fill="#3a2a1e"/>
+  <path d="M250 320 Q300 360 350 320 Q300 340 250 320 Z" fill="#b5524f"/>
+  <path d="M258 322 Q300 345 342 322" fill="#fff" opacity="0.9"/>
+  <ellipse cx="235" cy="300" rx="18" ry="10" fill="#eba08f" opacity="0.5"/>
+  <ellipse cx="365" cy="300" rx="18" ry="10" fill="#eba08f" opacity="0.5"/>
+  <!-- coffee cup -->
+  <g transform="translate(360 450)">
+    <rect x="0" y="0" width="90" height="100" rx="14" fill="#ffffff" stroke="#c8ccd0" stroke-width="3"/>
+    <path d="M90 25 Q125 25 125 55 Q125 85 90 80" fill="none" stroke="#c8ccd0" stroke-width="10"/>
+    <ellipse cx="45" cy="6" rx="40" ry="8" fill="#6f4a2a"/>
+  </g>
+  <path d="M330 600 Q340 520 380 500" stroke="#f0c9a5" stroke-width="34" fill="none" stroke-linecap="round"/>
+</svg>

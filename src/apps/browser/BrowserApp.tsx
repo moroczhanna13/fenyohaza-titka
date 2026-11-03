@@ -2,6 +2,7 @@ import { useId, useState, type Dispatch, type SubmitEvent } from 'react'
 import AppScreen from '../../app/AppScreen'
 import type { GameAction, GameState } from '../../state/gameState'
 import { availablePages } from '../../state/selectors'
+import ImageSearchView from './ImageSearchView'
 import LoginPageView from './LoginPageView'
 import NewsArchiveView from './NewsArchiveView'
 import StaticPageView from './StaticPageView'
@@ -75,6 +76,9 @@ export default function BrowserApp({ game, dispatch, onClose }: Readonly<Browser
         break
       case 'login':
         content = <LoginPageView page={page} game={game} dispatch={dispatch} />
+        break
+      case 'imageSearch':
+        content = <ImageSearchView page={page} game={game} dispatch={dispatch} />
         break
     }
   } else {
