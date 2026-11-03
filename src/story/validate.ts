@@ -11,6 +11,7 @@ export function validateChapter(chapter: Chapter): string[] {
   const conversations = new Set(chapter.conversations.map((c) => c.id))
   const photos = new Set(chapter.photos.map((p) => p.id))
   const puzzles = new Set(chapter.puzzles.map((p) => p.id))
+  const voices = new Set((chapter.voiceMessages ?? []).map((v) => v.id))
   const pages = new Set(
     (chapter.pages ?? []).flatMap((p) => [p.id, ...(p.kind === 'newsArchive' ? p.articles.map((a) => a.id) : [])]),
   )
@@ -67,6 +68,8 @@ export function validateChapter(chapter: Chapter): string[] {
     for (const step of steps) {
       if (step.type === 'message' && step.photo && !photos.has(step.photo))
         errors.push(`${where}: unknown photo "${step.photo}"`)
+      if (step.type === 'message' && step.audio && !voices.has(step.audio))
+        errors.push(`${where}: unknown voice message "${step.audio}"`)
       if (step.type === 'choice') {
         if (step.options.length < 2) errors.push(`${where}: a choice needs at least two options`)
         step.options.forEach((o) => checkSteps(o.replies, where))

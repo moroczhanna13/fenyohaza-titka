@@ -17,7 +17,8 @@ interface ChatViewProps {
 }
 
 export default function ChatView({ game, dispatch, parts, onBack, renderWait }: Readonly<ChatViewProps>) {
-  const contact = parts[0].contact
+  // A later part may reveal who the contact is, so the newest name wins.
+  const contact = parts[parts.length - 1].contact
   const states = parts.map((part) => {
     const progress = getProgress(game, part.id)
     const timeline = buildTimeline(part, progress.choices)

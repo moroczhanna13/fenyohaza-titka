@@ -23,6 +23,8 @@ const SOLUTIONS: Record<Id, string> = {
   'ch3-timeline': timelineAnswer(['ch3-t-ilona', 'ch3-t-pasztor', 'ch3-t-toth'], 'ch3-t-meszaros'),
   'ch4-ledger': 'ch4-r-advance',
   'ch4-pharmacy-password': 'Bodri2004',
+  'ch5-reka-lie': connectAnswer('ch5-s-camp', 'ch5-s-dinner'),
+  'ch5-morse': 'patika',
 }
 
 type PickOption = (optionCount: number) => number

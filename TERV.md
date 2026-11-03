@@ -47,7 +47,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Kassza-táblázat fejtörő (hibás sor megjelölése)
 - [x] Oldal: a patika belső felülete, jelszó-találgatás
 - [ ] Morze-hangüzenet generálása Web Audio API-val
-- [ ] Réka beszélgetései és a két történet közti ellentmondás
+- [x] Réka beszélgetései és a két történet közti ellentmondás
 - [ ] A vád: kérdéssor, hibás válasznál vissza a megfelelő fejezetbe
 - [ ] Befejezés-képernyő
 

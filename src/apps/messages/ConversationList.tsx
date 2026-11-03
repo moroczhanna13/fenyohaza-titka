@@ -14,7 +14,7 @@ export default function ConversationList({ game, onOpen }: Readonly<{ game: Game
     // A chat shows up once its first message has arrived.
     if (last?.kind !== 'message') return []
     const unread = parts.reduce((sum, part) => sum + unreadCount(part, getProgress(game, part.id)), 0)
-    return [{ thread, contact: parts[0].contact, last: last.message, unread }]
+    return [{ thread, contact: parts[parts.length - 1].contact, last: last.message, unread }]
   })
 
   if (rows.length === 0) return <p className={styles.empty}>Nincsenek üzenetek.</p>
