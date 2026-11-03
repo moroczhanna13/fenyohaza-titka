@@ -1,16 +1,25 @@
 import { describe, expect, it } from 'vitest'
-import { accusationAllAnswers, accusationAnswer, connectAnswer, isCorrectAnswer, timelineAnswer } from '../puzzles/answer'
+import {
+  accusationAllAnswers,
+  accusationAnswer,
+  connectAnswer,
+  isCorrectAnswer,
+  routeAnswer,
+  timelineAnswer,
+} from '../puzzles/answer'
 import { buildTimeline } from '../state/conversation'
 import { createInitialState, gameReducer, getProgress, type GameAction, type GameState } from '../state/gameState'
 import {
   availableConversations,
+  availablePages,
+  availablePhotos,
   currentChapter,
   foundEvidence,
   isChapterComplete,
   isMet,
   isPhoneLocked,
 } from '../state/selectors'
-import { CHAPTERS, findPuzzle } from './chapters'
+import { CASES, findPuzzle } from './chapters'
 import type { Condition, Id } from './types'
 
 /** The right option index for each accusation question. */
@@ -35,6 +44,8 @@ const SOLUTIONS: Record<Id, string> = {
   'ch5-reka-lie': connectAnswer('ch5-s-camp', 'ch5-s-dinner'),
   'ch5-morse': 'patika',
   'ch6-accusation': accusationAllAnswers(ACCUSATION),
+  'mb-route': routeAnswer(['mb-school', 'mb-nadas', 'mb-inn', 'mb-nadas', 'mb-kovago']),
+  'mb-location': 'Ködös-major',
 }
 
 type PickOption = (optionCount: number) => number
@@ -97,20 +108,26 @@ async function playChapter(start: GameState, pick: PickOption): Promise<GameStat
         state = await satisfy(state, item.until)
       }
     }
+    // A curious player also looks at every photo and web page on the phone.
+    for (const photo of availablePhotos(state)) act({ type: 'viewPhoto', photo: photo.id })
+    for (const page of availablePages(state)) act({ type: 'visitPage', page: page.id })
     if (!progressed) break
   }
   return state
 }
 
-const playable = CHAPTERS.filter((c) => c.completedWhen)
+const ALL_PUZZLES = CASES.flatMap((c) => c.chapters).flatMap((c) => c.puzzles)
 
 describe('automatic playthrough', () => {
-  it.each([
-    ['first', firstOption],
-    ['last', lastOption],
-  ])('completes every finished chapter choosing the %s option each time', async (_name, pick) => {
-    let state = createInitialState()
-    for (const chapter of playable) {
+  it.each(
+    CASES.flatMap((c) => [
+      [c.id, 'first', firstOption],
+      [c.id, 'last', lastOption],
+    ] as const),
+  )('completes %s choosing the %s option each time', async (caseId, _name, pick) => {
+    const storyCase = CASES.find((c) => c.id === caseId)!
+    let state = createInitialState(caseId)
+    for (const chapter of storyCase.chapters.filter((c) => c.completedWhen)) {
       expect(state.chapter).toBe(chapter.id)
       state = await playChapter(state, pick)
       expect(isChapterComplete(state), `${chapter.id} did not complete`).toBe(true)
@@ -124,7 +141,7 @@ describe('automatic playthrough', () => {
   })
 
   it('accepts exactly the right option for each accusation question', async () => {
-    const accusation = CHAPTERS.flatMap((c) => c.puzzles).find((p) => p.kind === 'accusation')
+    const accusation = ALL_PUZZLES.find((p) => p.kind === 'accusation')
     expect(accusation).toBeDefined()
     if (accusation?.kind !== 'accusation') return
     for (const [id, right] of ACCUSATION) {
@@ -136,7 +153,7 @@ describe('automatic playthrough', () => {
   })
 
   it('has a solution and exactly three distinct hints for every puzzle', async () => {
-    for (const puzzle of CHAPTERS.flatMap((c) => c.puzzles)) {
+    for (const puzzle of ALL_PUZZLES) {
       expect(await isCorrectAnswer(SOLUTIONS[puzzle.id] ?? '', puzzle.answerHash), puzzle.id).toBe(true)
       expect(new Set(puzzle.hints).size, puzzle.id).toBe(3)
     }

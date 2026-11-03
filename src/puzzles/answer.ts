@@ -40,3 +40,8 @@ export function accusationAllAnswers(answers: [questionId: string, optionIndex: 
 export function timelineAnswer(order: string[], misfit: string): string {
   return `${order.filter((id) => id !== misfit).join('>')}|${misfit}`
 }
+
+/** Answer string of a route puzzle: the place ids in travel order, start included. */
+export function routeAnswer(places: string[]): string {
+  return places.join('>')
+}

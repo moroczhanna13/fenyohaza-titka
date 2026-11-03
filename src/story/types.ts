@@ -182,7 +182,35 @@ export interface AccusationPuzzle extends PuzzleBase {
   questions: AccusationQuestion[]
 }
 
-export type Puzzle = TextPuzzle | ConnectPuzzle | TimelinePuzzle | LedgerPuzzle | AccusationPuzzle
+export interface MapPlace {
+  id: Id
+  label: string
+  /** Position on the map, x 0–100 from the left, y 0–80 from the top. */
+  x: number
+  y: number
+  /** Where the label goes; below the dot by default. */
+  labelSide?: 'below' | 'left' | 'right'
+}
+
+export interface MapRoad {
+  from: Id
+  to: Id
+  km: number
+}
+
+/**
+ * Build a route on a map, place by place along the roads (places may be visited
+ * again). Solved in the Deductions app; the answer is the places in order (see routeAnswer).
+ */
+export interface RoutePuzzle extends PuzzleBase {
+  kind: 'route'
+  places: MapPlace[]
+  roads: MapRoad[]
+  /** Where the route begins. */
+  start: Id
+}
+
+export type Puzzle = TextPuzzle | ConnectPuzzle | TimelinePuzzle | LedgerPuzzle | AccusationPuzzle | RoutePuzzle
 
 // ---------- Evidence ----------
 

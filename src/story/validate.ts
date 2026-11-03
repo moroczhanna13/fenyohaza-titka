@@ -95,6 +95,14 @@ export function validateChapter(chapter: Chapter): string[] {
     if (!/^[0-9a-f]{64}$/.test(p.answerHash)) errors.push(`puzzle ${p.id}: answerHash is not a SHA-256 hex string`)
     if ((p.kind === 'connect' || p.kind === 'timeline') && new Set(p.statements.map((s) => s.id)).size !== p.statements.length)
       errors.push(`puzzle ${p.id}: duplicate statement ids`)
+    if (p.kind === 'route') {
+      const places = new Set(p.places.map((pl) => pl.id))
+      if (places.size !== p.places.length) errors.push(`puzzle ${p.id}: duplicate place ids`)
+      if (!places.has(p.start)) errors.push(`puzzle ${p.id}: unknown start "${p.start}"`)
+      for (const road of p.roads) {
+        if (!places.has(road.from) || !places.has(road.to)) errors.push(`puzzle ${p.id}: road to an unknown place`)
+      }
+    }
     if (p.kind === 'accusation') {
       for (const q of p.questions) {
         if (!/^[0-9a-f]{64}$/.test(q.answerHash)) errors.push(`puzzle ${p.id}: question ${q.id} has no valid hash`)

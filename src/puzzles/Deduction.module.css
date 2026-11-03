@@ -264,3 +264,116 @@
   gap: var(--space-2);
   font-size: var(--font-size-sm);
 }
+
+/* ---------- Route ---------- */
+
+.map {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.road line {
+  stroke: var(--color-border);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+}
+
+.map text {
+  /* A halo in the map colour keeps labels readable where they cross a road. */
+  paint-order: stroke;
+  stroke: var(--color-surface);
+  stroke-width: 1px;
+  stroke-linejoin: round;
+}
+
+.road text {
+  font-size: 3px;
+  fill: var(--color-text-muted);
+}
+
+.road[data-travelled='true'] line {
+  stroke: var(--color-accent);
+  stroke-width: 1.4;
+}
+
+.place circle {
+  fill: var(--color-surface-raised);
+  stroke: var(--color-text-muted);
+  stroke-width: 0.6;
+}
+
+.place text {
+  font-size: 3.4px;
+  fill: var(--color-text);
+}
+
+.place[data-next='true'] {
+  cursor: pointer;
+}
+
+.place[data-next='true'] circle {
+  stroke: var(--color-accent);
+  stroke-width: 0.9;
+}
+
+.place[data-here='true'] circle {
+  fill: var(--color-accent);
+  stroke: var(--color-accent-strong);
+}
+
+.route {
+  margin: 0;
+  padding-left: var(--space-6);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.routeTotal {
+  margin: 0;
+  font-weight: 700;
+}
+
+.nextStops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.stop {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-accent-muted);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.stop:hover {
+  border-color: var(--color-accent);
+}
+
+.routeActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.routeActions .primary {
+  align-self: auto;
+}
+
+.secondary {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: none;
+  cursor: pointer;
+}
+
+.secondary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

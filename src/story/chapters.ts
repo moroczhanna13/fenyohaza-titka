@@ -4,6 +4,7 @@ import { chapter3 } from './chapter3'
 import { chapter4 } from './chapter4'
 import { chapter5 } from './chapter5'
 import { chapter6 } from './chapter6'
+import { minibusCase } from './minibus'
 import type { Chapter, Conversation, Id, Photo, Puzzle, StoryCase, VoiceMessage } from './types'
 
 export const GAME_TITLE = 'Fenyőháza titka'
@@ -22,6 +23,7 @@ export const CASES: readonly StoryCase[] = [
     summary: 'Egy tó menti kisváros, egy 25 éve leégett vitorlásklub és egy halott nyomozó, aki nem hitt a balesetben.',
     chapters: CHAPTERS,
   },
+  minibusCase,
 ]
 
 const ALL_CHAPTERS = CASES.flatMap((c) => c.chapters)
