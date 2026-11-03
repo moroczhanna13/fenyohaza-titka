@@ -4,6 +4,10 @@ Magyar nyelvű nyomozójáték, ami a böngészőben fut. A játékos megkapja e
 
 A főszál fejezetekből áll, mellette rövid, önálló mellékügyek vannak. Nincs backend, a játékállás a böngészőben (`localStorage`) mentődik.
 
+**Játszható itt:** https://moroczhanna13.github.io/fenyohaza-titka/
+
+A `main` ágra pusholt minden változás automatikusan települ (GitHub Actions, `.github/workflows/deploy.yml`).
+
 ## Indítás
 
 Node.js 20 vagy újabb kell.
