@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { connectAnswer, isCorrectAnswer, timelineAnswer } from '../puzzles/answer'
+import { accusationAllAnswers, accusationAnswer, connectAnswer, isCorrectAnswer, timelineAnswer } from '../puzzles/answer'
 import { buildTimeline } from '../state/conversation'
 import { createInitialState, gameReducer, getProgress, type GameAction, type GameState } from '../state/gameState'
 import {
@@ -13,6 +13,15 @@ import {
 import { CHAPTERS, findPuzzle } from './chapters'
 import type { Condition, Id } from './types'
 
+/** The right option index for each accusation question. */
+const ACCUSATION: [string, number][] = [
+  ['ch6-q-arsonist', 3],
+  ['ch6-q-not-accident', 1],
+  ['ch6-q-motive', 2],
+  ['ch6-q-witness', 0],
+  ['ch6-q-gedeon', 3],
+]
+
 /** Plain-text solutions, kept only in tests. Every puzzle in the story needs an entry. */
 const SOLUTIONS: Record<Id, string> = {
   'ch1-lock': 'Kerekes',
@@ -25,6 +34,7 @@ const SOLUTIONS: Record<Id, string> = {
   'ch4-pharmacy-password': 'Bodri2004',
   'ch5-reka-lie': connectAnswer('ch5-s-camp', 'ch5-s-dinner'),
   'ch5-morse': 'patika',
+  'ch6-accusation': accusationAllAnswers(ACCUSATION),
 }
 
 type PickOption = (optionCount: number) => number
@@ -110,6 +120,18 @@ describe('automatic playthrough', () => {
       for (const evidence of chapter.evidence) expect(found).toContain(evidence.id)
 
       state = gameReducer(state, { type: 'advanceChapter' })
+    }
+  })
+
+  it('accepts exactly the right option for each accusation question', async () => {
+    const accusation = CHAPTERS.flatMap((c) => c.puzzles).find((p) => p.kind === 'accusation')
+    expect(accusation).toBeDefined()
+    if (accusation?.kind !== 'accusation') return
+    for (const [id, right] of ACCUSATION) {
+      const question = accusation.questions.find((q) => q.id === id)!
+      for (let i = 0; i < question.options.length; i++) {
+        expect(await isCorrectAnswer(accusationAnswer(id, i), question.answerHash), `${id} option ${i}`).toBe(i === right)
+      }
     }
   })
 

@@ -3,10 +3,11 @@ import { chapter2 } from './chapter2'
 import { chapter3 } from './chapter3'
 import { chapter4 } from './chapter4'
 import { chapter5 } from './chapter5'
+import { chapter6 } from './chapter6'
 import type { Chapter, Conversation, Id, Photo, Puzzle, VoiceMessage } from './types'
 
 /** Main story chapters in order. */
-export const CHAPTERS: readonly Chapter[] = [chapter1, chapter2, chapter3, chapter4, chapter5]
+export const CHAPTERS: readonly Chapter[] = [chapter1, chapter2, chapter3, chapter4, chapter5, chapter6]
 
 export function chapterIndex(id: Id): number {
   return Math.max(0, CHAPTERS.findIndex((c) => c.id === id))
