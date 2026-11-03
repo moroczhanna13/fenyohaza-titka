@@ -45,3 +45,16 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+.subheading {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.plain {
+  margin: 0;
+  line-height: 1.6;
+}

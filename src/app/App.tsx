@@ -4,6 +4,7 @@ import HomeScreen from './HomeScreen'
 import AppPlaceholder from './AppPlaceholder'
 import BoxView from './BoxView'
 import ChapterEnd from './ChapterEnd'
+import EndingScreen from './EndingScreen'
 import IntroScreen from './IntroScreen'
 import LockScreen from './LockScreen'
 import NotificationBanner, { type PhoneNotification } from './NotificationBanner'
@@ -17,7 +18,7 @@ import GalleryApp from '../apps/gallery/GalleryApp'
 import MessagesApp from '../apps/messages/MessagesApp'
 import NotebookApp from '../apps/notebook/NotebookApp'
 import PuzzlePanel from '../puzzles/PuzzlePanel'
-import { findPuzzle } from '../story/chapters'
+import { findPuzzle, GAME_TITLE } from '../story/chapters'
 import type { Conversation, Id, MessageStep } from '../story/types'
 import { unreadCount } from '../state/conversation'
 import { getProgress } from '../state/gameState'
@@ -149,11 +150,27 @@ export default function App() {
   }
 
   let screen
-  if (complete && endShown) {
+  const next = nextChapter(game)
+  if (complete && endShown && !next) {
+    const solution = chapter.puzzles.find((p) => p.kind === 'accusation')?.conclusion
+    screen = (
+      <EndingScreen
+        gameTitle={GAME_TITLE}
+        chapter={chapter}
+        solution={solution}
+        onNewGame={() => {
+          goHome()
+          setNotification(null)
+          setBoxOpen(false)
+          dispatch({ type: 'newGame' })
+        }}
+      />
+    )
+  } else if (complete && endShown) {
     screen = (
       <ChapterEnd
         chapter={chapter}
-        next={nextChapter(game)}
+        next={next}
         onContinue={() => {
           goHome()
           dispatch({ type: 'advanceChapter' })

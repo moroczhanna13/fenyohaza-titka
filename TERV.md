@@ -49,7 +49,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] Morze-hangüzenet generálása Web Audio API-val
 - [x] Réka beszélgetései és a két történet közti ellentmondás
 - [x] A vád: kérdéssor, hibás válasznál vissza a megfelelő fejezetbe
-- [ ] Befejezés-képernyő
+- [x] Befejezés-képernyő
 
 ## 5. Mellékügyek
 

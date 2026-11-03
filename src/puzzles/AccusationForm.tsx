@@ -45,7 +45,7 @@ export default function AccusationForm({ puzzle, game, onSolved }: Readonly<Accu
       <div className={styles.form} role="alert">
         <p className={styles.failTitle}>Ez a pont nem áll meg. Ilona ügyvédje szétszedné.</p>
         <p className={styles.prompt}>
-          Vissza a {chapter?.number}. fejezethez: {chapter?.title}
+          Nézd át újra: {chapter?.number}. fejezet – {chapter?.title}
         </p>
         <ul className={styles.recap}>
           {evidence.map((e) => (

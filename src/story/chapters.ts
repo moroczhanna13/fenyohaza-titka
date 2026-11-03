@@ -6,6 +6,8 @@ import { chapter5 } from './chapter5'
 import { chapter6 } from './chapter6'
 import type { Chapter, Conversation, Id, Photo, Puzzle, VoiceMessage } from './types'
 
+export const GAME_TITLE = 'Fenyőháza titka'
+
 /** Main story chapters in order. */
 export const CHAPTERS: readonly Chapter[] = [chapter1, chapter2, chapter3, chapter4, chapter5, chapter6]
 
