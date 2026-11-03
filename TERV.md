@@ -60,7 +60,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 ## 6. Kiadás
 
 - [ ] Tesztelés ismerősökkel, a visszajelzések összegyűjtése
-- [ ] Teljesítmény és hozzáférhetőség ellenőrzése
+- [x] Teljesítmény és hozzáférhetőség ellenőrzése
 - [ ] GitHub Pages vagy Netlify telepítés
 - [ ] Rövid bemutató oldal vagy README képernyőképekkel
 

@@ -88,7 +88,7 @@
 
 .resultDate {
   font-size: 0.75rem;
-  color: #7a6a4a;
+  color: #66573a;
 }
 
 .resultTitle {
@@ -120,7 +120,7 @@
 .dateline {
   margin: 0 0 var(--space-4);
   font-size: 0.8rem;
-  color: #7a6a4a;
+  color: #66573a;
 }
 
 .bodyText {
