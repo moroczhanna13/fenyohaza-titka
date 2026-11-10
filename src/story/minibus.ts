@@ -257,25 +257,36 @@ const chapter: Chapter = {
       ],
     },
     {
-      kind: 'static',
+      kind: 'social',
       id: 'mb-neighbours',
       url: 'szomszedok.hu/fenyohaza',
-      title: 'Fenyőházi Szomszédok',
-      intro: 'Fenyőháza és környéke nyilvános csoportja.',
+      title: 'Fenyőházi Szomszédok – Fenyőháza és környéke',
       bookmarked: true,
-      blocks: [
-        { type: 'heading', text: 'Horváth Eszter · okt. 18. 11:02' },
+      profileType: 'group',
+      name: 'Fenyőháza és környéke',
+      about: 'Nyilvános csoport · 2 318 tag',
+      details: ['Helyi hírek, hirdetések, elveszett és talált dolgok.'],
+      posts: [
         {
-          type: 'text',
+          author: 'Horváth Eszter',
+          time: 'okt. 18. 11:02',
           text: 'Köszönjük mindenkinek, aki ott volt a lagzinkban a Rózsa Csárdában! Külön köszönet Tominak, aki elhozta a nádasi rokonokat, és hajnalban haza is vitte őket Nádasra!',
+          likes: 57,
+          comments: [
+            { author: 'Kiss Ilona', text: 'Az a fehér kisbusz? Olyan volt, mint egy iskolabusz.' },
+            {
+              author: 'Horváth Eszter',
+              text: 'Ugyan, bérelt. Tomi még a feliratot is leragasztotta rajta, hogy szebb legyen a fotókon.',
+            },
+          ],
         },
-        { type: 'text', text: 'Kiss Ilona: Az a fehér kisbusz? Olyan volt, mint egy iskolabusz.' },
         {
-          type: 'text',
-          text: 'Horváth Eszter: Ugyan, bérelt. Tomi még a feliratot is leragasztotta rajta, hogy szebb legyen a fotókon.',
+          author: 'Juhász Péter',
+          time: 'okt. 17. 18:30',
+          text: 'Elveszett egy fekete-fehér macska a Kikötő sétány környékén. Bajusz névre hallgat.',
+          likes: 12,
+          comments: [{ author: 'Bencze Margit', text: 'Megosztottam. Remélem, hazatalál!' }],
         },
-        { type: 'heading', text: 'Juhász Péter · okt. 17. 18:30' },
-        { type: 'text', text: 'Elveszett egy fekete-fehér macska a Kikötő sétány környékén. Bajusz névre hallgat.' },
       ],
     },
     {
