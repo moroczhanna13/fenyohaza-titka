@@ -12,7 +12,10 @@ A `public/images/` alatti fotószerű képek a Wikimedia Commons szabad licencű
 | `ch1/pills.webp` | [Bubbla med tabletter.jpg](https://commons.wikimedia.org/wiki/File:Bubbla_med_tabletter.jpg) | Shoepolish | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | kivágás, színkorrekció; rá saját készítésű patikai címke |
 | `ch3/festival-night.webp` | [Opel Astra F Hatch HL.jpg](https://commons.wikimedia.org/wiki/File:Opel_Astra_F_Hatch_HL.jpg) | Melkom | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | éjszakai, vakus hatás; a rendszám kicserélve (GBM-418), kivilágított ablak, dátumbélyegző |
 | `ch4/bodri.webp` | [20160327 pies nierasowy 3691.jpg](https://commons.wikimedia.org/wiki/File:20160327_pies_nierasowy_3691.jpg) | Jakub Hałun | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | kivágás |
+| `auction/clock.webp` | [Antique Clock in Dongguan 2013-02-09 120154.jpg](https://commons.wikimedia.org/wiki/File:Antique_Clock_in_Dongguan_2013-02-09_120154.jpg) | David290 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | kivágás, világosítás |
+| `auction/portrait.webp` | [Close-up of Woman Holding Coffee Cup at Cafe (28217840617).jpg](https://commons.wikimedia.org/wiki/File:Close-up_of_Woman_Holding_Coffee_Cup_at_Cafe_(28217840617).jpg) | Chevanon Photography | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | négyzetes kivágás, színkorrekció |
+| `minibus/wedding.webp` | [Ford Transit T8 006.jpg](https://commons.wikimedia.org/wiki/File:Ford_Transit_T8_006.jpg) | JustAnotherCarDesigner | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | éjszakai hatás, égősorok, felirat és ragasztószalag, rendszám kicserélve (PLK-215), a háttér elmosva |
 
-Saját készítésű (szabadon használható a játékkal együtt): `ch2/firelog.webp` (a tűzoltónapló oldala), valamint a plakát és a címke grafikája. Az SVG-képek (térkép, mellékügyek) szintén saját készítésűek.
+Saját készítésűek: `ch2/firelog.webp` (a tűzoltónapló oldala), `minibus/map.webp` (a garázsfali térkép), valamint a plakát, a cetlik és a patikai címke grafikája.
 
 A betűtípus (Noto Sans Old Hungarian) licence: `public/fonts/OFL.txt`.

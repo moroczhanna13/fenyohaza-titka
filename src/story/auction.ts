@@ -202,7 +202,7 @@ const chapter: Chapter = {
               snippet: 'Ugyanez a profilkép egy másik, azóta letiltott hirdetőnél.',
             },
             {
-              title: 'Szabad stockfotó: mosolygó nő kávéval',
+              title: 'Szabad stockfotó: kávéscsésze kézben, latte art',
               url: 'szabadfoto.hu/kep/88213',
               date: '2017. szeptember 2.',
               snippet: 'Ingyen felhasználható portré. Bárki letöltheti.',
@@ -216,15 +216,15 @@ const chapter: Chapter = {
   photos: [
     {
       id: 'au-clock',
-      src: 'images/auction/clock.svg',
-      alt: 'Fénykép egy díszes, diófa házas ingaóráról világos háttér előtt. Az óralap római számos, alul sárgaréz inga.',
+      src: 'images/auction/clock.webp',
+      alt: 'Fénykép egy sötét fa házas, oromzatos falióráról világos fal előtt. Az óralap római számos, alul üvegajtó mögött sárgaréz inga.',
       caption: 'Az ingaóra a hirdetésből',
       info: { takenAt: '2026-10-30T10:14', device: 'Mentett kép' },
     },
     {
       id: 'au-portrait',
-      src: 'images/auction/portrait.svg',
-      alt: 'Profilkép: mosolygó, barna hajú nő, kezében kávéscsészével, tökéletes, stúdiószerű világításban.',
+      src: 'images/auction/portrait.webp',
+      alt: 'Profilkép: két kéz egy fekete csészét tart, amelybe éppen tejhabot öntenek; tökéletes, stúdiószerű fény. Arc nem látszik.',
       caption: 'Kovács Erika profilképe',
       info: { takenAt: '2026-10-30T10:15', device: 'Mentett kép' },
     },

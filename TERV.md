@@ -84,7 +84,7 @@ Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.m
 - [x] Kisbusz-mellékügy Szomszédok-oldala az új közösségi oldaltípusra
 - [x] Mentésverzió emelése, tesztek, teljes végigjátszás és idővonal-ellenőrzés
 - [x] Képek: raszteres, fotószerű galériaképek a főszálban (Wikimedia Commons + Pillow, licencek: `public/images/LICENSES.md`)
-- [ ] Képek: a mellékügyek fotói (óra, profilkép, lakodalmi kép) is raszteresen
+- [x] Képek: a mellékügyek fotói (óra, profilkép, lakodalmi kép, térkép) is raszteresen
 
 ## Ötletek később
 

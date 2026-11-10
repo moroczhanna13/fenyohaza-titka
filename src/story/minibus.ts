@@ -316,15 +316,15 @@ const chapter: Chapter = {
   photos: [
     {
       id: 'mb-map',
-      src: 'images/minibus/map.svg',
+      src: 'images/minibus/map.webp',
       alt: 'Kézzel rajzolt térkép a garázs faláról. Középen Fenyőháza és az iskola, körülötte Nádas, a Rózsa Csárda és Kővágó. Kővágótól északra a Bükkösi elágazás, onnan rövid földút vezet egyik oldalon az Erdészlakhoz, a másikon a Ködös-majorhoz.',
       caption: 'A térkép a garázs falán',
       info: { takenAt: '2026-10-19T07:02', place: 'Fenyőháza, iskola', device: 'Samsung Galaxy A14' },
     },
     {
       id: 'mb-wedding',
-      src: 'images/minibus/wedding.svg',
-      alt: 'Éjszakai lakodalmi fotó a Rózsa Csárda előtt. Ünneplő vendégek, a háttérben egy fehér kisbusz áll, az oldalán a felirat ragasztószalaggal letakarva; egy csík kilátszik: „…LÁNOS ISKOLA”.',
+      src: 'images/minibus/wedding.webp',
+      alt: 'Éjszakai lakodalmi fotó a Rózsa Csárda udvarán, égősorok fényében. Egy fehér kisbusz áll, rendszáma PLK-215, az oldalán a felirat barna ragasztószalaggal letakarva; egy csík kilátszik: „…LÁNOS ISKOLA”. A kép szélén egy vendég elmosódott alakja.',
       caption: 'Lakodalom, Rózsa Csárda',
       info: { takenAt: '2026-10-17T23:48', place: 'Rózsa Csárda, Szőlőhegy', device: 'iPhone 13' },
     },
