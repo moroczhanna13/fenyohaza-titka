@@ -19,6 +19,7 @@ import {
   isChapterComplete,
   isMet,
   isPhoneLocked,
+  knownCharacters,
 } from '../state/selectors'
 import { CASES, findPuzzle } from './chapters'
 import type { Condition, Id } from './types'
@@ -153,6 +154,12 @@ describe('automatic playthrough', () => {
       for (const evidence of chapter.evidence) expect(found).toContain(evidence.id)
 
       state = gameReducer(state, { type: 'advanceChapter' })
+    }
+
+    // By the end, every person of the case is on a contact card with something found out about them.
+    for (const { name, facts } of knownCharacters(state)) {
+      expect(facts.length, name).toBeGreaterThan(0)
+      expect(name).not.toBe('Ismeretlen szám')
     }
   })
 

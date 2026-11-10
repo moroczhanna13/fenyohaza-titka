@@ -349,7 +349,7 @@ export const chapter3: Chapter = {
         {
           type: 'message',
           from: 'contact',
-          text: 'Fesztivál után mindig bementem egy üveggel. Csendben, egyedül, amikor már mindenki elment. Aznap is ezért mentem.',
+          text: 'Tűzijáték után mindig bementem egy üveggel. Csendben, egyedül, amíg a többiek a színpadnál mulattak. Aznap is ezért mentem.',
         },
         {
           type: 'message',

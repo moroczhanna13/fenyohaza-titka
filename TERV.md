@@ -82,7 +82,7 @@ Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.m
 - [x] 4. fejezet: margójegyzet, gyógyszer-ellentmondás, patika nyilvános oldal és új belépés, Réka leleplezése
 - [x] 5–6. fejezet: Réka új háttere, feljelentés-keret, új utóhang
 - [x] Kisbusz-mellékügy Szomszédok-oldala az új közösségi oldaltípusra
-- [ ] Mentésverzió emelése, tesztek, teljes végigjátszás és idővonal-ellenőrzés
+- [x] Mentésverzió emelése, tesztek, teljes végigjátszás és idővonal-ellenőrzés
 - [ ] Képek: raszteres, fotószerű galériaképek (a 2001-es fesztiválfotó elsőként)
 
 ## Ötletek később
