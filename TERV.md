@@ -64,6 +64,27 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 - [x] GitHub Pages vagy Netlify telepítés
 - [ ] Rövid bemutató oldal vagy README képernyőképekkel
 
+## 7. Javítások a visszajelzések alapján
+
+Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.md`-t követi.
+
+- [x] Döntések jóváhagyása, `TORTENET.md` frissítése
+- [ ] Motor: `match` fejtörő-típus (párosítás)
+- [ ] Motor: hivatkozás-blokk, közösségi oldal (`social`) és Szomszédok-kezdőlap kereséssel
+- [ ] Motor: patika-belépés felhasználóválasztóval és elfelejtett jelszóval
+- [ ] Motor: e-mail mappák (beérkezett, elküldött, spam)
+- [ ] Motor: Gedeon jegyzetei a Jegyzetfüzetben
+- [ ] Névjegyek app szereplőkkel és kiderített tényekkel
+- [ ] Fotónézegető nagyítás
+- [ ] 1. fejezet: új cédula, névtelen számok, háttérlevelek, gyógyszeres fotó
+- [ ] 2. fejezet: Réka csak anyagot ad, új archívumcikkek (szám, gyászjelentés)
+- [ ] 3. fejezet: számok párosítása, kétkörös kihallgatások, Szomszédok-oldalak, Mészáros új indoka
+- [ ] 4. fejezet: margójegyzet, gyógyszer-ellentmondás, patika nyilvános oldal és új belépés, Réka leleplezése
+- [ ] 5–6. fejezet: Réka új háttere, feljelentés-keret, új utóhang
+- [ ] Kisbusz-mellékügy Szomszédok-oldala az új közösségi oldaltípusra
+- [ ] Mentésverzió emelése, tesztek, teljes végigjátszás és idővonal-ellenőrzés
+- [ ] Képek: raszteres, fotószerű galériaképek (a 2001-es fesztiválfotó elsőként)
+
 ## Ötletek később
 
 - Angol nyelvű változat
