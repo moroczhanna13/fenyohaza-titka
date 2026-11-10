@@ -312,10 +312,21 @@ export interface StaticPage extends WebPageBase {
   blocks: DocumentBlock[]
 }
 
-/** A page behind a login. The password is a text puzzle; the blocks show once it is solved. */
+export interface LoginUser {
+  name: string
+  /** Shown after "Elfelejtett jelszó?". */
+  passwordHint: string
+}
+
+/**
+ * A page behind a login. The player first picks a user. The password of `user`
+ * is the text puzzle `puzzle`; every other user is a dead end. The blocks show once it is solved.
+ */
 export interface LoginPage extends WebPageBase {
   kind: 'login'
-  username: string
+  users: LoginUser[]
+  /** Name of the user whose password is the puzzle. */
+  user: string
   puzzle: Id
   blocks: DocumentBlock[]
 }

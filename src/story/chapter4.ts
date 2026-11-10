@@ -105,7 +105,12 @@ export const chapter4: Chapter = {
       url: 'fenyopatika.hu/belso',
       title: 'Fenyő Patika – belső rendszer',
       intro: 'Csak munkatársaknak.',
-      username: 'vidor.ilona',
+      users: [
+        { name: 'Kovács Zsófia', passwordHint: 'A jelszó-emlékeztetőt a rendszergazda kapja meg e-mailben.' },
+        { name: 'Németh Péter (gyakornok)', passwordHint: 'A jelszó-emlékeztetőt a rendszergazda kapja meg e-mailben.' },
+        { name: 'Vidor Ilona', passwordHint: 'Jelszó-emlékeztető (a felhasználó adta meg): „a kutyám + a legfontosabb évszám”' },
+      ],
+      user: 'Vidor Ilona',
       puzzle: 'ch4-pharmacy-password',
       blocks: [
         { type: 'heading', text: 'Kiadási napló – Berényi Gedeon, vérnyomáscsökkentő tabletta' },
@@ -169,7 +174,7 @@ export const chapter4: Chapter = {
       whereToSolve: 'A jelszót a patika belső oldalán kell beírni: fenyopatika.hu/belso (Böngésző).',
       answerHash: '3aae5cfbd52907de94fddd9f9ee4a4c7f8be35acd3cff808727ac6f56ff48ff5',
       hints: [
-        'A felhasználónév már ki van töltve. A jelszó Ilona kutyájának neve és egy számára fontos évszám, egybeírva.',
+        'Válaszd ki Vidor Ilonát, és nézd meg az „Elfelejtett jelszó?” alatti emlékeztetőt.',
         'Ilona posztjai a Böngészőben, a Fenyőházi Szomszédok oldalon vannak: ott a kutyája neve és a patika nyitásának éve.',
         'A jelszó: bodri2004.',
       ],

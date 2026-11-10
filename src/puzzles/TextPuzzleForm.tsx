@@ -7,10 +7,17 @@ interface TextPuzzleFormProps {
   puzzle: TextPuzzle
   onSolved: () => void
   submitLabel?: string
+  /** Shown after a wrong answer. */
+  wrongText?: string
 }
 
 /** Typed answer, checked against the stored hash after normalization. */
-export default function TextPuzzleForm({ puzzle, onSolved, submitLabel = 'Ellenőrzés' }: Readonly<TextPuzzleFormProps>) {
+export default function TextPuzzleForm({
+  puzzle,
+  onSolved,
+  submitLabel = 'Ellenőrzés',
+  wrongText = 'Nem ez a válasz.',
+}: Readonly<TextPuzzleFormProps>) {
   const inputId = useId()
   const [value, setValue] = useState('')
   const [checking, setChecking] = useState(false)
@@ -57,7 +64,7 @@ export default function TextPuzzleForm({ puzzle, onSolved, submitLabel = 'Ellen�
         </button>
       </div>
       <output className={styles.feedback}>
-        {showWrong ? 'Nem ez a válasz.' : ''}
+        {showWrong ? wrongText : ''}
       </output>
     </form>
   )

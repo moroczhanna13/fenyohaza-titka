@@ -91,7 +91,10 @@ export function validateChapter(chapter: Chapter): string[] {
   chapter.emails?.forEach((e) => checkCondition(e.availableAfter, `email ${e.id}`))
   for (const p of chapter.pages ?? []) {
     checkCondition(p.availableAfter, `page ${p.id}`)
-    if (p.kind === 'login') checkCondition({ type: 'puzzleSolved', puzzle: p.puzzle }, `page ${p.id}`)
+    if (p.kind === 'login') {
+      checkCondition({ type: 'puzzleSolved', puzzle: p.puzzle }, `page ${p.id}`)
+      if (!p.users.some((u) => u.name === p.user)) errors.push(`page ${p.id}: unknown user "${p.user}"`)
+    }
     if (p.kind === 'imageSearch') p.searches.forEach((e) => checkCondition({ type: 'photoViewed', photo: e.photo }, `page ${p.id}`))
   }
   chapter.photos.forEach((p) => checkCondition(p.availableAfter, `photo ${p.id}`))

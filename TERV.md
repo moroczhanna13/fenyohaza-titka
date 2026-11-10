@@ -71,7 +71,7 @@ Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.m
 - [x] Döntések jóváhagyása, `TORTENET.md` frissítése
 - [x] Motor: `match` fejtörő-típus (párosítás)
 - [x] Motor: hivatkozás-blokk, közösségi oldal (`social`) és Szomszédok-kezdőlap kereséssel
-- [ ] Motor: patika-belépés felhasználóválasztóval és elfelejtett jelszóval
+- [x] Motor: patika-belépés felhasználóválasztóval és elfelejtett jelszóval
 - [ ] Motor: e-mail mappák (beérkezett, elküldött, spam)
 - [ ] Motor: Gedeon jegyzetei a Jegyzetfüzetben
 - [ ] Névjegyek app szereplőkkel és kiderített tényekkel
