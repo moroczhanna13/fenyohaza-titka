@@ -115,9 +115,9 @@ export const chapter2: Chapter = {
       id: 'ch2-archive',
       url: 'fenyohazihirek.hu/archivum',
       title: 'Fenyőházi Hírek – Archívum',
-      intro: 'Lapszámaink 1990-től. Válassz egy napot: a keresés az adott nap és az azt követő három nap cikkeit mutatja.',
+      intro: 'Lapszámaink 1990-től. Válassz egy napot: a keresés az adott nap és az azt követő egy hét cikkeit mutatja.',
       bookmarked: true,
-      searchDays: 3,
+      searchDays: 7,
       articles: [
         {
           id: 'ch2-article-preview',

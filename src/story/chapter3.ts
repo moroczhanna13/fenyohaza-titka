@@ -97,42 +97,69 @@ export const chapter3: Chapter = {
           type: 'choice',
           options: [
             {
-              text: 'Polgármester úr, Berényi Gedeon rokona vagyok. Ő már nem tud kérdezni, ezért én kérdezek.',
-              replies: [
-                { type: 'message', from: 'contact', text: 'Részvétem. De a válaszom ugyanaz, mint neki: lezárt ügy.' },
-              ],
+              text: 'Polgármester úr, Berényi Gedeon rokona vagyok, az ő telefonjáról írok. Ő már nem tud kérdezni, ezért én kérdezek.',
+              replies: [{ type: 'message', from: 'contact', text: 'Részvétem. Hallottam, mi történt vele.' }],
             },
             {
-              text: 'Polgármester úr, a 2001-es tűzről kérdeznék.',
-              replies: [{ type: 'message', from: 'contact', text: 'Már a nagybátyjának is megmondtam: lezárt ügy.' }],
+              text: 'Jó napot! Nem Gedeon ír, hanem a rokona. Az ő telefonját kaptam meg.',
+              replies: [
+                { type: 'message', from: 'contact', text: 'Gondoltam. Az egész város ott volt a temetésén. Részvétem.' },
+              ],
             },
           ],
         },
-        { type: 'message', from: 'contact', text: 'Kérem, ne keressen többet.' },
+        {
+          type: 'message',
+          from: 'contact',
+          text: 'Ha a 2001-es tűz miatt keres: a nagybátyjának is megmondtam, az egy lezárt ügy. Kérem, ne keressen többet.',
+        },
         {
           type: 'choice',
           options: [
             {
               text: 'Az újságnak azt mondta, 23:40-kor riasztotta a tűzoltókat. A tűzoltónapló szerint 23:10-kor jött a bejelentés.',
-              replies: [{ type: 'message', from: 'contact', text: 'Ki adta magának azt a naplót?' }],
+              replies: [{ type: 'message', from: 'contact', text: 'Egy fénykép egy füzetlapról. Ezzel semmit nem bizonyít.' }],
             },
             {
-              text: 'Ha nem beszél velem, a tűzoltónaplót a Fenyőházi Hírek szerkesztőségének is elküldöm.',
-              replies: [{ type: 'message', from: 'contact', text: 'Ez fenyegetés?' }],
+              text: 'Gedeon lefotózta a tűzoltónaplót. Abban 23:10 áll, nem 23:40, amit maga mondott az újságnak.',
+              replies: [
+                { type: 'message', from: 'contact', text: 'Egy fénykép egy füzetlapról. Bárki írhatott bele bármit.' },
+              ],
             },
           ],
         },
-        { type: 'message', from: 'contact', text: 'Jövőre választás lesz. Gondolom, ezt maga is tudja.' },
-        { type: 'message', from: 'contact', text: '…' },
         {
-          type: 'message',
-          from: 'contact',
-          text: 'Rendben. Nem a klubháznál voltam, és nem én riasztottam senkit.',
+          type: 'choice',
+          options: [
+            {
+              text: 'Nem nekem kell bizonyítanom. A napló eredetije ott van a tűzoltószertárban. Ha a Hírek újságírója megnézi, azt is megkérdezi, hol volt a klubelnök fél órán át azon az éjszakán, amikor meghalt a gondnok.',
+              replies: [{ type: 'message', from: 'contact', text: '…' }],
+            },
+            {
+              text: 'Huszonöt éve senki nem tette egymás mellé a naplót és a cikket. Most valaki megtette. Ha nem én kérdezem meg, holnap a Hírek fogja.',
+              replies: [{ type: 'message', from: 'contact', text: 'Maga megfenyeget engem?' }],
+            },
+          ],
         },
         {
           type: 'message',
           from: 'contact',
-          text: '23 órától fél tizenkettőig a fesztiválsátorban ültem az üzemeltetőkkel. Tárgyaltunk. Az üzemeltetők tanúsíthatják – ha megtalálja őket.',
+          text: 'Jövőre választás lesz. Egy ilyen cikk után senki nem kérdezi meg, mi az igazság. Elég, ha kérdés lesz belőle: mit titkolt a polgármester azon az éjszakán, amikor valaki meghalt.',
+        },
+        {
+          type: 'message',
+          from: 'contact',
+          text: 'A rendőrségnek annak idején azt mondtam, nem tudom pontosan, mikor szóltak. Az újságírónak bemondtam egy időt. Senki nem vetette össze a kettőt – miért is tette volna, mindenki zárlatról beszélt.',
+        },
+        {
+          type: 'message',
+          from: 'contact',
+          text: 'Elmondom, hol voltam. Utána hagyjon békén.',
+        },
+        {
+          type: 'message',
+          from: 'contact',
+          text: '23 órától fél tizenkettőig a fesztiválsátorban ültem az üzemeltetőkkel. Tárgyaltunk. Halász Géza, a büfés végig ott volt, ma is a piacon árul – kérdezze meg.',
         },
         {
           type: 'choice',
@@ -183,14 +210,17 @@ export const chapter3: Chapter = {
           type: 'choice',
           options: [
             {
-              text: 'Pásztor úr, Gedeon rokona vagyok. Ő mit kérdezett magától?',
+              text: 'Pásztor úr, Gedeon rokona vagyok, az ő telefonjáról írok. Ő mit kérdezett magától?',
               replies: [
-                { type: 'message', from: 'contact', text: 'Ugyanazt, amit most maga fog. És ugyanazt is fogom mondani.' },
+                { type: 'message', from: 'contact', text: 'Hallottam, mi történt vele. Rendes ember volt.' },
+                { type: 'message', from: 'contact', text: 'Ugyanazt kérdezte, amit most maga fog. És ugyanazt is fogom mondani.' },
               ],
             },
             {
-              text: 'Maga volt a vitorlásklub mindenese 2001-ben, igaz?',
-              replies: [{ type: 'message', from: 'contact', text: 'Igaz. Régen volt.' }],
+              text: 'Jó estét! Gedeon rokona vagyok. Maga volt a vitorlásklub mindenese 2001-ben, igaz?',
+              replies: [
+                { type: 'message', from: 'contact', text: 'Igaz. Gedeon is ezzel kezdte. Sajnálom, ami vele történt.' },
+              ],
             },
           ],
         },
@@ -243,6 +273,11 @@ export const chapter3: Chapter = {
         {
           type: 'message',
           from: 'contact',
+          text: 'Pál kislánya épp akkor ment el, amikor odaértem – a vacsoráját hozta neki egy lábasban. Pál utánaszólt, hogy menjen egyenesen haza. Aztán nekem esett.',
+        },
+        {
+          type: 'message',
+          from: 'contact',
           text: 'Két hónapja nem kaptam fizetést. Pál azt mondta, nincs pénz a kasszában. Pedig a fesztivál előtt megjött az előleg, tudtam.',
         },
         {
@@ -285,12 +320,15 @@ export const chapter3: Chapter = {
           type: 'choice',
           options: [
             {
-              text: 'Mészáros úr, Gedeon rokona vagyok. Csak pár kérdést tennék fel.',
-              replies: [{ type: 'message', from: 'contact', text: 'Ő is ezzel kezdte.' }],
+              text: 'Mészáros úr, Gedeon rokona vagyok, az ő telefonjáról írok. Csak pár kérdést tennék fel.',
+              replies: [
+                { type: 'message', from: 'contact', text: 'Hallottam a balesetről. Részvétem.' },
+                { type: 'message', from: 'contact', text: 'Ő is pár kérdéssel kezdte.' },
+              ],
             },
             {
-              text: 'Maga volt a klubtitkár 2001-ben, igaz?',
-              replies: [{ type: 'message', from: 'contact', text: 'Igen. És?' }],
+              text: 'Jó estét, Gedeon rokona vagyok. Maga volt a klubtitkár 2001-ben, igaz?',
+              replies: [{ type: 'message', from: 'contact', text: 'Igen. És? Gedeon is ezt kérdezte.' }],
             },
           ],
         },
@@ -332,11 +370,40 @@ export const chapter3: Chapter = {
           options: [
             {
               text: 'A 23:05-ös fesztiválfotón az autója a klubháznál áll. Nem a színpadnál volt.',
-              replies: [{ type: 'message', from: 'contact', text: '…' }],
+              replies: [{ type: 'message', from: 'contact', text: 'Milyen fotóról beszél?' }],
             },
             {
               text: 'Mit keresett 23:05-kor a klubnál? Van egy fotó az autójáról.',
               replies: [{ type: 'message', from: 'contact', text: 'Honnan van magának az a kép?' }],
+            },
+          ],
+        },
+        {
+          type: 'choice',
+          options: [
+            {
+              text: 'Bencze Margit tette ki a Régi fenyőházi fesztiválok csoportba. Bárki láthatja.',
+              replies: [
+                { type: 'message', from: 'contact', text: 'Bencze Margit…' },
+                { type: 'message', from: 'contact', text: 'Egy autó egy parkolóban. Ebből még semmi nem következik.' },
+              ],
+            },
+            {
+              text: 'A rendszám olvasható rajta: GBM-418. A régi forgalmi adatok szerint az a maga piros Opelje volt.',
+              replies: [{ type: 'message', from: 'contact', text: 'Egy autó egy parkolóban. Ebből még semmi nem következik.' }],
+            },
+          ],
+        },
+        {
+          type: 'choice',
+          options: [
+            {
+              text: 'Akkor miért mondta a rendőrségnek, hogy egész este a színpadnál volt?',
+              replies: [{ type: 'message', from: 'contact', text: '…' }],
+            },
+            {
+              text: 'Az autó 23:05-kor ott állt, az irodában égett a villany. Öt perccel később már a tűzoltókat hívták.',
+              replies: [{ type: 'message', from: 'contact', text: '…' }],
             },
           ],
         },
@@ -598,7 +665,7 @@ export const chapter3: Chapter = {
       id: 'ch3-toth-alibi',
       title: 'Tóth Ervin vallomása',
       description:
-        '23 órától fél tizenkettőig a fesztiválsátorban tárgyalt az üzemeltetőkkel, ők tanúsíthatják. Hogy miről, nem mondja meg. Ezért mondott az újságnak 23:40-et.',
+        '23 órától fél tizenkettőig a fesztiválsátorban tárgyalt az üzemeltetőkkel; Halász Géza, a büfés tanúsíthatja. Hogy miről, nem mondja meg. Ezért mondott az újságnak 23:40-et – és mivel a rendőrségnek pontos időt nem mondott, huszonöt évig senki nem vetette össze a kettőt.',
       source: { type: 'conversation', conversation: 'ch3-toth' },
       foundWhen: { type: 'conversationFinished', conversation: 'ch3-toth' },
     },
@@ -606,7 +673,7 @@ export const chapter3: Chapter = {
       id: 'ch3-pasztor-alibi',
       title: 'Pásztor László vallomása',
       description:
-        '22:45-kor összeveszett Kerekes Pállal a stégnél a ki nem fizetett bére miatt, aztán hazament; a rendőrségnek ezt elhallgatta. Pál azt mondta neki: valaki lop a kasszából, most már tudja, ki, és a fesztivál után rendet tesz.',
+        '22:45-kor összeveszett Kerekes Pállal a stégnél a ki nem fizetett bére miatt, aztán hazament; a rendőrségnek ezt elhallgatta. Pál azt mondta neki: valaki lop a kasszából, most már tudja, ki, és a fesztivál után rendet tesz. Amikor odaért, Pál kislánya épp hazaindult: a vacsoráját hozta neki.',
       source: { type: 'conversation', conversation: 'ch3-pasztor-2' },
       foundWhen: { type: 'conversationFinished', conversation: 'ch3-pasztor-2' },
     },

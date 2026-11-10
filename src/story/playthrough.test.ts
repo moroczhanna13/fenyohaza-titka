@@ -50,7 +50,7 @@ const SOLUTIONS: Record<Id, string> = {
   'ch4-dose': connectAnswer('ch4-s-erecept', 'ch4-s-box'),
   'ch4-pharmacy-password': 'Bodri2004',
   'ch4-identity': 'Kerekes Réka',
-  'ch5-reka-lie': connectAnswer('ch5-s-camp', 'ch5-s-dinner'),
+  'ch5-reka-lie': connectAnswer('ch5-s-camp', 'ch5-s-pasztor'),
   'ch5-morse': 'patika',
   'ch6-accusation': accusationAllAnswers(ACCUSATION),
   'mb-route': routeAnswer(['mb-school', 'mb-nadas', 'mb-inn', 'mb-nadas', 'mb-kovago']),

@@ -269,7 +269,7 @@ export const chapter4: Chapter = {
       answerHash: 'e55092cc9881a1dd51925a97eeb283df603632e0da2598380ca022aa7356316e',
       hints: [
         'Kinél lehettek Kerekes Pál otthoni másolatai huszonöt évig?',
-        'Az üzenő anyja tavaly halt meg. Nézd meg Pál gyászjelentését a Fenyőházi Hírek archívumában, a tűz utáni napokban.',
+        'Az üzenő anyja tavaly halt meg. Pál gyászjelentése a Fenyőházi Hírek archívumában van: keress 2001. július 21-re, és nyisd meg a július 27-i „Gyászjelentés” cikket.',
         'A gyászjelentés szerint Pált a felesége és a lánya, Réka gyászolta. Az üzenő: Kerekes Réka.',
       ],
     },

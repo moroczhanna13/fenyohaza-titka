@@ -83,7 +83,7 @@ export const chapter5: Chapter = {
           type: 'choice',
           options: [
             {
-              text: 'Azt írta, táborban volt. A levélben meg azt, hogy maga vitte le a vacsorát.',
+              text: 'Pásztor László szerint aznap este, háromnegyed tizenegy körül Pál kislánya vitte le neki a vacsorát. Maga nem volt táborban.',
               replies: [{ type: 'message', from: 'contact', text: '…' }],
             },
             {
@@ -93,6 +93,11 @@ export const chapter5: Chapter = {
           ],
         },
         { type: 'message', from: 'contact', text: 'Igen. Hazudtam.' },
+        {
+          type: 'message',
+          from: 'contact',
+          text: 'A rendőrségnek is ezt mondtam huszonöt éve. Ha most kiderül, hogy akkor hazudtam, ki fog hinni nekem bármit is?',
+        },
         {
           type: 'message',
           from: 'contact',
@@ -173,7 +178,6 @@ export const chapter5: Chapter = {
       body: [
         'Apa szigorú ember volt, de igazságos. A klub volt az élete: hajnalban ő nyitott, éjjel ő zárt.',
         'Hetek óta mondogatta otthon, hogy valaki lop a kasszából, és hogy a fesztivál után „rendet tesz”.',
-        'Aznap este én vittem le neki a vacsorát a klubba, rántott húst, ahogy szerette. Akkor láttam utoljára.',
         'Ma is minden nyáron kimegyek a sétányra a fesztivál éjszakáján. Valakinek emlékeznie kell rá.',
         'Réka',
       ],
@@ -222,14 +226,17 @@ export const chapter5: Chapter = {
         },
         { id: 'ch5-s-thief', text: 'Réka a levélben: az apja hetek óta mondta, hogy valaki lop a kasszából.' },
         { id: 'ch5-s-attic', text: 'Réka az üzenetben: tavaly, az anyja halála után találta meg az apja másolatait a padláson.' },
-        { id: 'ch5-s-dinner', text: 'Réka a levélben: aznap este ő vitte le a vacsorát az apjának a klubba.' },
+        {
+          id: 'ch5-s-pasztor',
+          text: 'Pásztor László: háromnegyed tizenegy körül, amikor a stéghez ért, Pál kislánya épp hazaindult – a vacsoráját hozta neki.',
+        },
       ],
-      answerHash: '60987db46a271aefac25dadbd73fb078c9b4d35a20ffbcf279cb4913ceaf0061',
+      answerHash: 'd09d631e8adf7cdb2b76a2bbab1690d4c6babe3439c3bc467afb5cfb3563988e',
       conclusion: 'Réka nem volt táborban: aznap este ott járt a klubnál. Mit látott?',
       hints: [
-        'Réka két helyen is mesél a tűz estéjéről. Hasonlítsd össze, hol volt akkor.',
-        'Az egyik az üzenetekben van, a másik a levélben, amit Réka küldött.',
-        'Kösd össze a tábort a vacsorával: Réka nem lehetett egyszerre Balatonfüreden és a klubnál.',
+        'Réka azt mondja, hol volt a tűz estéjén. Valaki más is említette, ki járt aznap este a klubnál.',
+        'Pásztor László vallomását nézd meg a Jegyzetfüzetben: kit látott, amikor a stéghez ért?',
+        'Kösd össze Réka tábor-történetét Pásztor vallomásával: Pál kislánya aznap este a klubnál volt.',
       ],
     },
     {
