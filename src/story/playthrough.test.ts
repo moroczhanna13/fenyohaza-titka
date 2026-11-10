@@ -4,6 +4,7 @@ import {
   accusationAnswer,
   connectAnswer,
   isCorrectAnswer,
+  matchAnswer,
   routeAnswer,
   timelineAnswer,
 } from '../puzzles/answer'
@@ -37,6 +38,11 @@ const SOLUTIONS: Record<Id, string> = {
   'ch1-photo-place': 'Kikötő sétány 4.',
   'ch2-article-time': '23:40',
   'ch2-who-lied': connectAnswer('ch2-s-toth', 'ch2-s-log'),
+  'ch3-numbers': matchAnswer([
+    ['ch3-n-412', 'ch3-p-toth'],
+    ['ch3-n-518', 'ch3-p-pasztor'],
+    ['ch3-n-266', 'ch3-p-meszaros'],
+  ]),
   'ch3-car-owner': 'Mészáros Béla',
   'ch3-timeline': timelineAnswer(['ch3-t-ilona', 'ch3-t-pasztor', 'ch3-t-toth'], 'ch3-t-meszaros'),
   'ch4-ledger': 'ch4-r-advance',
