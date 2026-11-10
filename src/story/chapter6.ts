@@ -1,14 +1,14 @@
 import type { Chapter } from './types'
 
-/** 6. fejezet – A vád */
+/** 6. fejezet – A feljelentés */
 export const chapter6: Chapter = {
   id: 'ch6',
   number: 6,
-  title: 'A vád',
+  title: 'A feljelentés',
 
   intro: [
     'Minden darab megvan.',
-    'Réka holnap bemegy a rendőrségre. Előtte még egyszer végig kell menni mindenen – egyetlen gyenge pont, és Ilona kimagyarázza magát.',
+    'Réka tanúskodni fog. A feljelentést viszont neked kell megírnod a megyei rendőr-főkapitányságnak – pontról pontra, úgy, hogy Ilona ügyvédje se tudja szétszedni.',
   ],
 
   apps: [],
@@ -19,14 +19,14 @@ export const chapter6: Chapter = {
       contact: 'Kerekes Réka',
       thread: 'ch1-unknown',
       steps: [
+        { type: 'message', from: 'contact', text: 'Megírta már a feljelentést?' },
         {
           type: 'message',
           from: 'contact',
-          text: 'Mielőtt bemegyek, mondja el nekem az egészet, ahogy a rendőrségen is elmondaná.',
+          text: 'Minden állításhoz kell bizonyíték. Ha egy ponton is téved, Ilona ügyvédje szétszedi az egészet.',
         },
-        { type: 'message', from: 'contact', text: 'Ha egy ponton is téved, Ilona ügyvédje szétszedi az egészet.' },
         { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch6-accusation' } },
-        { type: 'message', from: 'contact', text: 'Köszönöm.' },
+        { type: 'message', from: 'contact', text: 'Elolvastam. Minden benne van.' },
         {
           type: 'message',
           from: 'contact',
@@ -37,7 +37,7 @@ export const chapter6: Chapter = {
           options: [
             {
               text: 'Gedeon is ezt akarta.',
-              replies: [{ type: 'message', from: 'contact', text: 'Tudom. Ezért magának hagyta a cédulát, nem nekem.' }],
+              replies: [{ type: 'message', from: 'contact', text: 'Tudom. Nem véletlenül magára hagyta a dobozt.' }],
             },
             {
               text: 'Mi lesz most?',
@@ -48,7 +48,7 @@ export const chapter6: Chapter = {
         {
           type: 'message',
           from: 'contact',
-          text: 'Holnap reggel bemegyek. Elviszem apa másolatait és Gedeon telefonját is – ha odaadja.',
+          text: 'Holnap reggel nyolckor a kapitányság előtt. Hozza a telefont és a dobozt. Én hozom apa másolatait, és elmondom, amit huszonöt éve kellett volna.',
         },
       ],
     },
@@ -60,8 +60,8 @@ export const chapter6: Chapter = {
     {
       id: 'ch6-accusation',
       kind: 'accusation',
-      title: 'A vád',
-      prompt: 'Válaszolj mind az öt kérdésre. Ha egy válasz nem áll meg, vissza kell nézned a hozzá tartozó bizonyítékokat.',
+      title: 'A feljelentés',
+      prompt: 'A feljelentés öt pontja. Mindegyiknél válaszd ki, mit állítasz. Ha egy pont nem áll meg, vissza kell nézned a hozzá tartozó bizonyítékokat.',
       questions: [
         {
           id: 'ch6-q-arsonist',
@@ -88,7 +88,7 @@ export const chapter6: Chapter = {
           options: [
             'A biztosítási pénzért.',
             'Mert Kerekes Pál el akarta bocsátani a könyvelőt.',
-            'Hogy eltűnjön a könyvelés: a június 27-i sorból 300 000 Ft hiányzott, és Pál rájött.',
+            'Hogy eltűnjenek a könyvek: Ilona évek óta lopott a kasszából (a június 27-i sorból is 300 000 Ft hiányzott), és Pál rájött.',
             'Bosszúból Tóth Ervin ellen.',
           ],
           answerHash: 'f6fa5d8fe5a208f6c6e55bb5f0e4bd201d6782f0eea040d3a52f79dd14338cad',
@@ -121,11 +121,11 @@ export const chapter6: Chapter = {
       ],
       answerHash: 'd2e479caccf0aa3ba5981da35a3780a1f0dd9e342b0d1bb140fbf834d2f428f7',
       conclusion:
-        'Vidor Ilona 2001 nyarán 300 000 forintot sikkasztott a klub kasszájából. Amikor Kerekes Pál rájött, a tűz éjszakáján két helyen felgyújtotta a klubházat, a könyvekkel együtt. Huszonöt évvel később, amikor Gedeon a nyomára bukkant, a patikában dupla erősségű gyógyszert adott neki.',
+        'Vidor Ilona három éven át, összesen mintegy 4,5 millió forintot sikkasztott a vitorlásklub kasszájából. Amikor Kerekes Pál rájött, és feljelentéssel fenyegette, a fesztivál éjszakáján el akarta tüntetni a könyveket: két helyen felgyújtotta a klubházat. Pál a csónakraktárban bent égett. Huszonöt évvel később, amikor Gedeon a nyomára bukkant, a patikában kétszeres erősségű vérnyomáscsökkentőt adott neki.',
       hints: [
-        'Minden kérdéshez van bizonyíték a Jegyzetfüzetben.',
+        'Minden ponthoz van bizonyíték a Jegyzetfüzetben, és a Névjegyekben is összegyűlt, mit tudsz az egyes szereplőkről.',
         'A tettes az, akinek az autója a klubnál állt, akinek a szignója a hamis soron van, és aki Gedeon gyógyszerét kiadta.',
-        'Vidor Ilona; két tűzfészek; a 300 000 Ft-os hamis sor; Mészáros Béla; dupla erősségű vérnyomáscsökkentő.',
+        'Vidor Ilona; két tűzfészek; az évekig tartó sikkasztás és a 300 000 Ft-os hamis sor; Mészáros Béla; kétszeres erősségű vérnyomáscsökkentő.',
       ],
     },
   ],
@@ -133,9 +133,9 @@ export const chapter6: Chapter = {
   evidence: [],
 
   outro: [
-    'Kerekes Réka másnap reggel bement a rendőrségre. Magával vitte az apja kasszakönyv-másolatait, a patika kiadási naplóját és Gedeon telefonját.',
-    'Vidor Ilonát egy héttel később őrizetbe vették. A Fenyő Patika azóta zárva.',
-    'A Kikötő sétány 4. kerítésére valaki egy szál virágot kötött. Mellette egy cédula, ismerős kézírással lemásolva: „Nem baleset volt.”',
+    'Másnap reggel ketten mentetek be a megyei rendőr-főkapitányságra. Te átadtad a feljelentést, Gedeon telefonját és a dobozt. Réka tanúvallomást tett, és elmondta, amit huszonöt évig titkolt.',
+    'Az ügyet újranyitották. Vidor Ilonát egy héttel később őrizetbe vették. A Fenyő Patika azóta zárva.',
+    'A Kikötő sétány 4. kerítésére valaki egy szál virágot kötött. Mellette egy cédula: „VII. 21. – NEM zárlat. Két tűz. Ki hazudik?” Alatta, más kézírással: „Most már tudjuk.”',
   ],
 
   completedWhen: {

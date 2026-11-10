@@ -15,8 +15,8 @@ export const chapter5: Chapter = {
   title: 'Réka',
 
   intro: [
-    'Az ismeretlen szám mögött végre egy ember áll.',
-    'Huszonöt éve vár erre a beszélgetésre. Kérdés, mindent elmond-e.',
+    'Az ismeretlen szám mögött Kerekes Réka áll, Kerekes Pál lánya.',
+    'Huszonöt éve hallgat valamiről. Kérdés, most mindent elmond-e.',
   ],
 
   apps: [],
@@ -27,22 +27,34 @@ export const chapter5: Chapter = {
       contact: 'Kerekes Réka',
       thread: 'ch1-unknown',
       steps: [
-        { type: 'message', from: 'contact', text: 'Kerekes Réka vagyok. Kerekes Pál lánya.' },
+        { type: 'message', from: 'contact', text: 'Igen. Kerekes Réka vagyok, Pál lánya.' },
         {
           type: 'message',
           from: 'contact',
-          text: 'Bocsásson meg, hogy eddig bujkáltam. Gedeon után nem mertem senkiben megbízni.',
+          text: 'Bocsásson meg, hogy bujkáltam. Gedeon meghalt, miután kérdezősködni kezdett. Nem tudtam, kiben bízhatok.',
         },
         {
           type: 'choice',
           options: [
             {
               text: 'Miért nem szólt huszonöt évig?',
-              replies: [{ type: 'message', from: 'contact', text: 'Mert senki nem kérdezett. És mert féltem.' }],
+              replies: [
+                {
+                  type: 'message',
+                  from: 'contact',
+                  text: 'Tizennégy éves voltam, és mindenki azt mondta, zárlat. Mit mondtam volna?',
+                },
+              ],
             },
             {
-              text: 'Sejtettem, hogy köze van Pálhoz.',
-              replies: [{ type: 'message', from: 'contact', text: 'Gedeon is rájött. Már az első héten.' }],
+              text: 'És most bennem megbízik?',
+              replies: [
+                {
+                  type: 'message',
+                  from: 'contact',
+                  text: 'Nem egészen. De maga ott folytatta, ahol Gedeon abbahagyta. Ez több, mint amit bárki más tett.',
+                },
+              ],
             },
           ],
         },
@@ -54,8 +66,9 @@ export const chapter5: Chapter = {
         {
           type: 'message',
           from: 'contact',
-          text: 'Tavaly anyám padlásán találtam meg apa másolatait. Akkor írtam Gedeonnak.',
+          text: 'Tavaly meghalt anyám. A ház kiürítésekor találtam meg a padláson apa másolatait. Nem értettem belőlük semmit, de tudtam, hogy apa nem véletlenül hordta haza őket.',
         },
+        { type: 'message', from: 'contact', text: 'Gedeonról tudtam, hogy a régi ügyeket bújja. Neki írtam.' },
         { type: 'message', from: 'contact', text: 'Írtam magának egy levelet apáról. Hogy tudja, kiért csinálja ezt.' },
       ],
     },
@@ -79,32 +92,57 @@ export const chapter5: Chapter = {
             },
           ],
         },
-        { type: 'message', from: 'contact', text: 'Igen. Hazudtam. Tizennégy éves voltam.' },
+        { type: 'message', from: 'contact', text: 'Igen. Hazudtam.' },
         {
           type: 'message',
           from: 'contact',
-          text: 'Fél tizenegy után vittem le a vacsorát. A klub előtt egy zöld Škoda állt. Ilonáé – mindenki ismerte azt az autót.',
+          text: 'Táborban voltam, de aznap délután megszöktem. Stoppal jöttem haza, meg akartam lepni apát a fesztiválon.',
         },
         {
           type: 'message',
           from: 'contact',
-          text: 'Apa azt mondta, menjek haza, mert még dolga van a könyvelővel.',
+          text: 'Fél tizenegy után vittem le neki a vacsorát. A klub előtt egy zöld Škoda állt. Ilonáé – mindenki ismerte azt az autót.',
+        },
+        {
+          type: 'message',
+          from: 'contact',
+          text: 'Apa azt mondta, menjek haza, mert még dolga van a könyvelővel. Ideges volt. Azt hittem, a szökés miatt haragszik rám.',
         },
         { type: 'message', from: 'contact', text: 'Mire hazaértem és kinéztem az ablakon, már égett.' },
-        { type: 'message', from: 'contact', text: 'Huszonöt évig azt hittem, ha megszólalok, velem is ez lesz.' },
         {
           type: 'message',
           from: 'contact',
-          text: 'Van még valami. Gedeon a halála előtti este hangüzenetet hagyott nekem. Továbbítom.',
+          text: 'Anyám másnap hajnalban visszavitt a táborba, és megtiltotta, hogy bárkinek elmondjam, hogy otthon voltam. Félt.',
+        },
+        { type: 'message', from: 'contact', text: 'Én meg huszonöt évig azt hittem, ha ott maradok vele, ma is élne.' },
+        {
+          type: 'choice',
+          options: [
+            {
+              text: 'Nem a maga hibája volt.',
+              replies: [{ type: 'message', from: 'contact', text: 'Tudom. Mostanában kezdem elhinni.' }],
+            },
+            {
+              text: 'Ilona azt mondta az újságnak, fél tizenegykor bezárta az irodát.',
+              replies: [
+                {
+                  type: 'message',
+                  from: 'contact',
+                  text: 'Akkor ezt nem tudtam. Gedeon mutatta meg a cikket. Azóta nem alszom.',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'message',
+          from: 'contact',
+          text: 'Van még valami. Gedeon a halála előtti este hangüzenetet hagyott nekem. Nem vettem fel a telefont. Továbbítom.',
           audio: 'ch5-voice-gedeon',
         },
-        {
-          type: 'message',
-          from: 'contact',
-          text: 'Alig lehet érteni, csak recsegés. De a háttérben kopog valamit. Gedeon mindig kopogott, ha gondolkodott. Maga hallja, mit?',
-        },
+        { type: 'message', from: 'contact', text: 'Alig lehet érteni. Én csak recsegést hallok.' },
         { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch5-morse' } },
-        { type: 'message', from: 'player', text: 'PATIKA. Morzejelekkel kopogta.' },
+        { type: 'message', from: 'player', text: 'A háttérben kopog. Morzejelek: P-A-T-I-K-A.' },
         { type: 'message', from: 'contact', text: 'A patika.' },
         {
           type: 'message',
@@ -114,7 +152,12 @@ export const chapter5: Chapter = {
         {
           type: 'message',
           from: 'contact',
-          text: 'Most már minden megvan. Ha maga is biztos benne, holnap bemegyek a rendőrségre.',
+          text: 'Ilona most is minden reggel kinyitja a patikát, mintha mi sem történt volna.',
+        },
+        {
+          type: 'message',
+          from: 'contact',
+          text: 'Ha bemegyünk a rendőrségre, elmondom, amit huszonöt éve nem mertem. De a feljelentést magának kell megírnia. Maga rakta össze.',
         },
       ],
     },
@@ -178,7 +221,7 @@ export const chapter5: Chapter = {
           text: 'Réka az üzenetben: azon a nyáron Balatonfüreden volt táborban, csak másnap tudta meg, mi történt.',
         },
         { id: 'ch5-s-thief', text: 'Réka a levélben: az apja hetek óta mondta, hogy valaki lop a kasszából.' },
-        { id: 'ch5-s-attic', text: 'Réka az üzenetben: tavaly találta meg az apja másolatait az anyja padlásán.' },
+        { id: 'ch5-s-attic', text: 'Réka az üzenetben: tavaly, az anyja halála után találta meg az apja másolatait a padláson.' },
         { id: 'ch5-s-dinner', text: 'Réka a levélben: aznap este ő vitte le a vacsorát az apjának a klubba.' },
       ],
       answerHash: '60987db46a271aefac25dadbd73fb078c9b4d35a20ffbcf279cb4913ceaf0061',
@@ -205,17 +248,10 @@ export const chapter5: Chapter = {
 
   evidence: [
     {
-      id: 'ch5-reka-identity',
-      title: 'Az ismeretlen üzenő',
-      description: 'Kerekes Réka, Kerekes Pál lánya. Ő írt Gedeonnak márciusban, és ő küldte az apja kasszakönyv-másolatát.',
-      source: { type: 'conversation', conversation: 'ch5-reka' },
-      foundWhen: { type: 'conversationFinished', conversation: 'ch5-reka' },
-    },
-    {
       id: 'ch5-reka-witness',
       title: 'Réka, a szemtanú',
       description:
-        'Réka 14 évesen fél tizenegy után a klubnál járt. A bejárat előtt Vidor Ilona zöld Škodája állt; az apja azt mondta, még dolga van a könyvelővel. Ilona azt állította, fél tizenegykor bezárta az irodát és elment.',
+        'Réka 14 évesen megszökött a táborból, és fél tizenegy után a klubnál járt. A bejárat előtt Vidor Ilona zöld Škodája állt; az apja azt mondta, még dolga van a könyvelővel. Ilona azt állította, fél tizenegykor bezárta az irodát.',
       source: { type: 'conversation', conversation: 'ch5-reka-2' },
       foundWhen: { type: 'conversationFinished', conversation: 'ch5-reka-2' },
     },
@@ -228,9 +264,36 @@ export const chapter5: Chapter = {
     },
   ],
 
+  characterFacts: [
+    {
+      id: 'ch5-f-reka-camp',
+      character: 'reka',
+      text: 'A tűz estéjén megszökött a balatonfüredi táborból. Fél tizenegy után levitte a vacsorát az apjának, és a klub előtt Ilona zöld Škodáját látta. Huszonöt évig titkolta.',
+      knownWhen: { type: 'conversationFinished', conversation: 'ch5-reka-2' },
+    },
+    {
+      id: 'ch5-f-ilona-car',
+      character: 'ilona',
+      text: 'A tűz estéjén fél tizenegy után a zöld Škodája (HKZ-907) a klub bejárata előtt állt – pedig azt mondta, akkor bezárt és elment.',
+      knownWhen: { type: 'conversationFinished', conversation: 'ch5-reka-2' },
+    },
+    {
+      id: 'ch5-f-pal-bookkeeper',
+      character: 'pal',
+      text: 'Fél tizenegy után hazaküldte Rékát, mert „még dolga volt a könyvelővel”.',
+      knownWhen: { type: 'conversationFinished', conversation: 'ch5-reka-2' },
+    },
+    {
+      id: 'ch5-f-gedeon-morse',
+      character: 'gedeon',
+      text: 'A halála előtti este hangüzenetet hagyott Rékának; a háttérben morzejelekkel kopogta: PATIKA.',
+      knownWhen: { type: 'puzzleSolved', puzzle: 'ch5-morse' },
+    },
+  ],
+
   outro: [
-    'Egy tizennégy éves lány, aki látta a zöld autót. Egy kasszakönyv-másolat, egy kiadási napló, és egy kopogás egy recsegő felvételen.',
-    'Minden darab megvan. Már csak ki kell mondani.',
+    'Egy tizennégy éves lány, aki megszökött a táborból, és látta a zöld autót. Egy kasszakönyv-másolat, egy kiadási napló, és egy kopogás egy recsegő felvételen.',
+    'Minden darab megvan. Már csak le kell írni.',
   ],
 
   completedWhen: { type: 'conversationFinished', conversation: 'ch5-reka-2' },

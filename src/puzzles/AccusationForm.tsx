@@ -62,7 +62,7 @@ export default function AccusationForm({ puzzle, game, onSolved }: Readonly<Accu
             setAnswers({})
           }}
         >
-          Újra a vádhoz
+          Vissza a feljelentéshez
         </button>
       </div>
     )
@@ -90,7 +90,7 @@ export default function AccusationForm({ puzzle, game, onSolved }: Readonly<Accu
         </fieldset>
       ))}
       <button type="button" className={styles.primary} disabled={!complete || checking} onClick={submit}>
-        Vád benyújtása
+        Feljelentés elküldése
       </button>
     </div>
   )

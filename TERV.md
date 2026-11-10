@@ -80,7 +80,7 @@ Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.m
 - [x] 2. fejezet: Réka csak anyagot ad, új archívumcikkek (szám, gyászjelentés)
 - [x] 3. fejezet: számok párosítása, kétkörös kihallgatások, Szomszédok-oldalak, Mészáros új indoka
 - [x] 4. fejezet: margójegyzet, gyógyszer-ellentmondás, patika nyilvános oldal és új belépés, Réka leleplezése
-- [ ] 5–6. fejezet: Réka új háttere, feljelentés-keret, új utóhang
+- [x] 5–6. fejezet: Réka új háttere, feljelentés-keret, új utóhang
 - [ ] Kisbusz-mellékügy Szomszédok-oldala az új közösségi oldaltípusra
 - [ ] Mentésverzió emelése, tesztek, teljes végigjátszás és idővonal-ellenőrzés
 - [ ] Képek: raszteres, fotószerű galériaképek (a 2001-es fesztiválfotó elsőként)
