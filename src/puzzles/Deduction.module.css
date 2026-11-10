@@ -205,6 +205,15 @@
   vertical-align: bottom;
 }
 
+.ledgerNote {
+  margin: 0;
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  font-family: var(--font-hand);
+  font-size: var(--font-size-sm);
+  color: #1d3f8a;
+  transform: rotate(-1deg);
+}
+
 .ledgerTable tr[data-marked='true'] td {
   background: rgb(229 103 90 / 0.18);
 }

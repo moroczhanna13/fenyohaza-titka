@@ -170,6 +170,8 @@ export interface LedgerPuzzle extends PuzzleBase {
   kind: 'ledger'
   /** Heading above the table, e.g. what the document is. */
   caption: string
+  /** Handwritten margin note shown under the table. */
+  note?: string
   rows: LedgerRow[]
 }
 

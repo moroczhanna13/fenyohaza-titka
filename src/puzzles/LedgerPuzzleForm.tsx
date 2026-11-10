@@ -81,6 +81,7 @@ export default function LedgerPuzzleForm({ puzzle, onSolved }: Readonly<LedgerPu
               ))}
             </tbody>
           </table>
+          {puzzle.note && <p className={styles.ledgerNote}>{puzzle.note}</p>}
         </div>
       </fieldset>
       <button type="button" className={styles.primary} disabled={!marked || checking} onClick={check}>
