@@ -26,7 +26,6 @@ import { getProgress } from '../state/gameState'
 import { browserStorage, loadActiveCase, loadGame, saveActiveCase } from '../state/storage'
 import {
   availableConversations,
-  availableEmails,
   currentChapter,
   foundEvidence,
   isChapterComplete,
@@ -34,6 +33,7 @@ import {
   nextChapter,
   threadOf,
   unlockedApps,
+  unreadInboxCount,
 } from '../state/selectors'
 import { useConversationEngine } from '../state/useConversationEngine'
 import { useGameState } from '../state/useGameState'
@@ -160,7 +160,7 @@ function CaseGame({ caseId, onSwitchCase }: Readonly<CaseGameProps>) {
     return () => window.clearTimeout(timer)
   }, [complete])
   const unseenEvidence = evidence.filter((e) => !game.seenEvidence.includes(e.id)).length
-  const unreadEmails = availableEmails(game).filter((e) => !game.readEmails.includes(e.id)).length
+  const unreadEmails = unreadInboxCount(game)
   const unreadMessages = availableConversations(game).reduce(
     (sum, c) => sum + unreadCount(c, getProgress(game, c.id)),
     0,

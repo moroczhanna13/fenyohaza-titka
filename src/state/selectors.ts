@@ -92,6 +92,11 @@ export function availableEmails(state: GameState): Email[] {
     .filter((email) => isMet(state, email.availableAfter))
 }
 
+/** Unread emails in the inbox (sent mail and spam do not count). */
+export function unreadInboxCount(state: GameState): number {
+  return availableEmails(state).filter((e) => (e.folder ?? 'inbox') === 'inbox' && !state.readEmails.includes(e.id)).length
+}
+
 export function isChapterComplete(state: GameState): boolean {
   const { completedWhen } = currentChapter(state)
   return !!completedWhen && isMet(state, completedWhen)

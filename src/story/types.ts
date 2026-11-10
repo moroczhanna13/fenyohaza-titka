@@ -247,9 +247,13 @@ export interface Evidence {
 
 // ---------- E-mail ----------
 
+export type EmailFolder = 'inbox' | 'sent' | 'spam'
+
 export interface Email {
   id: Id
-  /** Sender as shown in the inbox. */
+  /** Inbox by default. Only the inbox counts towards the unread badge. */
+  folder?: EmailFolder
+  /** Sender as shown in the inbox; for sent mail, the recipient. */
   from: string
   subject: string
   /** Display date, e.g. "szept. 30.". The inbox lists emails in data order. */
