@@ -83,7 +83,8 @@ Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.m
 - [x] 5–6. fejezet: Réka új háttere, feljelentés-keret, új utóhang
 - [x] Kisbusz-mellékügy Szomszédok-oldala az új közösségi oldaltípusra
 - [x] Mentésverzió emelése, tesztek, teljes végigjátszás és idővonal-ellenőrzés
-- [ ] Képek: raszteres, fotószerű galériaképek (a 2001-es fesztiválfotó elsőként)
+- [x] Képek: raszteres, fotószerű galériaképek a főszálban (Wikimedia Commons + Pillow, licencek: `public/images/LICENSES.md`)
+- [ ] Képek: a mellékügyek fotói (óra, profilkép, lakodalmi kép) is raszteresen
 
 ## Ötletek később
 

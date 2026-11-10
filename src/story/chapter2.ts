@@ -103,8 +103,8 @@ export const chapter2: Chapter = {
   photos: [
     {
       id: 'ch2-photo-firelog',
-      src: 'images/ch2/firelog.svg',
-      alt: 'Kézzel vezetett tűzoltósági eseménynapló egy oldala, 2001. július 21., szombat. 21:40 – gyakorlat vége. 23:10 – telefonos bejelentés: ég a Vitorlásklub, Kikötő sétány 4. (piros karikával bekarikázva). 23:14 – kivonulás két géppel. 23:21 – helyszín, tűz két ponton: iroda és csónakraktár. 01:35 – eloltva, egy halott, a gondnok, a raktárban.',
+      src: 'images/ch2/firelog.webp',
+      alt: 'Kézzel vezetett tűzoltósági eseménynapló egy oldala, 2001. július 21., szombat. 21:40 – gyakorlat vége. 23:10 – telefonos bejelentés: ég a Vitorlásklub, Kikötő sétány 4. (az időpont piros karikával bekarikázva). 23:14 – kivonulás két géppel. 23:21 – helyszín, tűz két ponton: iroda és csónakraktár. 01:35 – eloltva, egy halott, a gondnok, a raktárban.',
       info: { takenAt: '2026-09-05T11:20', place: 'Fenyőháza, Tűzoltószertár' },
     },
   ],

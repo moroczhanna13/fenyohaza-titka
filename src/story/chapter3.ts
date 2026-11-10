@@ -420,8 +420,8 @@ export const chapter3: Chapter = {
   photos: [
     {
       id: 'ch3-photo-festival',
-      src: 'images/ch3/festival-night.svg',
-      alt: 'Éjszakai fesztiválfotó, a sarokban narancssárga dátumbélyegző: ’01 7 21 23:05. Előtérben a tömeg sziluettje, balra a kivilágított színpad, az égen tűzijáték. Jobbra, a háttérben a vitorlásklub, az irodaablakban ég a villany. A klubház mellett egy piros autó parkol, a rendszáma nagyítva olvasható: GBM-418.',
+      src: 'images/ch3/festival-night.webp',
+      alt: 'Éjszakai, vakus fénykép, a jobb alsó sarokban narancssárga dátumbélyegző: ’01 7 21 23:05. Előtérben egy piros Opel Astra hátulról, a rendszáma nagyítva olvasható: GBM-418. Mögötte a sötét klubház falán egyetlen ablakban ég a villany, fölötte a tűzijáték színes fénye dereng.',
       caption: 'Mentve a Fenyőházi Szomszédok „Régi fenyőházi fesztiválok” csoportjából',
       info: { takenAt: '2001-07-21T23:05' },
     },
@@ -464,10 +464,10 @@ export const chapter3: Chapter = {
         {
           author: 'Bencze Margit',
           time: '2026. július 21.',
-          text: 'Ma huszonöt éve volt a régi klub utolsó fesztiválja. A fiam régi gépén találtam ezt a képet, aznap este készült, pár perccel tizenegy után. Ki emlékszik még?',
+          text: 'Ma huszonöt éve volt a régi klub utolsó fesztiválja. A fiam régi gépén találtam ezt a képet, aznap este készült a klubnál, pár perccel tizenegy után – a tűzijátékot akarta lefényképezni, ez lett belőle. Ki emlékszik még?',
           image: {
-            src: 'images/ch3/festival-night.svg',
-            alt: 'Éjszakai fesztiválfotó 2001. július 21-ről, 23:05-ös dátumbélyegzővel: tömeg, kivilágított színpad, tűzijáték, a háttérben a vitorlásklub egy piros autóval.',
+            src: 'images/ch3/festival-night.webp',
+            alt: 'Éjszakai, vakus fénykép, a jobb alsó sarokban narancssárga dátumbélyegző: ’01 7 21 23:05. Előtérben egy piros Opel Astra hátulról, a rendszáma nagyítva olvasható: GBM-418. Mögötte a sötét klubház falán egyetlen ablakban ég a villany, fölötte a tűzijáték színes fénye dereng.',
           },
           likes: 64,
           comments: [
