@@ -454,7 +454,7 @@ export interface Note {
   availableAfter?: Condition
 }
 
-/** Someone in the story, listed in the Contacts app once known. */
+/** Someone in the story, listed in the notebook's people tab once known. */
 export interface Character {
   id: Id
   name: string
@@ -465,14 +465,14 @@ export interface Character {
   knownWhen?: Condition
 }
 
-/** Something the player has found out about a character; it appears on the contact card. */
+/** Something the player has found out about a character; it appears in the notebook's people tab. */
 export interface CharacterFact {
   id: Id
   /** A character of this chapter or an earlier one. */
   character: Id
   text: string
   knownWhen?: Condition
-  /** Once this fact is known, the contact card shows this name (e.g. when an unknown number gets a name). */
+  /** Once this fact is known, the character is shown with this name (e.g. when an unknown number gets a name). */
   rename?: string
 }
 
@@ -512,7 +512,7 @@ export interface Chapter {
   evidence: Evidence[]
   /** Pages of Gedeon's notes, shown in the Notebook. */
   notes?: Note[]
-  /** People introduced in this chapter (Contacts app). */
+  /** People introduced in this chapter (notebook, people tab). */
   characters?: Character[]
   /** What can be found out about the people, in this chapter. */
   characterFacts?: CharacterFact[]

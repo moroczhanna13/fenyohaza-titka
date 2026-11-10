@@ -156,7 +156,7 @@ describe('automatic playthrough', () => {
       state = gameReducer(state, { type: 'advanceChapter' })
     }
 
-    // By the end, every person of the case is on a contact card with something found out about them.
+    // By the end, every person of the case is in the notebook with something found out about them.
     for (const { name, facts } of knownCharacters(state)) {
       expect(facts.length, name).toBeGreaterThan(0)
       expect(name).not.toBe('Ismeretlen szám')

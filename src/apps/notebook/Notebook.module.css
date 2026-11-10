@@ -108,3 +108,79 @@
   line-height: 24px;
   white-space: pre-line;
 }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) 0;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: none;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.tab[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-weight: 600;
+}
+
+.tabBadge {
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--color-danger-strong);
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* People */
+.person {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.personSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+}
+
+.personName {
+  font-weight: 700;
+}
+
+.personRole {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.facts {
+  margin: 0;
+  padding: 0 var(--space-4) var(--space-3) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.person .empty {
+  padding: 0 var(--space-4) var(--space-3);
+}

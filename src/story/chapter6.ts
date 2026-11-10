@@ -123,7 +123,7 @@ export const chapter6: Chapter = {
       conclusion:
         'Vidor Ilona három éven át, összesen mintegy 4,5 millió forintot sikkasztott a vitorlásklub kasszájából. Amikor Kerekes Pál rájött, és feljelentéssel fenyegette, a fesztivál éjszakáján el akarta tüntetni a könyveket: két helyen felgyújtotta a klubházat. Pál a csónakraktárban bent égett. Huszonöt évvel később, amikor Gedeon a nyomára bukkant, a patikában kétszeres erősségű vérnyomáscsökkentőt adott neki.',
       hints: [
-        'Minden ponthoz van bizonyíték a Jegyzetfüzetben, és a Névjegyekben is összegyűlt, mit tudsz az egyes szereplőkről.',
+        'Minden ponthoz van bizonyíték a Jegyzetfüzetben; a Szereplők fülön az is összegyűlt, mit tudsz az egyes emberekről.',
         'A tettes az, akinek az autója a klubnál állt, akinek a szignója a hamis soron van, és aki Gedeon gyógyszerét kiadta.',
         'Vidor Ilona; két tűzfészek; az évekig tartó sikkasztás és a 300 000 Ft-os hamis sor; Mészáros Béla; kétszeres erősségű vérnyomáscsökkentő.',
       ],

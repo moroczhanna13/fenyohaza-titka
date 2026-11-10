@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-export type AppId = 'messages' | 'email' | 'gallery' | 'browser' | 'notebook' | 'deductions' | 'contacts'
+export type AppId = 'messages' | 'email' | 'gallery' | 'browser' | 'notebook' | 'deductions'
 
 export interface AppInfo {
   id: AppId
@@ -75,17 +75,6 @@ export const APPS: AppInfo[] = [
       <svg {...iconProps}>
         <path d="M6 3h12v18H6z" />
         <path d="M9 8h6M9 12h6M9 16h4" />
-      </svg>
-    ),
-  },
-  {
-    id: 'contacts',
-    label: 'Névjegyek',
-    color: '#4f7a8f',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="8" r="3.5" />
-        <path d="M5 20a7 7 0 0 1 14 0" />
       </svg>
     ),
   },

@@ -3,7 +3,6 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { CHAPTERS } from '../story/chapters'
 import type { LoginPage, SocialHomePage, SocialPage, WebPage } from '../story/types'
 import { createInitialState, gameReducer } from '../state/gameState'
-import ContactsApp from './contacts/ContactsApp'
 import EmailApp from './email/EmailApp'
 import NotebookApp from './notebook/NotebookApp'
 import LoginPageView from './browser/LoginPageView'
@@ -16,15 +15,9 @@ const pages: WebPage[] = CHAPTERS.flatMap((c) => c.pages ?? [])
 const page = (id: string) => pages.find((p) => p.id === id)!
 
 describe('new screens render', () => {
-  it('lists the known people in the Contacts app', () => {
-    const html = renderToStaticMarkup(<ContactsApp game={unlocked} onClose={noop} />)
-    expect(html).toContain('Berényi Gedeon')
-    expect(html).toContain('Ismeretlen szám')
-  })
-
-  it("shows Gedeon's notes in the notebook", () => {
+  it("splits the notebook into evidence, people, Gedeon's notes and own notes", () => {
     const html = renderToStaticMarkup(<NotebookApp game={unlocked} dispatch={noop} onClose={noop} />)
-    expect(html).toContain('Gedeon jegyzetei')
+    for (const tab of ['Bizonyítékok', 'Szereplők', 'Gedeon jegyzetei', 'Saját']) expect(html).toContain(tab)
   })
 
   it('shows mail folders, starting with the inbox', () => {

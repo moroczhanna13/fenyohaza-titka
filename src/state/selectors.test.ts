@@ -38,7 +38,7 @@ describe('selectors', () => {
   it('unlocks the chapter 1 apps with the phone', () => {
     expect(unlockedApps(createInitialState())).toEqual([])
     const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
-    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery', 'notebook', 'email', 'contacts'])
+    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery', 'notebook', 'email'])
   })
 
   it('lists gallery photos newest first', () => {

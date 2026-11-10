@@ -13,7 +13,6 @@ import SoundToggle from './SoundToggle'
 import { isMuted, playMessageSound, playSuccessSound, setMuted, startAmbience } from './sound'
 import { APPS, type AppId } from '../apps/registry'
 import BrowserApp from '../apps/browser/BrowserApp'
-import ContactsApp from '../apps/contacts/ContactsApp'
 import DeductionsApp from '../apps/deductions/DeductionsApp'
 import EmailApp from '../apps/email/EmailApp'
 import GalleryApp from '../apps/gallery/GalleryApp'
@@ -272,8 +271,6 @@ function CaseGame({ caseId, onSwitchCase }: Readonly<CaseGameProps>) {
     screen = <BrowserApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp === 'email') {
     screen = <EmailApp game={game} dispatch={dispatch} onClose={goHome} />
-  } else if (openApp === 'contacts') {
-    screen = <ContactsApp game={game} onClose={goHome} />
   } else if (openApp === 'notebook') {
     screen = <NotebookApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp) {
