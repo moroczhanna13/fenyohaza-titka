@@ -13,6 +13,7 @@ import SoundToggle from './SoundToggle'
 import { isMuted, playMessageSound, playSuccessSound, setMuted, startAmbience } from './sound'
 import { APPS, type AppId } from '../apps/registry'
 import BrowserApp from '../apps/browser/BrowserApp'
+import ContactsApp from '../apps/contacts/ContactsApp'
 import DeductionsApp from '../apps/deductions/DeductionsApp'
 import EmailApp from '../apps/email/EmailApp'
 import GalleryApp from '../apps/gallery/GalleryApp'
@@ -34,6 +35,7 @@ import {
   threadOf,
   unlockedApps,
   unreadInboxCount,
+  unseenNotebookIds,
 } from '../state/selectors'
 import { useConversationEngine } from '../state/useConversationEngine'
 import { useGameState } from '../state/useGameState'
@@ -159,7 +161,7 @@ function CaseGame({ caseId, onSwitchCase }: Readonly<CaseGameProps>) {
     const timer = window.setTimeout(() => setEndShown(true), END_DELAY_MS)
     return () => window.clearTimeout(timer)
   }, [complete])
-  const unseenEvidence = evidence.filter((e) => !game.seenEvidence.includes(e.id)).length
+  const unseenNotebook = unseenNotebookIds(game).length
   const unreadEmails = unreadInboxCount(game)
   const unreadMessages = availableConversations(game).reduce(
     (sum, c) => sum + unreadCount(c, getProgress(game, c.id)),
@@ -270,6 +272,8 @@ function CaseGame({ caseId, onSwitchCase }: Readonly<CaseGameProps>) {
     screen = <BrowserApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp === 'email') {
     screen = <EmailApp game={game} dispatch={dispatch} onClose={goHome} />
+  } else if (openApp === 'contacts') {
+    screen = <ContactsApp game={game} onClose={goHome} />
   } else if (openApp === 'notebook') {
     screen = <NotebookApp game={game} dispatch={dispatch} onClose={goHome} />
   } else if (openApp) {
@@ -279,7 +283,7 @@ function CaseGame({ caseId, onSwitchCase }: Readonly<CaseGameProps>) {
     screen = (
       <HomeScreen
         unlockedApps={unlockedApps(game)}
-        badges={{ messages: unreadMessages, notebook: unseenEvidence, email: unreadEmails }}
+        badges={{ messages: unreadMessages, notebook: unseenNotebook, email: unreadEmails }}
         onOpenApp={setOpenApp}
         onOpenCases={() => setCasesOpen(true)}
         onNewGame={() => {

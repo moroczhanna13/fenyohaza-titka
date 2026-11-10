@@ -1,4 +1,4 @@
-import { findConversation } from './chapters'
+import { findCharacter, findConversation } from './chapters'
 import type { Chapter, Condition, ConversationStep, EvidenceSource } from './types'
 
 /**
@@ -28,6 +28,9 @@ export function validateChapter(chapter: Chapter): string[] {
     ...chapter.photos,
     ...chapter.puzzles,
     ...chapter.evidence,
+    ...(chapter.notes ?? []),
+    ...(chapter.characters ?? []),
+    ...(chapter.characterFacts ?? []),
     ...[...pages].map((id) => ({ id })),
   ].map((item) => item.id)
   for (const id of allIds) {
@@ -125,6 +128,12 @@ export function validateChapter(chapter: Chapter): string[] {
   for (const e of chapter.evidence) {
     checkCondition(e.foundWhen, `evidence ${e.id}`)
     checkSource(e.source, `evidence ${e.id}`)
+  }
+  chapter.notes?.forEach((n) => checkCondition(n.availableAfter, `note ${n.id}`))
+  chapter.characters?.forEach((c) => checkCondition(c.knownWhen, `character ${c.id}`))
+  for (const f of chapter.characterFacts ?? []) {
+    checkCondition(f.knownWhen, `character fact ${f.id}`)
+    if (!findCharacter(f.character)) errors.push(`character fact ${f.id}: unknown character "${f.character}"`)
   }
   checkCondition(chapter.completedWhen, 'completedWhen')
   if (chapter.lock) checkCondition({ type: 'puzzleSolved', puzzle: chapter.lock.puzzle }, 'lock')

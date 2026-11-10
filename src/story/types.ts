@@ -438,6 +438,42 @@ export interface BoxItem {
   blocks: DocumentBlock[]
 }
 
+// ---------- Gedeon's notes and the people of the story ----------
+
+/**
+ * A page of Gedeon's own notes, shown in the Notebook. Short and fragmentary:
+ * it raises questions and points somewhere, it does not give answers.
+ */
+export interface Note {
+  id: Id
+  /** Display date, e.g. "szept. 5." */
+  date?: string
+  text: string
+  availableAfter?: Condition
+}
+
+/** Someone in the story, listed in the Contacts app once known. */
+export interface Character {
+  id: Id
+  name: string
+  /** Role in 2001, e.g. "a klub könyvelője". */
+  roleThen?: string
+  /** Role today, e.g. "patikus, Fenyő Patika". */
+  roleNow?: string
+  knownWhen?: Condition
+}
+
+/** Something the player has found out about a character; it appears on the contact card. */
+export interface CharacterFact {
+  id: Id
+  /** A character of this chapter or an earlier one. */
+  character: Id
+  text: string
+  knownWhen?: Condition
+  /** Once this fact is known, the contact card shows this name (e.g. when an unknown number gets a name). */
+  rename?: string
+}
+
 // ---------- Chapter ----------
 
 export interface PhoneLock {
@@ -472,6 +508,12 @@ export interface Chapter {
   photos: Photo[]
   puzzles: Puzzle[]
   evidence: Evidence[]
+  /** Pages of Gedeon's notes, shown in the Notebook. */
+  notes?: Note[]
+  /** People introduced in this chapter (Contacts app). */
+  characters?: Character[]
+  /** What can be found out about the people, in this chapter. */
+  characterFacts?: CharacterFact[]
   /** The chapter is complete when this is met. Omitted while the chapter's content is unfinished. */
   completedWhen?: Condition
   /** Paragraphs shown on the chapter's closing screen. */

@@ -3,7 +3,7 @@ import AppScreen from '../../app/AppScreen'
 import { findConversation, findPuzzle } from '../../story/chapters'
 import type { EvidenceSource } from '../../story/types'
 import type { GameAction, GameState } from '../../state/gameState'
-import { foundEvidence } from '../../state/selectors'
+import { availableNotes, foundEvidence, unseenNotebookIds } from '../../state/selectors'
 import styles from './Notebook.module.css'
 
 function sourceLabel(source: EvidenceSource | undefined): string | null {
@@ -28,7 +28,8 @@ interface NotebookAppProps {
 export default function NotebookApp({ game, dispatch, onClose }: Readonly<NotebookAppProps>) {
   const notesId = useId()
   const evidence = foundEvidence(game)
-  const unseen = evidence.filter((e) => !game.seenEvidence.includes(e.id)).map((e) => e.id)
+  const notes = availableNotes(game)
+  const unseen = unseenNotebookIds(game)
   // Remember which items were new when the notebook opened, so the marker stays visible until it closes.
   const [newIds] = useState(unseen)
   const unseenKey = unseen.join()
@@ -39,6 +40,26 @@ export default function NotebookApp({ game, dispatch, onClose }: Readonly<Notebo
 
   return (
     <AppScreen title="Jegyzetfüzet" onBack={onClose} backLabel="Vissza a kezdőképernyőre">
+      {notes.length > 0 && (
+        <section className={styles.section} aria-labelledby="gedeon-notes-title">
+          <h2 id="gedeon-notes-title" className={styles.heading}>
+            Gedeon jegyzetei
+          </h2>
+          <ul className={styles.gedeonNotes}>
+            {notes.map((note) => (
+              <li key={note.id} className={styles.gedeonNote}>
+                {(note.date || newIds.includes(note.id)) && (
+                  <p className={styles.noteDate}>
+                    {note.date}
+                    {newIds.includes(note.id) && <span className={styles.new}>Új</span>}
+                  </p>
+                )}
+                <p className={styles.noteText}>{note.text}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section className={styles.section} aria-labelledby="evidence-title">
         <h2 id="evidence-title" className={styles.heading}>
           Bizonyítékok

@@ -72,3 +72,39 @@
   line-height: 1.6;
   resize: vertical;
 }
+
+/* Gedeon's notes: torn notebook pages in his handwriting. */
+.gedeonNotes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.gedeonNote {
+  padding: var(--space-3) var(--space-4);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(transparent 0 23px, rgb(58 90 140 / 0.25) 23px 24px),
+    #f3ecd8;
+  color: #2a2418;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+}
+
+.noteDate {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-1);
+  font-size: 0.75rem;
+  color: #6b5a3a;
+}
+
+.noteText {
+  margin: 0;
+  font-family: var(--font-hand);
+  line-height: 24px;
+  white-space: pre-line;
+}

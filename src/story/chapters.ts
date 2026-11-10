@@ -6,7 +6,7 @@ import { chapter5 } from './chapter5'
 import { chapter6 } from './chapter6'
 import { auctionCase } from './auction'
 import { minibusCase } from './minibus'
-import type { Chapter, Conversation, Id, Photo, Puzzle, StoryCase, VoiceMessage } from './types'
+import type { Chapter, Character, Conversation, Id, Photo, Puzzle, StoryCase, VoiceMessage } from './types'
 
 export const GAME_TITLE = 'Fenyőháza titka'
 
@@ -82,4 +82,10 @@ const voiceById = new Map<Id, VoiceMessage>(ALL_CHAPTERS.flatMap((c) => c.voiceM
 
 export function findVoiceMessage(id: Id): VoiceMessage | undefined {
   return voiceById.get(id)
+}
+
+const charactersById = new Map<Id, Character>(ALL_CHAPTERS.flatMap((c) => c.characters ?? []).map((ch) => [ch.id, ch]))
+
+export function findCharacter(id: Id): Character | undefined {
+  return charactersById.get(id)
 }

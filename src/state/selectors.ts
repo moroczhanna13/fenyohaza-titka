@@ -1,6 +1,19 @@
 import type { AppId } from '../apps/registry'
 import { caseOfChapter, chapterAfter, chapterIndex, chaptersUpTo, findConversation } from '../story/chapters'
-import type { Chapter, Condition, Conversation, Email, Evidence, Id, Photo, Puzzle, WebPage } from '../story/types'
+import type {
+  Chapter,
+  Character,
+  CharacterFact,
+  Condition,
+  Conversation,
+  Email,
+  Evidence,
+  Id,
+  Note,
+  Photo,
+  Puzzle,
+  WebPage,
+} from '../story/types'
 import { buildTimeline, isFinished } from './conversation'
 import { getProgress, type GameState } from './gameState'
 
@@ -82,6 +95,39 @@ export function foundEvidence(state: GameState): Evidence[] {
   return chaptersUpTo(state.chapter)
     .flatMap((chapter) => chapter.evidence)
     .filter((evidence) => isMet(state, evidence.foundWhen))
+}
+
+/** Gedeon's notes found so far, in story order. */
+export function availableNotes(state: GameState): Note[] {
+  return chaptersUpTo(state.chapter)
+    .flatMap((chapter) => chapter.notes ?? [])
+    .filter((note) => isMet(state, note.availableAfter))
+}
+
+/** Notebook items (evidence and Gedeon's notes) the player has not opened the notebook for yet. */
+export function unseenNotebookIds(state: GameState): Id[] {
+  return [...foundEvidence(state), ...availableNotes(state)].map((x) => x.id).filter((id) => !state.seenEvidence.includes(id))
+}
+
+export interface KnownCharacter {
+  character: Character
+  /** The latest name a known fact gave the character, or its own. */
+  name: string
+  facts: CharacterFact[]
+}
+
+/** People the player knows about, in story order, with what has been found out about each. */
+export function knownCharacters(state: GameState): KnownCharacter[] {
+  const chapters = chaptersUpTo(state.chapter)
+  const facts = chapters.flatMap((c) => c.characterFacts ?? []).filter((f) => isMet(state, f.knownWhen))
+  return chapters
+    .flatMap((c) => c.characters ?? [])
+    .filter((character) => isMet(state, character.knownWhen))
+    .map((character) => {
+      const own = facts.filter((f) => f.character === character.id)
+      const renamed = own.findLast((f) => f.rename)?.rename
+      return { character, name: renamed ?? character.name, facts: own }
+    })
 }
 
 /** Inbox: the current chapter's emails first, each chapter newest first. */

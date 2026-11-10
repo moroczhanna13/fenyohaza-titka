@@ -17,7 +17,7 @@ export interface GameState {
   openedHints: Record<Id, number>
   /** Chapters whose intro the player has dismissed. */
   introSeen: Id[]
-  /** Evidence the player has already seen in the notebook. */
+  /** Evidence and note ids the player has seen in the notebook. */
   seenEvidence: Id[]
   /** The player's own notes in the notebook. */
   notes: string
