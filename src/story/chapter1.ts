@@ -21,9 +21,10 @@ export const chapter1: Chapter = {
   title: 'A doboz',
 
   intro: [
-    'Berényi Gedeon nyugdíjas zárszerelő volt, és megszállott rejtvényfejtő. A nagybátyád. Nemrég meghalt – hivatalosan baleset.',
-    'Az utolsó éveiben egy régi fenyőházi ügy nem hagyta nyugodni. Hogy mi, azt senkinek nem mondta el.',
-    'A hagyatékból két dolgot kaptál: a telefonját és egy kartondobozt. A dobozban egy cédula van, az ő kézírásával.',
+    'Berényi Gedeon nyugdíjas zárszerelő volt, és megszállott rejtvényfejtő. A nagybátyád. Szeptember közepén leesett a lépcsőn a saját házában. Hivatalosan baleset.',
+    'Harminc évig mászott létrán mások zárjaihoz, és egyszer sem esett le. Ez azóta sem hagy nyugodni.',
+    'Az utolsó évében egy régi fenyőházi ügy foglalkoztatta. Hogy mi, azt senkinek nem mondta el.',
+    'A hagyatékból egy kartondobozt kaptál, rajta az ő írásával: „Neked. Te szereted a rejtvényeket.” Benne a telefonja és néhány papír.',
     'A telefon le van zárva.',
   ],
 
@@ -33,7 +34,7 @@ export const chapter1: Chapter = {
     {
       id: 'ch1-box-note',
       title: 'A cédula',
-      blocks: [{ type: 'text', text: '„Ha ezt olvasod, nem baleset volt.”' }],
+      blocks: [{ type: 'text', text: '„VII. 21. – NEM zárlat. Két tűz. Ki hazudik?”' }],
     },
     {
       id: 'ch1-box-note-back',
@@ -53,6 +54,7 @@ export const chapter1: Chapter = {
     { app: 'gallery', availableAfter: unlocked },
     { app: 'notebook', availableAfter: unlocked },
     { app: 'email', availableAfter: unlocked },
+    { app: 'contacts', availableAfter: unlocked },
   ],
 
   conversations: [
@@ -119,22 +121,20 @@ export const chapter1: Chapter = {
               replies: [{ type: 'message', from: 'contact', text: 'Persze. Ahogy huszonöt éve is.' }],
             },
             {
-              text: 'A dobozában volt egy cédula: „Ha ezt olvasod, nem baleset volt.”',
-              replies: [{ type: 'message', from: 'contact', text: 'Akkor ő is tudta, hogy sietnie kell.' }],
+              text: 'A dobozában volt egy cédula: „NEM zárlat. Két tűz. Ki hazudik?”',
+              replies: [
+                { type: 'message', from: 'contact', text: 'Két tűz?' },
+                { type: 'message', from: 'contact', text: 'Akkor messzebb jutott, mint amennyit nekem elmondott.' },
+              ],
             },
           ],
         },
-        { type: 'message', from: 'contact', text: 'Olvassa vissza, mit írt nekem utoljára.' },
-        {
-          type: 'message',
-          from: 'contact',
-          text: 'Én nem tudom, melyik képre gondolt. Maga viszont a kezében tartja a telefonját.',
-        },
-        { type: 'message', from: 'contact', text: 'Hol készült a kép? Írja meg a pontos címet.' },
+        { type: 'message', from: 'contact', text: 'Az utolsó üzenetében egy képről írt. Nekem nem küldte el.' },
+        { type: 'message', from: 'contact', text: 'Ha megtalálja, írja meg, hol készült.' },
         { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch1-photo-place' } },
-        { type: 'message', from: 'player', text: 'Kikötő sétány 4.' },
+        { type: 'message', from: 'player', text: 'Megvan a kép. Kikötő sétány 4.' },
         { type: 'message', from: 'contact', text: 'Igen. Ott állt a vitorlásklub, mielőtt leégett.' },
-        { type: 'message', from: 'contact', text: 'A gondnok bent égett. Kerekes Pál.' },
+        { type: 'message', from: 'contact', text: 'A gondnok bent halt meg. Kerekes Pál.' },
         {
           type: 'choice',
           options: [
@@ -173,15 +173,78 @@ export const chapter1: Chapter = {
           type: 'message',
           from: 'contact',
           time: 'szept. 12. 09:02',
-          text: 'Tisztelt Berényi úr! Megérkezett az új vérnyomás-gyógyszere, holnaptól átveheti. Üdvözlettel: Vidor Ilona, Fenyő Patika',
+          text: 'Tisztelt Berényi úr! Megérkezett az új vérnyomás-gyógyszere, holnaptól átveheti. Üdvözlettel: Vidor Ilona, Fenyő Patika · fenyopatika.hu',
         },
         { type: 'message', from: 'player', text: 'Köszönöm, holnap beugrom.' },
+      ],
+      steps: [],
+    },
+    // Gedeon never saved these three numbers; who is who is found out in chapter 3.
+    {
+      id: 'ch1-num-toth',
+      contact: '+36 30 412 7781',
+      availableAfter: unlocked,
+      history: [
+        {
+          type: 'message',
+          from: 'player',
+          time: 'júl. 2. 10:14',
+          text: 'Jó napot kívánok! Berényi Gedeon vagyok. A 2001-es vitorlásklubos tűzről kérdeznék, ha ráér.',
+        },
+        { type: 'message', from: 'contact', text: 'Nem érek rá. Az egy lezárt ügy, kérem, hagyja nyugodni.' },
+        {
+          type: 'message',
+          from: 'player',
+          time: 'júl. 9. 08:30',
+          text: 'Csak egyetlen kérdés: hány órakor értesült a tűzről?',
+        },
+      ],
+      steps: [],
+    },
+    {
+      id: 'ch1-num-pasztor',
+      contact: '+36 20 518 3364',
+      availableAfter: unlocked,
+      history: [
+        {
+          type: 'message',
+          from: 'player',
+          time: 'aug. 14. 18:02',
+          text: 'Jó estét! Berényi Gedeon vagyok. Emlékszik még 2001 nyarára?',
+        },
+        { type: 'message', from: 'contact', text: 'Arra itt mindenki emlékszik.' },
+        { type: 'message', from: 'contact', text: 'Ha inni jön, jöjjön. Ha kérdezni, ne.' },
+      ],
+      steps: [],
+    },
+    {
+      id: 'ch1-num-meszaros',
+      contact: '+36 30 266 0915',
+      availableAfter: unlocked,
+      history: [
+        { type: 'message', from: 'player', time: 'aug. 30. 20:41', text: 'Jó estét! Beszélhetnénk a régi klubról?' },
+        { type: 'message', from: 'contact', text: 'Nincs miről beszélni. Huszonöt éve volt.' },
+        { type: 'message', from: 'player', text: 'Csak a fesztivál éjszakájáról kérdeznék.' },
+        { type: 'message', from: 'contact', text: 'Akkor végképp nincs.' },
       ],
       steps: [],
     },
   ],
 
   emails: [
+    {
+      id: 'ch1-mail-puzzleclub',
+      from: 'Fejtörő Klub',
+      subject: 'Októberi feladványok – hiányoltuk a megfejtését',
+      date: 'okt. 5.',
+      availableAfter: unlocked,
+      body: [
+        'Kedves Gedeon!',
+        'Tizenkét év óta most először nem érkezett meg a havi megfejtése. Remélem, csak a nyár volt hosszú.',
+        'Csatoltuk az októberi feladványokat: két keresztrejtvény, egy logikai sakkfeladvány és – külön kérésére – egy titkosírásos levél.',
+        'Szívélyes üdvözlettel: Szentes Ágnes, Fejtörő Klub',
+      ],
+    },
     {
       id: 'ch1-mail-library',
       from: 'Városi Könyvtár',
@@ -208,6 +271,70 @@ export const chapter1: Chapter = {
       ],
     },
     {
+      id: 'ch1-mail-spam-prize',
+      folder: 'spam',
+      from: 'Nyereményközpont',
+      subject: 'GRATULÁLUNK! Ön nyert egy robotporszívót!',
+      date: 'szept. 18.',
+      availableAfter: unlocked,
+      body: [
+        'Kedves Szerencsés Nyertes!',
+        'Önt választottuk ki heti sorsolásunk fődíjára! A nyeremény átvételéhez csak a szállítási díjat (990 Ft) kell kifizetnie bankkártyával 24 órán belül.',
+        'Ne hagyja ki ezt a lehetőséget!',
+      ],
+    },
+    {
+      id: 'ch1-mail-water',
+      from: 'Fenyőházi Vízmű',
+      subject: 'Vízdíj-értesítő – 2026. augusztus',
+      date: 'szept. 15.',
+      availableAfter: unlocked,
+      body: [
+        'Tisztelt Berényi Gedeon!',
+        'Augusztusi fogyasztása: 4 m³. Fizetendő: 3 412 Ft, fizetési határidő: szeptember 30.',
+        'Fenyőházi Vízmű Kft. – ügyfélszolgálat',
+      ],
+    },
+    {
+      id: 'ch1-mail-erecept',
+      from: 'E-recept értesítő',
+      subject: 'Új e-receptje érkezett',
+      date: 'szept. 10.',
+      availableAfter: unlocked,
+      body: [
+        'Tisztelt Berényi Gedeon!',
+        'Háziorvosa, dr. Somogyi Katalin e-receptet állított ki Önnek:',
+        'Amlodipin 5 mg tabletta, 30 db. Adagolás: naponta 1 tabletta, reggel.',
+        'A recept bármely gyógyszertárban kiváltható a TAJ-kártyája bemutatásával. Ez egy automatikus értesítés, kérjük, ne válaszoljon rá.',
+      ],
+    },
+    {
+      id: 'ch1-mail-sent-puzzleclub',
+      folder: 'sent',
+      from: 'Fejtörő Klub',
+      subject: 'Augusztusi megfejtések',
+      date: 'aug. 31.',
+      availableAfter: unlocked,
+      body: [
+        'Kedves Ágnes!',
+        'Mellékelem az augusztusi megfejtéseket. A titkosírásosnál a kulcs ezúttal is a dátumban volt – ahogy szinte mindig.',
+        'A szeptemberivel lehet, hogy csúszni fogok. Egy régi ügy most minden időmet elviszi.',
+        'Üdv: Gedeon',
+      ],
+    },
+    {
+      id: 'ch1-mail-keys',
+      from: 'Zár-Kulcs Nagyker',
+      subject: 'Rendelése visszaigazolása (#20931)',
+      date: 'aug. 28.',
+      availableAfter: unlocked,
+      body: [
+        'Köszönjük rendelését!',
+        '20 db Yale-kulcsnyers, 2 db cilinderbetét (30/30), 1 db tűreszelő-készlet. Fizetendő: 18 650 Ft, utánvéttel.',
+        'Várható kézbesítés: 2–3 munkanap.',
+      ],
+    },
+    {
       id: 'ch1-mail-mayor',
       from: 'Tóth Ervin polgármester',
       subject: 'Köszönjük, Fenyőháza!',
@@ -216,7 +343,46 @@ export const chapter1: Chapter = {
       body: [
         'Kedves Fenyőháziak!',
         'Köszönöm mindenkinek, aki idén is velünk ünnepelt a Tavi Fesztiválon. Jövőre ugyanitt, ugyanígy!',
-        'Tóth Ervin polgármester',
+        'Ha kérdésük, javaslatuk van, keressenek bizalommal: fogadóórám minden hónap első hétfőjén van a városházán, de a mobilomon is elérnek.',
+        'Tóth Ervin polgármester · +36 30 412 7781',
+      ],
+    },
+    {
+      id: 'ch1-mail-spam-parcel',
+      folder: 'spam',
+      from: 'Csomagkövetés',
+      subject: 'Csomagja nem kézbesíthető – vámkezelési díj szükséges',
+      date: 'aug. 3.',
+      availableAfter: unlocked,
+      body: [
+        'Tisztelt Ügyfelünk!',
+        'Csomagja a vámraktárban várakozik. A kézbesítéshez fizessen be 1 290 Ft vámkezelési díjat 48 órán belül, különben a csomagot visszaküldjük.',
+      ],
+    },
+    {
+      id: 'ch1-mail-club',
+      from: 'Fenyőházi Vitorlásklub',
+      subject: 'Meghívó – 25 éve égett le a klubház',
+      date: 'júl. 10.',
+      availableAfter: unlocked,
+      body: [
+        'Kedves Tagjaink, Barátaink!',
+        'Huszonöt éve, 2001. július 21-én a Tavi Fesztivál éjszakáján leégett régi klubházunk, és életét vesztette gondnokunk, Kerekes Pál.',
+        'Július 21-én, kedden este 8 órakor a Kikötő sétány 4. előtt rövid megemlékezést tartunk. Beszédet mond Tóth Ervin polgármester, a régi klub elnöke.',
+        'A 2009-ben újjáalakult Fenyőházi Vitorlásklub vezetősége',
+      ],
+    },
+    {
+      id: 'ch1-mail-sent-library',
+      folder: 'sent',
+      from: 'Fenyőházi Városi Könyvtár',
+      subject: 'Kölcsönzési kérelem – Fenyőházi Hírek, 2001',
+      date: 'márc. 20.',
+      availableAfter: unlocked,
+      body: [
+        'Tisztelt Könyvtár!',
+        'Szeretném kikölcsönözni a Fenyőházi Hírek 2001-es bekötött évfolyamát. Tudom, hogy csak helyben olvasható, de egy régi ügy miatt otthon kellene dolgoznom vele néhány hétig. Vigyázni fogok rá.',
+        'Köszönettel: Berényi Gedeon',
       ],
     },
   ],
@@ -247,6 +413,12 @@ export const chapter1: Chapter = {
       info: { takenAt: '2026-09-14T08:30', place: 'Fenyőháza, Szabadstrand', coordinates: { lat: 46.9150, lon: 17.8790 } },
     },
     {
+      id: 'ch1-photo-pills',
+      src: 'images/ch1/pills.svg',
+      alt: 'Gyógyszeres doboz a konyhaasztalon, mellette egy pohár víz. A dobozon: Amlodipin 10 mg tabletta, 30 db. Rajta a patika címkéje: Fenyő Patika, Berényi G., 2026.09.13.',
+      info: { takenAt: '2026-09-13T19:40', place: 'Fenyőháza, Bükk utca 12.', coordinates: { lat: 46.9241, lon: 17.8833 } },
+    },
+    {
       id: 'ch1-photo-lake-evening',
       src: 'images/ch1/lake-evening.svg',
       alt: 'Alkonyat a tónál. A bal parton egy leégett épület fekete körvonala, előtte elszenesedett stégcölöpök állnak ki a vízből.',
@@ -270,7 +442,7 @@ export const chapter1: Chapter = {
     {
       id: 'ch1-photo-place',
       kind: 'text',
-      title: 'Hol készült a kép?',
+      title: 'Hol készült Gedeon utolsó képe?',
       prompt: 'Írd meg a pontos címet.',
       answerHash: '7013109292e95b90c045327b581d0b81733fddc72d8e1214cb16998456632926',
       hints: [
@@ -295,6 +467,59 @@ export const chapter1: Chapter = {
       description: 'Kikötő sétány 4. Itt állt a vitorlásklub, ami huszonöt éve a Tavi Fesztivál éjszakáján leégett.',
       source: { type: 'puzzle', puzzle: 'ch1-photo-place' },
       foundWhen: { type: 'puzzleSolved', puzzle: 'ch1-photo-place' },
+    },
+  ],
+
+  notes: [
+    {
+      id: 'ch1-note-unknown',
+      date: 'márc. 12.',
+      text: 'Ismeretlen szám. Pál miatt ír, a könyvelést emlegeti. Nem mondja meg, ki ő – nem is kérdezem többet.\nAki huszonöt év után is ezen rágódik, annak oka van rá.',
+      availableAfter: unlocked,
+    },
+    {
+      id: 'ch1-note-pills',
+      date: 'szept. 13.',
+      text: 'Új doboz a patikából. Más a színe, mint eddig.\nRákérdezni a doktornőnél.',
+      availableAfter: unlocked,
+    },
+  ],
+
+  characters: [
+    { id: 'gedeon', name: 'Berényi Gedeon', roleNow: 'a nagybátyád; nyugdíjas zárszerelő, rejtvényfejtő' },
+    { id: 'reka', name: 'Ismeretlen szám', roleNow: 'névtelenül ír Gedeon telefonjára' },
+    { id: 'pal', name: 'Kerekes Pál', roleThen: 'a vitorlásklub gondnoka' },
+    { id: 'ilona', name: 'Vidor Ilona', roleNow: 'patikus, Fenyő Patika' },
+    { id: 'toth', name: 'Tóth Ervin', roleNow: 'Fenyőháza polgármestere' },
+  ],
+
+  characterFacts: [
+    {
+      id: 'ch1-f-gedeon-death',
+      character: 'gedeon',
+      text: 'Szeptember közepén leesett a lépcsőn a saját házában. Hivatalosan baleset.',
+    },
+    {
+      id: 'ch1-f-gedeon-photo',
+      character: 'gedeon',
+      text: 'Szeptember 14-én este a leégett vitorlásklub romjait fotózta, utána azt írta: „Ha velem történne valami, ott keressék.”',
+      knownWhen: { type: 'puzzleSolved', puzzle: 'ch1-photo-place' },
+    },
+    {
+      id: 'ch1-f-reka-march',
+      character: 'reka',
+      text: 'Márciusban írt először Gedeonnak, Kerekes Pál halála miatt. Nem mondja meg, ki ő.',
+    },
+    {
+      id: 'ch1-f-pal-death',
+      character: 'pal',
+      text: '2001. július 21-én, a Tavi Fesztivál éjszakáján halt meg, amikor leégett a vitorlásklub. A rendőrség balesetnek minősítette.',
+      knownWhen: { type: 'puzzleSolved', puzzle: 'ch1-photo-place' },
+    },
+    {
+      id: 'ch1-f-ilona-pills',
+      character: 'ilona',
+      text: 'Szeptember 12-én ő írt Gedeonnak, hogy megérkezett az új vérnyomás-gyógyszere.',
     },
   ],
 

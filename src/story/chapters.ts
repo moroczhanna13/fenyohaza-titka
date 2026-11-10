@@ -21,7 +21,7 @@ export const CASES: readonly StoryCase[] = [
     id: MAIN_CASE_ID,
     kind: 'main',
     title: GAME_TITLE,
-    summary: 'Gedeon nagybácsi hivatalosan balesetben halt meg. A hagyatékában talált cédula szerint nem, és a szál egy 25 éve leégett vitorlásklubhoz vezet.',
+    summary: 'Gedeon nagybácsi hivatalosan balesetben halt meg. A hagyatékában egy cédula egy 25 éve leégett vitorlásklubról szól – és arról, hogy az a tűz sem véletlen volt.',
     chapters: CHAPTERS,
   },
   minibusCase,

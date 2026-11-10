@@ -2,13 +2,16 @@ import { describe, expect, it } from 'vitest'
 import { createInitialState, gameReducer } from './gameState'
 import {
   availableEmails,
+  availableNotes,
   availablePhotos,
   foundEvidence,
+  knownCharacters,
   isChapterComplete,
   isMet,
   isPhoneLocked,
   nextChapter,
   unlockedApps,
+  unreadInboxCount,
 } from './selectors'
 
 describe('selectors', () => {
@@ -35,7 +38,7 @@ describe('selectors', () => {
   it('unlocks the chapter 1 apps with the phone', () => {
     expect(unlockedApps(createInitialState())).toEqual([])
     const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
-    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery', 'notebook', 'email'])
+    expect(unlockedApps(unlocked)).toEqual(['messages', 'gallery', 'notebook', 'email', 'contacts'])
   })
 
   it('lists gallery photos newest first', () => {
@@ -60,6 +63,30 @@ describe('availableEmails', () => {
     expect(availableEmails(createInitialState())).toEqual([])
     const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
     expect(availableEmails(unlocked).length).toBeGreaterThan(0)
+  })
+
+  it('counts only unread inbox mail, not sent mail or spam', () => {
+    const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
+    const emails = availableEmails(unlocked)
+    const inbox = emails.filter((e) => (e.folder ?? 'inbox') === 'inbox')
+    expect(inbox.length).toBeLessThan(emails.length)
+    expect(unreadInboxCount(unlocked)).toBe(inbox.length)
+    const read = gameReducer(unlocked, { type: 'readEmail', email: inbox[0].id })
+    expect(unreadInboxCount(read)).toBe(inbox.length - 1)
+  })
+})
+
+describe('notes and characters', () => {
+  it("shows Gedeon's notes and the known people once the phone is unlocked", () => {
+    expect(availableNotes(createInitialState())).toEqual([])
+    const unlocked = gameReducer(createInitialState(), { type: 'solvePuzzle', puzzle: 'ch1-lock' })
+    expect(availableNotes(unlocked).length).toBeGreaterThan(0)
+    const people = knownCharacters(unlocked)
+    expect(people.map((p) => p.character.id)).toContain('gedeon')
+    const pal = people.find((p) => p.character.id === 'pal')!
+    const before = pal.facts.length
+    const placed = gameReducer(unlocked, { type: 'solvePuzzle', puzzle: 'ch1-photo-place' })
+    expect(knownCharacters(placed).find((p) => p.character.id === 'pal')!.facts.length).toBe(before + 1)
   })
 })
 
