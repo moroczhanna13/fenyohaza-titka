@@ -75,7 +75,7 @@ Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.m
 - [x] Motor: e-mail mappák (beérkezett, elküldött, spam)
 - [x] Motor: Gedeon jegyzetei a Jegyzetfüzetben
 - [x] Névjegyek app szereplőkkel és kiderített tényekkel
-- [ ] Fotónézegető nagyítás
+- [x] Fotónézegető nagyítás
 - [ ] 1. fejezet: új cédula, névtelen számok, háttérlevelek, gyógyszeres fotó
 - [ ] 2. fejezet: Réka csak anyagot ad, új archívumcikkek (szám, gyászjelentés)
 - [ ] 3. fejezet: számok párosítása, kétkörös kihallgatások, Szomszédok-oldalak, Mészáros új indoka

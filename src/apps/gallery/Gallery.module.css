@@ -69,6 +69,16 @@
 /* Zoomed: three times the width, scrollable in both directions. */
 .stage[data-zoomed='true'] {
   max-height: 70vh;
+  cursor: grab;
+}
+
+.stage[data-zoomed='true']:active {
+  cursor: grabbing;
+}
+
+.stage[data-zoomed='true'] .photo {
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .stage[data-zoomed='true'] .photo {
