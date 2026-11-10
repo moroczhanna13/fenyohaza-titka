@@ -1,0 +1,255 @@
+/* Fenyőházi Szomszédok: a light, friendly social network look. */
+
+.social {
+  min-height: 100%;
+  padding: var(--space-3);
+  background: #eef1f6;
+  color: #1c1e21;
+}
+
+.brand {
+  margin: 0 0 var(--space-3);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #2f6f5e;
+}
+
+/* ---------- Profile header ---------- */
+
+.profile {
+  position: relative;
+  margin-bottom: var(--space-3);
+  padding: 0 var(--space-4) var(--space-4);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+  overflow: hidden;
+}
+
+.cover {
+  height: 72px;
+  margin: 0 calc(-1 * var(--space-4));
+  background: linear-gradient(120deg, #2f6f5e, #6aa58e 55%, #e8c66f);
+}
+
+.avatar,
+.smallAvatar {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #3d7fb8;
+  color: #fff;
+  font-weight: 700;
+}
+
+.avatar[data-type='group'],
+.smallAvatar[data-type='group'] {
+  background: #2f6f5e;
+}
+
+.avatar[data-type='business'],
+.smallAvatar[data-type='business'] {
+  background: #b5651d;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  margin-top: -32px;
+  border: 3px solid #fff;
+  font-size: 1.3rem;
+}
+
+.name {
+  margin: var(--space-2) 0 var(--space-1);
+  font-size: 1.25rem;
+}
+
+.about {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-sm);
+  color: #4b4f56;
+}
+
+.details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--font-size-sm);
+  color: #4b4f56;
+}
+
+/* ---------- Feed ---------- */
+
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.post {
+  padding: var(--space-3) var(--space-4);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+}
+
+.postMeta {
+  margin: 0 0 var(--space-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.postAuthor {
+  font-weight: 700;
+}
+
+.postTime {
+  font-size: 0.75rem;
+  color: #65676b;
+}
+
+.postText {
+  margin: 0 0 var(--space-2);
+  line-height: 1.45;
+}
+
+.postImage {
+  display: block;
+  width: calc(100% + 2 * var(--space-4));
+  max-width: none;
+  margin: 0 calc(-1 * var(--space-4)) var(--space-2);
+  height: auto;
+}
+
+.likes {
+  margin: 0;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid #e4e6eb;
+  font-size: 0.8rem;
+  color: #65676b;
+}
+
+.comments {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.comment {
+  padding: var(--space-2) var(--space-3);
+  border-radius: 14px;
+  background: #f0f2f5;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.commentAuthor {
+  font-weight: 700;
+}
+
+/* ---------- Home page ---------- */
+
+.homeTitle {
+  margin: 0 0 var(--space-2);
+  font-size: 1.3rem;
+  color: #2f6f5e;
+}
+
+.search {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid #ccd0d5;
+  border-radius: 999px;
+  background: #fff;
+  color: #1c1e21;
+  font: inherit;
+  color-scheme: light;
+}
+
+.searchButton {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: 999px;
+  background: #2f6f5e;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sectionTitle {
+  margin: var(--space-3) 0 var(--space-2);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #65676b;
+}
+
+.muted {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: #65676b;
+}
+
+.profileList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.profileRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.smallAvatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  font-size: 0.9rem;
+}
+
+.profileRowText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.profileRowName {
+  font-weight: 700;
+}
+
+.profileRowAbout {
+  font-size: 0.8rem;
+  color: #65676b;
+}

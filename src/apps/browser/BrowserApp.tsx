@@ -5,6 +5,8 @@ import { availablePages } from '../../state/selectors'
 import ImageSearchView from './ImageSearchView'
 import LoginPageView from './LoginPageView'
 import NewsArchiveView from './NewsArchiveView'
+import SocialHomeView from './SocialHomeView'
+import SocialPageView from './SocialPageView'
 import StaticPageView from './StaticPageView'
 import { findPageByUrl, normalizeUrl } from './url'
 import VehicleRegistryView from './VehicleRegistryView'
@@ -72,10 +74,16 @@ export default function BrowserApp({ game, dispatch, onClose }: Readonly<Browser
         content = <VehicleRegistryView page={page} dispatch={dispatch} />
         break
       case 'static':
-        content = <StaticPageView page={page} dispatch={dispatch} />
+        content = <StaticPageView page={page} dispatch={dispatch} onNavigate={navigate} />
         break
       case 'login':
         content = <LoginPageView page={page} game={game} dispatch={dispatch} />
+        break
+      case 'social':
+        content = <SocialPageView page={page} dispatch={dispatch} />
+        break
+      case 'socialHome':
+        content = <SocialHomeView page={page} pages={pages} dispatch={dispatch} onNavigate={navigate} />
         break
       case 'imageSearch':
         content = <ImageSearchView page={page} game={game} dispatch={dispatch} />

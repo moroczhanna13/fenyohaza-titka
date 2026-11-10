@@ -78,3 +78,13 @@
   font-weight: 700;
   white-space: nowrap;
 }
+
+.link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #1a5fb4;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

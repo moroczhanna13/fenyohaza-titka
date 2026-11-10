@@ -5,10 +5,12 @@ interface DocumentBlocksProps {
   blocks: DocumentBlock[]
   /** 'handwriting' for notes and paper items, 'plain' for web pages. */
   textStyle?: 'handwriting' | 'plain'
+  /** Opens an in-game web address; without it, link blocks show as plain text. */
+  onNavigate?: (url: string) => void
 }
 
-/** Renders story documents: text (optionally in rovás), headings, key tables and data tables. */
-export default function DocumentBlocks({ blocks, textStyle = 'plain' }: Readonly<DocumentBlocksProps>) {
+/** Renders story documents: text (optionally in rovás), headings, key tables, data tables and links. */
+export default function DocumentBlocks({ blocks, textStyle = 'plain', onNavigate }: Readonly<DocumentBlocksProps>) {
   return (
     <>
       {blocks.map((block, i) => {
@@ -37,6 +39,18 @@ export default function DocumentBlocks({ blocks, textStyle = 'plain' }: Readonly
                   </li>
                 ))}
               </ul>
+            )
+          case 'link':
+            return (
+              <p key={key} className={styles.plain}>
+                {onNavigate ? (
+                  <button type="button" className={styles.link} onClick={() => onNavigate(block.url)}>
+                    {block.text}
+                  </button>
+                ) : (
+                  block.text
+                )}
+              </p>
             )
           case 'table':
             return (

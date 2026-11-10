@@ -342,7 +342,53 @@ export interface ImageSearchPage extends WebPageBase {
   searches: ImageSearchEntry[]
 }
 
-export type WebPage = NewsArchivePage | VehicleRegistryPage | StaticPage | LoginPage | ImageSearchPage
+export interface SocialComment {
+  author: string
+  text: string
+}
+
+export interface SocialPost {
+  author: string
+  /** Display time, e.g. "2024. március 1." */
+  time: string
+  text: string
+  /** Optional picture; path under public/. */
+  image?: { src: string; alt: string }
+  likes?: number
+  comments?: SocialComment[]
+}
+
+/**
+ * A profile on a social network: a person, a group or a business.
+ * Groups and businesses are listed on the network's home page; people are only found by searching.
+ */
+export interface SocialPage extends WebPageBase {
+  kind: 'social'
+  profileType: 'person' | 'group' | 'business'
+  /** Shown in the profile header and matched by the home page search. */
+  name: string
+  about?: string
+  /** Short facts under the name, e.g. place, opening hours, phone number. */
+  details?: string[]
+  posts: SocialPost[]
+}
+
+/**
+ * Home page of a social network with a search box. It lists the available
+ * social pages whose url starts with its own url.
+ */
+export interface SocialHomePage extends WebPageBase {
+  kind: 'socialHome'
+}
+
+export type WebPage =
+  | NewsArchivePage
+  | VehicleRegistryPage
+  | StaticPage
+  | LoginPage
+  | ImageSearchPage
+  | SocialPage
+  | SocialHomePage
 
 // ---------- Voice messages ----------
 
@@ -367,6 +413,8 @@ export type DocumentBlock =
   | { type: 'glyphTable'; entries: [latin: string, glyph: string][] }
   | { type: 'heading'; text: string }
   | { type: 'table'; headers: string[]; rows: string[][] }
+  /** A link to another in-game web page (only clickable inside the Browser). */
+  | { type: 'link'; text: string; url: string }
 
 /** Something the player holds in hand, outside the phone. */
 export interface BoxItem {
