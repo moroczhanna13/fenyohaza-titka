@@ -143,6 +143,16 @@ export interface TimelinePuzzle extends PuzzleBase {
   statements: Statement[]
 }
 
+/**
+ * Pair each item on the left with one on the right (e.g. phone numbers with names).
+ * Right items may outnumber the left ones. Solved in the Deductions app (see matchAnswer).
+ */
+export interface MatchPuzzle extends PuzzleBase {
+  kind: 'match'
+  left: Statement[]
+  right: Statement[]
+}
+
 export interface LedgerRow {
   id: Id
   date: string
@@ -210,7 +220,14 @@ export interface RoutePuzzle extends PuzzleBase {
   start: Id
 }
 
-export type Puzzle = TextPuzzle | ConnectPuzzle | TimelinePuzzle | LedgerPuzzle | AccusationPuzzle | RoutePuzzle
+export type Puzzle =
+  | TextPuzzle
+  | ConnectPuzzle
+  | TimelinePuzzle
+  | MatchPuzzle
+  | LedgerPuzzle
+  | AccusationPuzzle
+  | RoutePuzzle
 
 // ---------- Evidence ----------
 

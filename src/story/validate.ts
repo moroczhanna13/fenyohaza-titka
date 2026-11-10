@@ -100,6 +100,11 @@ export function validateChapter(chapter: Chapter): string[] {
     if (!/^[0-9a-f]{64}$/.test(p.answerHash)) errors.push(`puzzle ${p.id}: answerHash is not a SHA-256 hex string`)
     if ((p.kind === 'connect' || p.kind === 'timeline') && new Set(p.statements.map((s) => s.id)).size !== p.statements.length)
       errors.push(`puzzle ${p.id}: duplicate statement ids`)
+    if (p.kind === 'match') {
+      const ids = [...p.left, ...p.right].map((s) => s.id)
+      if (new Set(ids).size !== ids.length) errors.push(`puzzle ${p.id}: duplicate match item ids`)
+      if (p.right.length < p.left.length) errors.push(`puzzle ${p.id}: fewer right items than left items`)
+    }
     if (p.kind === 'route') {
       const places = new Set(p.places.map((pl) => pl.id))
       if (places.size !== p.places.length) errors.push(`puzzle ${p.id}: duplicate place ids`)

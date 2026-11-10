@@ -69,7 +69,7 @@ Szabály: egyszerre egy feladat, a végén `npm run build` fusson hibátlanul, u
 Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.md`-t követi.
 
 - [x] Döntések jóváhagyása, `TORTENET.md` frissítése
-- [ ] Motor: `match` fejtörő-típus (párosítás)
+- [x] Motor: `match` fejtörő-típus (párosítás)
 - [ ] Motor: hivatkozás-blokk, közösségi oldal (`social`) és Szomszédok-kezdőlap kereséssel
 - [ ] Motor: patika-belépés felhasználóválasztóval és elfelejtett jelszóval
 - [ ] Motor: e-mail mappák (beérkezett, elküldött, spam)

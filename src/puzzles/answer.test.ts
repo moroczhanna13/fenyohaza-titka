@@ -44,3 +44,10 @@ describe('ledger puzzles', () => {
     }
   })
 })
+
+describe('matchAnswer', () => {
+  it('keeps the left order and pairs ids with "="', async () => {
+    const { matchAnswer } = await import('./answer')
+    expect(matchAnswer([['a', 'x'], ['b', 'y']])).toBe('a=x&b=y')
+  })
+})

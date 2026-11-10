@@ -45,3 +45,8 @@ export function timelineAnswer(order: string[], misfit: string): string {
 export function routeAnswer(places: string[]): string {
   return places.join('>')
 }
+
+/** Answer string of a match puzzle: each left id paired with its right id, in the puzzle's left order. */
+export function matchAnswer(pairs: [left: string, right: string][]): string {
+  return pairs.map(([l, r]) => `${l}=${r}`).join('&')
+}
