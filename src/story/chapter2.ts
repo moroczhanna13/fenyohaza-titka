@@ -7,8 +7,8 @@ export const chapter2: Chapter = {
   title: 'A tó éjszakája',
 
   intro: [
-    'Ha tudni akarod, mi történt azon az éjszakán, a régi újságoknál kell kezdened.',
-    'A Fenyőházi Hírek archívuma ma már online is elérhető. Gedeon postafiókjában ott a levél róla.',
+    'A cédulán ez állt: „NEM zárlat. Két tűz. Ki hazudik?” Gedeon tudott valamit, amit te még nem.',
+    'Tavasszal kikölcsönözte a Fenyőházi Hírek 2001-es évfolyamát. Valamit keresett benne.',
   ],
 
   apps: [{ app: 'browser' }, { app: 'deductions' }],
@@ -42,45 +42,59 @@ export const chapter2: Chapter = {
         {
           type: 'message',
           from: 'contact',
-          text: 'Gedeon egy héttel a halála előtt ezt küldte nekem.',
+          text: 'Gedeon egy héttel a halála előtt ezt küldte nekem. Nem írt mellé semmit.',
           photo: 'ch2-photo-firelog',
         },
-        {
-          type: 'message',
-          from: 'contact',
-          text: 'Nézze meg, mikor riasztották a tűzoltókat. Aztán nézze meg, mit írt akkor az újság.',
-        },
-        { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch2-article-time' } },
-        { type: 'message', from: 'player', text: 'Az újság szerint 23:40-kor.' },
-        { type: 'message', from: 'contact', text: 'A napló szerint 23:10-kor. Fél óra.' },
-        {
-          type: 'message',
-          from: 'contact',
-          text: 'Valaki hazudott. Kösse össze, ami nem stimmel – Gedeon is így csinálta.',
-        },
-        { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch2-who-lied' } },
-        { type: 'message', from: 'contact', text: 'Tóth Ervin. Akkor klubelnök, ma polgármester.' },
-        { type: 'message', from: 'contact', text: 'Fél órát tagadott le abból az éjszakából.' },
+        { type: 'message', from: 'contact', text: 'Én nem tudom, mit kellene látnom rajta. Maga?' },
         {
           type: 'choice',
           options: [
             {
-              text: 'És a két tűzfészek?',
+              text: 'Ez a tűzoltók naplója a tűz éjszakájáról.',
               replies: [
                 {
                   type: 'message',
                   from: 'contact',
-                  text: 'Egy zárlat nem gyullad ki két helyen egyszerre. Gedeon is ezt mondta.',
+                  text: 'Szeptember elején bejutott a tűzoltószertárba. Hogy hogyan, azt nem mondta meg.',
                 },
               ],
             },
             {
-              text: 'Maga kit gyanúsít?',
-              replies: [{ type: 'message', from: 'contact', text: 'Mindenkit, aki aznap éjjel a klub körül volt.' }],
+              text: 'Hadd nézzem meg alaposabban.',
+              replies: [{ type: 'message', from: 'contact', text: 'Rendben. Várok.' }],
             },
           ],
         },
-        { type: 'message', from: 'contact', text: 'A tűz nem véletlen volt. Ezt most már maga is tudja.' },
+        { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch2-article-time' } },
+        {
+          type: 'message',
+          from: 'player',
+          text: 'A napló szerint 23:10-kor jött a bejelentés. A Fenyőházi Hírekben viszont 23:40 áll.',
+        },
+        { type: 'message', from: 'contact', text: 'Fél óra különbség.' },
+        { type: 'message', from: 'contact', text: 'Nem lehet, hogy az újság egyszerűen elírta?' },
+        { type: 'wait', until: { type: 'puzzleSolved', puzzle: 'ch2-who-lied' } },
+        {
+          type: 'message',
+          from: 'player',
+          text: 'Nem az újság írta el. Tóth Ervin mondta nekik a 23:40-et. Fél órát letagadott abból az éjszakából.',
+        },
+        { type: 'message', from: 'contact', text: 'Tóth Ervin. Akkor klubelnök, ma polgármester.' },
+        {
+          type: 'choice',
+          options: [
+            {
+              text: 'És a napló szerint két helyen égett: az irodában és a csónakraktárban. Egy zárlat nem gyullad ki két helyen.',
+              replies: [
+                { type: 'message', from: 'contact', text: 'Gedeon is ezt mondta. Akkor nem hittem el neki.' },
+              ],
+            },
+            {
+              text: 'Maga kit gyanúsít?',
+              replies: [{ type: 'message', from: 'contact', text: 'Nem tudom. Ezért írok magának.' }],
+            },
+          ],
+        },
         { type: 'message', from: 'contact', text: 'Holnap írok.' },
       ],
     },
@@ -112,6 +126,7 @@ export const chapter2: Chapter = {
           body: [
             'Július 20-án és 21-én ismét a Kikötő sétányon lesz a Tavi Fesztivál. Lesz vásár, sétahajózás és esti koncert a víz mellett.',
             'A szombati zárónapon 22:30-kor kezdődik a tűzijáték, amelyet hagyományosan a vitorlásklub szervez. A programot Mészáros Béla klubtitkár fogja össze.',
+            'A tűzijáték biztosításához önkénteseket keresnek. Jelentkezni Mészáros Béla klubtitkárnál lehet, a 06-30/266-0915-ös telefonszámon.',
           ],
         },
         {
@@ -133,6 +148,16 @@ export const chapter2: Chapter = {
           body: [
             'A vitorlásklub vezetősége gyűjtést szervez a leégett klubház újjáépítésére. Az adományokat a polgármesteri hivatalban is fogadják.',
             'Vidor Ilona, a klub könyvelője szerint a tűzben a pénztárkönyv és a teljes könyvelés is odaveszett. „Fél tizenegykor zártam be az irodát, akkor még minden rendben volt” – mondta lapunknak.',
+          ],
+        },
+        {
+          id: 'ch2-article-obituary',
+          date: '2001-07-27',
+          title: 'Gyászjelentés',
+          body: [
+            'Fájdalommal tudatjuk, hogy Kerekes Pál (1947–2001), a Fenyőházi Vitorlásklub gondnoka július 21-én, életének 54. évében tragikus hirtelenséggel elhunyt.',
+            'Gyászolják: szerető felesége, Kerekes Pálné született Szalai Erzsébet, lánya, Réka, valamint a klub minden tagja.',
+            'Temetése július 31-én 14 órakor lesz a fenyőházi temetőben.',
           ],
         },
       ],
@@ -197,6 +222,47 @@ export const chapter2: Chapter = {
       description: 'Tóth Ervin 23:40-et mondott az újságnak, pedig a riasztás 23:10-kor volt. Fél órát letagadott.',
       source: { type: 'puzzle', puzzle: 'ch2-who-lied' },
       foundWhen: { type: 'puzzleSolved', puzzle: 'ch2-who-lied' },
+    },
+  ],
+
+  notes: [
+    {
+      id: 'ch2-note-firelog',
+      date: 'szept. 5.',
+      text: 'Tűzoltószertár. A napló szerint 23:10-kor jött a bejelentés.\nAz újságban valaki mást mondott. Ki?',
+    },
+  ],
+
+  characterFacts: [
+    {
+      id: 'ch2-f-toth-president',
+      character: 'toth',
+      text: '2001-ben ő volt a vitorlásklub elnöke.',
+      knownWhen: { type: 'puzzleSolved', puzzle: 'ch2-article-time' },
+    },
+    {
+      id: 'ch2-f-toth-lie',
+      character: 'toth',
+      text: 'Az újságnak azt mondta, 23:40-kor értesült a tűzről és riasztott – a tűzoltónapló szerint a bejelentés 23:10-kor jött. Fél órát letagadott.',
+      knownWhen: { type: 'puzzleSolved', puzzle: 'ch2-who-lied' },
+    },
+    {
+      id: 'ch2-f-pal-storeroom',
+      character: 'pal',
+      text: 'A tűzoltók a csónakraktárban találták meg. A tűz két ponton égett: az irodában és a raktárban.',
+      knownWhen: { type: 'puzzleSolved', puzzle: 'ch2-article-time' },
+    },
+    {
+      id: 'ch2-f-pal-family',
+      character: 'pal',
+      text: 'A gyászjelentés szerint a felesége, Kerekes Pálné (Szalai Erzsébet) és a lánya, Réka gyászolta.',
+      knownWhen: { type: 'pageVisited', page: 'ch2-article-obituary' },
+    },
+    {
+      id: 'ch2-f-ilona-bookkeeper',
+      character: 'ilona',
+      text: '2001-ben a vitorlásklub könyvelője volt. Az újságnak azt mondta, a tűz estéjén fél tizenegykor bezárta az irodát.',
+      knownWhen: { type: 'pageVisited', page: 'ch2-article-collection' },
     },
   ],
 

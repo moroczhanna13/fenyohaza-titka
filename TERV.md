@@ -77,7 +77,7 @@ Részletek és indoklás: `JAVITASOK.md`. A történet a frissített `TORTENET.m
 - [x] Névjegyek app szereplőkkel és kiderített tényekkel
 - [x] Fotónézegető nagyítás
 - [x] 1. fejezet: új cédula, névtelen számok, háttérlevelek, gyógyszeres fotó
-- [ ] 2. fejezet: Réka csak anyagot ad, új archívumcikkek (szám, gyászjelentés)
+- [x] 2. fejezet: Réka csak anyagot ad, új archívumcikkek (szám, gyászjelentés)
 - [ ] 3. fejezet: számok párosítása, kétkörös kihallgatások, Szomszédok-oldalak, Mészáros új indoka
 - [ ] 4. fejezet: margójegyzet, gyógyszer-ellentmondás, patika nyilvános oldal és új belépés, Réka leleplezése
 - [ ] 5–6. fejezet: Réka új háttere, feljelentés-keret, új utóhang
