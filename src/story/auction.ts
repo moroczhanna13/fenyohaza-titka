@@ -70,6 +70,11 @@ const chapter: Chapter = {
         { type: 'wait', until: sourceFound },
         {
           type: 'message',
+          from: 'player',
+          text: 'Utánanéztem a képnek. Az óra fotója a Vértes Aukciósház katalógusából van, 2019 tavaszán árverezték el.',
+        },
+        {
+          type: 'message',
           from: 'contact',
           text: 'Vértes Aukciósház? 2019-ben? De hát azt írta, tegnap fényképezte a nagymamája nappalijában…',
         },
@@ -93,6 +98,11 @@ const chapter: Chapter = {
         },
         { type: 'message', from: 'contact', text: 'Akkor most melyik igaz?' },
         { type: 'wait', until: lieFound },
+        {
+          type: 'message',
+          from: 'player',
+          text: 'A kettő nem lehet egyszerre igaz. Aki születése óta Fenyőházán él, az nem dolgozik úgy külföldön, hogy egy órát se tudjon megmutatni.',
+        },
         { type: 'message', from: 'contact', text: 'Szóval egyik sem. Ez a Kovács Erika nem is létezik.' },
         { type: 'message', from: 'contact', text: 'Petra szerint jelenteni kell a hirdetést. Segít?' },
         {

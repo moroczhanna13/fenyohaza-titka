@@ -127,7 +127,12 @@ const chapter: Chapter = {
         },
         { type: 'message', from: 'contact', text: 'Ha kitalálja, merre járt a busz a hétvégén, szóljon.' },
         { type: 'wait', until: routeSolved },
-        { type: 'message', from: 'contact', text: 'Nádas, Rózsa Csárda, vissza Nádasra, aztán Kővágó. Lakodalmi fuvar. A mi buszunkkal.' },
+        {
+          type: 'message',
+          from: 'player',
+          text: 'Megvan a hétvégi út. Szombat este valaki kivitte a buszt, Nádasról elhozta a lakodalmi vendégeket a Rózsa Csárdába, hajnalban visszavitte őket, aztán Kővágón tankolt. Pontosan 81 kilométer.',
+        },
+        { type: 'message', from: 'contact', text: 'Lakodalmi fuvar. A mi buszunkkal.' },
         {
           type: 'message',
           from: 'contact',
@@ -137,8 +142,14 @@ const chapter: Chapter = {
         { type: 'wait', until: busFound },
         {
           type: 'message',
+          from: 'player',
+          text: 'A Ködös-major pajtájában keresse. Az elágazástól gyalog is közel van, az erdész friss keréknyomot látott arrafelé, és az Erdészlak felé senki nem ment.',
+        },
+        { type: 'message', from: 'contact', text: 'Szólok Kántor úrnak, kimegy megnézni.' },
+        {
+          type: 'message',
           from: 'contact',
-          text: 'Kántor úr kiment a majorhoz. Ott áll a busz a pajtában, ponyvával letakarva. Elment a kuplungja.',
+          text: 'Megvan! Ott áll a busz a pajtában, ponyvával letakarva. Elment a kuplungja.',
         },
         { type: 'message', from: 'contact', text: 'Bakos Tamás most írt. Azt mondja, magával akar beszélni, nem velem.' },
       ],

@@ -3,7 +3,7 @@ import { CASES, caseOfChapter, chapterAfter, findCase, findConversation, MAIN_CA
 import { buildTimeline, initialProgress, type ConversationProgress } from './conversation'
 
 /** Bump when the shape of GameState changes; older saves are then discarded. */
-export const SAVE_VERSION = 9
+export const SAVE_VERSION = 10
 
 export interface GameState {
   version: typeof SAVE_VERSION
